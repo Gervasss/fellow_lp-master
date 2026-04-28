@@ -4,7 +4,7 @@ import Script from "next/script";
 
 function HomePage() {
     const siteUrl = "https://fellow-lp.vercel.app/"; 
-    const ogImageUrl = `${siteUrl}/assets/fellow_banner.png`; 
+    const ogImageUrl = `${siteUrl}/assets/fellow-banner.jpg`; 
 
     return (
         <>

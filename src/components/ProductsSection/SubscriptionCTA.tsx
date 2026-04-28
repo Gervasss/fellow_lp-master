@@ -137,7 +137,7 @@ useEffect(() => {
                                         <li><IoCheckmarkCircle size={14} /> Updates</li>
                                     </ul>
                                     <button className={`${styles.subscribeBtn} ${bodyFont.className}`}>
-                                       Ver Site
+                                       Ir para o Produto
                                     </button>
                                 </div>
                             ))}

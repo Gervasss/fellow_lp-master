@@ -1,197 +1,105 @@
-# Grupo Fellow Landing Page
 
-Landing page institucional do Grupo Fellow, construída com Next.js, React, TypeScript, Tailwind CSS 4, CSS Modules, GSAP e Lenis.
+# 🚀 Grupo Fellow Landing Page
 
-O projeto apresenta o ecossistema Fellow com uma experiência visual animada: hero com preloader, navegação responsiva, seções institucionais, serviços, time, contato, CTA de produtos e footer.
+Landing page institucional do **Grupo Fellow**, construída com tecnologias de ponta para entregar uma experiência de alta performance e fluidez visual.
 
-## Stack
+O projeto apresenta o ecossistema Fellow através de uma jornada animada: hero com preloader, navegação responsiva, seções institucionais, serviços, time, contato, CTA de produtos e footer.
 
-- Next.js 16 com Pages Router
-- React 19
-- TypeScript
-- Tailwind CSS 4
-- CSS Modules por componente
-- GSAP e ScrollTrigger para animações
-- Lenis para smooth scroll
-- Mantine Provider
-- `next/font/google` para Sora e Plus Jakarta Sans
-- `next/image` para otimização de imagens locais
+## 🛠 Stack Tecnológica
 
-## Requisitos
+* **Framework:** Next.js 16 (Pages Router)
+* **Biblioteca UI:** React 19 & Mantine Provider
+* **Linguagem:** TypeScript
+* **Estilização:** Tailwind CSS 4 & CSS Modules
+* **Animações:** GSAP + ScrollTrigger
+* **Experiência de Scroll:** Lenis (Smooth Scroll)
+* **Tipografia:** `next/font/google` (Sora e Plus Jakarta Sans)
 
-- Node.js compatível com Next.js 16
-- npm
+---
 
-Instale as dependências:
+## 📥 Requisitos & Instalação
+
+* **Node.js:** Compatível com Next.js 16
+* **Package Manager:** npm
 
 ```bash
+# Instale as dependências
 npm install
 ```
 
-## Scripts
+## ⚙️ Scripts Disponíveis
 
-```bash
-npm run dev
-```
+| Comando | Descrição |
+| :--- | :--- |
+| `npm run dev` | 🚀 Inicia o servidor local em `http://localhost:3000` |
+| `npm run build` | 🏗️ Gera o build de produção (via Turbopack) |
+| `npm run start` | ⚡ Executa a aplicação em modo produção |
+| `npm run lint` | 🔍 Executa a verificação do ESLint |
 
-Inicia o servidor local em `http://localhost:3000`.
+> [!TIP]
+> **No Windows (PowerShell):** Caso o acesso seja bloqueado, utilize o prefixo `.cmd` (ex: `npm.cmd run dev`).
 
-```bash
-npm run build
-```
+---
 
-Gera o build de produção.
-
-```bash
-npm run start
-```
-
-Executa a aplicação em modo produção depois do build.
-
-```bash
-npm run lint
-```
-
-Executa o ESLint.
-
-No Windows, caso o PowerShell bloqueie `npm`, use:
-
-```bash
-npm.cmd run dev
-npm.cmd run build
-npm.cmd run lint
-```
-
-## Estrutura
+## 📂 Estrutura de Pastas
 
 ```text
 pages/
-  _app.tsx              Provider global, estilos globais e GradualBlur
-  _document.tsx         Documento HTML customizado
-  index.tsx             Página principal, SEO, schema.org e analytics
+  📄 _app.tsx          # Provider global, estilos e GradualBlur
+  📄 _document.tsx     # Documento HTML customizado
+  📄 index.tsx         # Página principal, SEO e Analytics
 
 src/
-  components/
-    AllSections/        Composição geral da landing page
-    HeroSection/        Hero, preloader e navbar
-    AboutSection/       Seção institucional
-    ServicesSection/    Produtos/serviços com animações de scroll
-    SquadSection/       Cards do time
-    ContactSection/     Formulário e informações de contato
-    ProductsSection/    CTA de produtos
-    FooterSection/      Footer institucional
-    ui/                 Componentes reutilizáveis
-  styles/
-    globals.css         Tailwind, tokens globais e ajustes base
-  lib/
-    utils.ts            Utilitários compartilhados
+  📁 components/
+    📁 AllSections/    # Composição geral da landing page
+    📁 HeroSection/    # Hero, preloader e navbar
+    📁 ui/             # Componentes de interface reutilizáveis
+  📁 styles/           # globals.css e tokens de design
+  📁 lib/              # Utilitários (utils.ts)
 
-public/assets/          Imagens e logos usados na página
+public/assets/         # 🖼️ Imagens e logos
 ```
 
-## Fluxo da página
+---
 
-A composição principal fica em `src/components/AllSections/AllSections.tsx`.
+## 🌊 Fluxo da Página & IDs
 
-Ordem atual:
+A estrutura segue uma ordem lógica de conversão, gerenciada em `AllSections.tsx`:
 
-1. Hero
-2. About
-3. Services
-4. Squad
-5. Contact
-6. Subscription CTA
-7. Footer
+1.  🏠 **Hero** (`#inicio`)
+2.  🏢 **About** (`#sobre`)
+3.  💼 **Services** (`#servicos`)
+4.  👥 **Squad** (`#time`)
+5.  📩 **Contact** (`#contato`)
+6.  🛍️ **Subscription CTA**
+7.  🔚 **Footer**
 
-O wrapper `AllSections.module.css` mantém o background escuro compartilhado entre as seções principais. O footer fica fora desse shell para evitar conflitos com `overflow`, `clip-path` e animações do hero.
+---
 
-## Seções e IDs
+## 📈 SEO, Analytics & Imagens
 
-As âncoras usadas pela navbar e links internos são:
+* **SEO:** Open Graph e JSON-LD configurados em `pages/index.tsx`.
+* **Analytics:** Para ativar o Google Analytics, configure a variável de ambiente:
+    `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX`
+* **Imagens:** Utilize sempre o componente `next/image` para suporte nativo a **AVIF/WebP**.
 
-- `#inicio`
-- `#sobre`
-- `#servicos`
-- `#time`
-- `#contato`
+---
 
-Ao criar novas seções, mantenha os IDs sincronizados com `src/components/ui/resizable-navbar.tsx` e com o footer.
+## 🪄 Animações (GSAP & Lenis)
 
-## Contatos e redes
+O projeto foca em alta fidelidade visual. Ao dar manutenção:
+* ✅ **Limpeza:** Sempre use o retorno do `useEffect` para matar instâncias do GSAP.
+* ✅ **Performance:** Registre os plugins (`ScrollTrigger`) apenas onde necessário.
+* ✅ **Scroll:** A suavização do Lenis é aplicada globalmente no shell principal.
 
-Os principais links estão distribuídos em:
+---
 
-- Footer: `src/components/FooterSection/FooterSection.tsx`
-- Navbar: `src/components/ui/resizable-navbar.tsx`
-- Contact section: `src/components/ContactSection/ContactSection.tsx`
+## 🚀 Deploy & Manutenção
 
-O botão "Fale com a equipe" da navbar aponta para o WhatsApp da empresa via `wa.me`.
+* **Plataforma:** Otimizado para **Vercel**.
+* **Padronização:** Preserve a paleta escura com acentos roxos característica do Grupo Fellow.
+* **Configuração:** `reactStrictMode` ativo e `poweredByHeader` desativado para segurança.
 
-## SEO e analytics
+---
 
-SEO, Open Graph, Twitter Card, canonical URL, schema.org e Google Analytics ficam em `pages/index.tsx`.
-
-Variável opcional:
-
-```env
-NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-```
-
-Se a variável não estiver definida, os scripts do Google Analytics não são renderizados.
-
-## Imagens
-
-As imagens locais ficam em `public/assets`.
-
-Use `next/image` sempre que possível para imagens de conteúdo ou marca. Imagens referenciadas com caminho absoluto público devem começar com `/assets/...`.
-
-## Animações
-
-O projeto usa GSAP, ScrollTrigger e Lenis.
-
-Cuidados importantes:
-
-- Registre plugins GSAP apenas onde necessário.
-- Em componentes com animação, limpe timelines/contexts no retorno do `useEffect` ou `useLayoutEffect`.
-- Ao alterar altura, pinning ou ordem das seções, valide a rolagem em desktop e mobile.
-- A suavização global de scroll está em `AllSections.tsx`.
-
-## Next.js 16
-
-Este projeto usa Next.js 16. Antes de alterar APIs, estrutura de rotas, imagens, fontes ou configuração do framework, consulte a documentação local em:
-
-```text
-node_modules/next/dist/docs/
-```
-
-Essa orientação também está registrada em `AGENTS.md`.
-
-## Build e validação
-
-Antes de entregar mudanças, rode:
-
-```bash
-npm.cmd run lint
-npm.cmd run build
-```
-
-O build usa Turbopack via Next.js 16.
-
-## Deploy
-
-O projeto é compatível com Vercel.
-
-Configurações relevantes:
-
-- `next.config.ts` habilita compressão.
-- `poweredByHeader` está desativado.
-- `reactStrictMode` está ativo.
-- Imagens otimizadas para AVIF e WebP.
-
-## Manutenção
-
-- Mantenha textos institucionais e contatos consistentes entre Footer, Navbar e Contact section.
-- Evite colocar o footer dentro do container animado do hero.
-- Prefira CSS Modules para estilos específicos de componentes.
-- Use Tailwind para utilitários pontuais, especialmente em componentes UI já escritos nesse padrão.
-- Preserve a paleta escura com acentos roxos do Grupo Fellow.
+**© 2026 Grupo Fellow** - *Tecnologia e Performance.*

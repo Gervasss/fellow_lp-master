@@ -2,10 +2,11 @@ import AllSections from "@/src/components/AllSections/AllSections";
 import Head from "next/head";
 import Script from "next/script";
 
-function HomePage() {
-    const siteUrl = "https://fellow-lp-master.vercel.app/"; 
-    const ogImageUrl = `${siteUrl}/assets/fellow-banner.jpg`; 
+const SITE_URL = "https://fellow-lp-master.vercel.app/";
+const OG_IMAGE_URL = `${SITE_URL}/assets/fellow-banner.jpg`;
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+function HomePage() {
     return (
         <>
             <Head>
@@ -27,19 +28,19 @@ function HomePage() {
                 <meta name="author" content="Grupo Fellow" />
                 <meta name="robots" content="index, follow" />
 
-                <link rel="canonical" href={siteUrl} />
+                <link rel="canonical" href={SITE_URL} />
 
                 {/* Open Graph (Social Media) */}
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content={siteUrl} />
+                <meta property="og:url" content={SITE_URL} />
                 <meta property="og:title" content="Grupo Fellow | Tecnologia para Operações de Alta Disponibilidade" />
                 <meta
                     property="og:description"
                     content="Centralizando e escalando negócios com infraestrutura digital robusta e tolerância zero a falhas. Conheça o ecossistema Fellow."
                 />
                 
-                <meta property="og:image" content={ogImageUrl} />
-                <meta property="og:image:secure_url" content={ogImageUrl} />
+                <meta property="og:image" content={OG_IMAGE_URL} />
+                <meta property="og:image:secure_url" content={OG_IMAGE_URL} />
                 <meta property="og:image:type" content="image/png" />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
@@ -50,29 +51,32 @@ function HomePage() {
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Grupo Fellow | Infraestrutura e Software Estratégico" />
-                <meta name="twitter:image" content={ogImageUrl} />
+                <meta name="twitter:image" content={OG_IMAGE_URL} />
 
                 <link rel="icon" type="image/jpg" href="/assets/fellow-logo.jpg"  />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Head>
 
-            {/* Google Analytics */}
-            <Script
-                strategy="afterInteractive"
-                src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-            />
-            <Script
-                id="google-analytics"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                    __html: `
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', 'G-XXXXXXXXXX');
-                    `,
-                }}
-            />
+            {GA_MEASUREMENT_ID ? (
+                <>
+                    <Script
+                        strategy="afterInteractive"
+                        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+                    />
+                    <Script
+                        id="google-analytics"
+                        strategy="afterInteractive"
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);}
+                                gtag('js', new Date());
+                                gtag('config', '${GA_MEASUREMENT_ID}');
+                            `,
+                        }}
+                    />
+                </>
+            ) : null}
 
             {/* Structured Data: Ajustado para "Corporation" (mais autoridade) */}
             <Script
@@ -84,8 +88,8 @@ function HomePage() {
                         "@type": "Corporation",
                         "name": "Grupo Fellow",
                         "description": "Provedora de infraestrutura digital e licenciamento de softwares para operações financeiras e eventos de larga escala.",
-                        "url": siteUrl,
-                        "logo": ogImageUrl,
+                        "url": SITE_URL,
+                        "logo": OG_IMAGE_URL,
                         "address": {
                             "@type": "PostalAddress",
                             "addressLocality": "Vitória da Conquista",
@@ -116,6 +120,7 @@ function HomePage() {
 export async function getStaticProps() {
     return {
         props: {},
+        revalidate: 60 * 60 * 24,
     };
 }
 

@@ -5,7 +5,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import HeroSection from '../HeroSection/HeroSection';
-import ContactSection from '../ContactSection/ContactSection';
 
 gsap.registerPlugin(ScrollTrigger);
 

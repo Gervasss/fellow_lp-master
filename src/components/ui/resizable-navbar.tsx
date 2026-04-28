@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import NextImage from "next/image";
+import { Sora } from "next/font/google";
 import { cn } from "@/src/lib/utils";
 import {
   IconBriefcase2,
@@ -15,6 +16,11 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 // --- INTERFACES ---
+
+const navFont = Sora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -340,7 +346,7 @@ export const FellowNavbar = () => {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <Navbar className="px-4 pt-4">
+    <Navbar className={cn("px-4 pt-4", navFont.className)}>
 <NavBody >
   <a
     className="inline-flex items-center gap-3 no-underline transition-transform duration-300 hover:scale-[1.03]"
@@ -355,7 +361,7 @@ export const FellowNavbar = () => {
       className="object-contain drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)]"
     />
 
-    <span className="text-base font-bold tracking-[0.05em] bg-gradient-to-r from-[#7B61FF]  to-[#9F8CFF] bg-clip-text text-transparent">
+    <span className="text-base font-bold tracking-[0.05em] bg-gradient-to-r from-white  to-white bg-clip-text text-transparent">
       Grupo Fellow
     </span>
   </a>
@@ -389,7 +395,7 @@ export const FellowNavbar = () => {
               height={52}
               className="object-contain"
             />
-            <span className="text-base font-bold tracking-[0.03em] bg-gradient-to-r from-[#7B61FF] to-[#9F8CFF] bg-clip-text text-transparent">
+            <span className="text-base font-bold tracking-[0.03em] bg-gradient-to-r from-white to-white bg-clip-text text-transparent">
               Grupo Fellow
             </span>
           </a>

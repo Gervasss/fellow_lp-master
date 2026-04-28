@@ -5,9 +5,7 @@ import styles from './ContactSection.module.css';
 import { 
   IoMailOutline, 
   IoCallOutline, 
-  IoLocationOutline, 
   IoLogoInstagram, 
-  IoLogoGithub, 
   IoLogoLinkedin, 
   IoPaperPlaneOutline,
   IoChatbubblesOutline 
@@ -30,8 +28,6 @@ type FormState = {
     submitting: boolean;
     submitted: boolean;
 };
-
-const WHATSAPP_NUMBER_E164 = '5584584958';
 
 export default function ContactSection() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -147,7 +143,7 @@ export default function ContactSection() {
                             <div className={styles.iconBubble}><IoCallOutline size={22} /></div>
                             <div className={`${styles.infoText} ${bodyFont.className}`}>
                                 <p>WhatsApp</p>
-                                <span className={styles.infoStrong}>(77) 98165-2668</span>
+                                <span className={styles.infoStrong}>(71) 99641-8877</span>
                             </div>
                         </div>
 

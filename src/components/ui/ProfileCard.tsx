@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useCallback, useMemo, useState } from "react";
+import Image from "next/image";
 import styles from "./ProfileCard.module.css";
 
 /* Tipos auxiliares (sem any) */
@@ -93,9 +94,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   description,
   handle = "usuario",
   status = "Online",
-  contactText = "Contato",
   showUserInfo = true,
-  onContactClick,
   cardBackground = "#77777c7c",
   neonBorderColor = "#7B61FF",
   cardBackdropFilter = "blur(22px) saturate(1.35)",
@@ -322,11 +321,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           <div className={styles["pc-glare"]} />
 
           <div className={`${styles["pc-content"]} ${styles["pc-avatar-content"]}`}>
-            <img
+            <Image
               className={styles.avatar}
               src={avatarUrl}
               alt={`${name} avatar`}
-              loading="lazy"
+              width={420}
+              height={540}
+              sizes="(max-width: 768px) 86vw, 320px"
               onError={(e) => {
                 e.currentTarget.style.display = "none";
               }}
@@ -336,19 +337,20 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               <div className={styles["pc-user-info"]}>
                 <div className={styles["pc-user-details"]}>
                   <div className={styles["pc-mini-avatar"]}>
-                    <img
+                    <Image
                       src={miniAvatarUrl || avatarUrl}
                       alt={`${name} mini avatar`}
-                      loading="lazy"
+                      width={80}
+                      height={80}
+                      sizes="40px"
                       onError={(e) => {
                         const t = e.currentTarget;
                         t.style.opacity = "0.5";
-                        t.src = avatarUrl;
                       }}
                     />
                   </div>
                   <div className={styles["pc-user-text"]}>
-                    <div className={styles["pc-handle"]}>@{handle}</div>
+                    <div className={styles["pc-handle"]}>{handle}</div>
                     <div className={styles["pc-status"]}>{status}</div>
                   </div>
                 </div>

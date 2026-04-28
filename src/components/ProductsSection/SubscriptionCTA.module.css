@@ -11,7 +11,7 @@
 .container {
     position: relative;
     z-index: 5;
-    width: min(1180px, calc(100% - 3rem));
+    width: min(1040px, calc(100% - 3rem));
     margin: 0 auto;
 }
 
@@ -62,14 +62,16 @@
 /* GLASS CARD */
 .glassCard {
     position: relative;
-    padding: clamp(3rem, 6vw, 6rem) 2rem;
-    border-radius: 3.5rem;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(10, 9, 13, 0.98) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    padding: clamp(2.4rem, 4.6vw, 4.4rem) clamp(1.25rem, 3vw, 2rem);
+    border-radius: 2rem;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(10, 9, 13, 0.96) 100%),
+        radial-gradient(circle at 50% 0%, rgba(123, 97, 255, 0.12), transparent 42%);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     overflow: hidden;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 26px 72px rgba(0, 0, 0, 0.52);
 }
 
 .content {
@@ -82,9 +84,9 @@
 }
 
 .title {
-    font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+    font-size: clamp(1.75rem, 4vw, 3rem);
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.15rem;
     color: #ffffff;
     letter-spacing: -0.04em;
 }
@@ -96,51 +98,83 @@
 }
 
 .description {
-    max-width: 650px;
+    max-width: 580px;
     color: rgba(214, 214, 214, 0.6);
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 /* PRODUCTS GRID */
 .productsGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
-    max-width: 960px;
-    margin-bottom: 5rem;
+    max-width: 860px;
+    margin-bottom: 3.5rem;
 }
 
 .productMiniCard {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(159, 140, 255, 0.08);
-    border-radius: 2rem;
-    padding: 2.5rem 1.5rem;
+    position: relative;
+    min-height: 310px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.018) 100%),
+        rgba(12, 11, 16, 0.78);
+    border: 1px solid rgba(159, 140, 255, 0.14);
+    border-radius: 1.35rem;
+    padding: 1.65rem 1.15rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 18px 42px rgba(0, 0, 0, 0.32);
+    overflow: hidden;
+}
+
+.productMiniCard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(159, 140, 255, 0.14), transparent 42%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
 }
 
 .productMiniCard:hover {
-    background: rgba(123, 97, 255, 0.06);
-    border-color: rgba(159, 140, 255, 0.3);
-    transform: translateY(-10px);
+    background:
+        linear-gradient(180deg, rgba(123, 97, 255, 0.09) 0%, rgba(255, 255, 255, 0.025) 100%),
+        rgba(12, 11, 16, 0.86);
+    border-color: rgba(159, 140, 255, 0.34);
+    transform: translateY(-7px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 24px 54px rgba(0, 0, 0, 0.42),
+        0 0 34px rgba(123, 97, 255, 0.13);
+}
+
+.productMiniCard:hover::before {
+    opacity: 1;
 }
 
 .prodLogo {
-    width: 4.5rem;
-    height: 4.5rem;
-    background: #1a191e;
-    border-radius: 1.2rem;
+    position: relative;
+    z-index: 1;
+    width: 4.25rem;
+    height: 4.25rem;
+    background: #141218;
+    border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.15rem;
     overflow: hidden;
-    border: 1px solid rgba(159, 140, 255, 0.1);
+    border: 1px solid rgba(159, 140, 255, 0.18);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.34);
 }
 
 .logoImage {
@@ -150,15 +184,19 @@
 }
 
 .prodName {
-    font-size: 1.25rem;
+    position: relative;
+    z-index: 1;
+    font-size: 1.08rem;
     color: #fff;
-    margin-bottom: 1rem;
+    margin: 0 0 0.85rem;
 }
 
 .prodFeatures {
+    position: relative;
+    z-index: 1;
     list-style: none;
     padding: 0;
-    margin: 0 0 2rem 0;
+    margin: 0 0 1.35rem 0;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
@@ -179,11 +217,13 @@
 }
 
 .subscribeBtn {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(159, 140, 255, 0.2);
-    border-radius: 1rem;
+    padding: 0.88rem;
+    background: rgba(123, 97, 255, 0.1);
+    border: 1px solid rgba(159, 140, 255, 0.24);
+    border-radius: 0.85rem;
     color: #fff;
     font-weight: 700;
     font-size: 0.8rem;
@@ -203,8 +243,8 @@
 /* BENEFITS FOOTER */
 .benefitsRow {
     display: flex;
-    gap: 4rem;
-    padding-top: 3rem;
+    gap: 2.5rem;
+    padding-top: 2.25rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     width: 100%;
     justify-content: center;
@@ -248,6 +288,6 @@
     .section { padding: 80px 0; }
     .productsGrid { grid-template-columns: 1fr; gap: 1rem; }
     .benefitsRow { flex-direction: column; align-items: center; gap: 1.5rem; }
-    .productMiniCard { flex-direction: column; padding: 2rem; }
-    .glassCard { border-radius: 2.5rem; }
+    .productMiniCard { flex-direction: column; min-height: 280px; padding: 1.45rem; }
+    .glassCard { border-radius: 1.5rem; }
 }

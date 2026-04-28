@@ -121,7 +121,7 @@
   align-items: center;
   will-change: transform;
   border-radius: 28px;
-  background: #6D4CFF;
+background: linear-gradient(135deg, #7B61FF, #9F8CFF);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 -1px 0 rgba(255, 255, 255, 0.02),

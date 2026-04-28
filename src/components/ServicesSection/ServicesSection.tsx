@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
@@ -138,9 +139,12 @@ export default function ServicesSections() {
                             <h1 className={`${styles.featureTitle} ${headingFont.className} ${styles.section1Title}`}>Fellow Pay</h1>
 
                             <div className={styles.featureContentRow}>
-                                <img
+                                <Image
                                     className={styles.featureImage}
                                     src="/assets/pay.jpg"
+                                    width={760}
+                                    height={520}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                     alt="Representação visual do serviço Fellow Pay"
                                 />
 
@@ -172,9 +176,12 @@ export default function ServicesSections() {
                             </h1>
 
                             <div className={`${styles.featureContentRow} ${styles.section3ContentRow}`}>
-                                <img
+                                <Image
                                     className={`${styles.featureImage} ${styles.section3Image}`}
                                     src="/assets/ticket.jpg"
+                                    width={760}
+                                    height={520}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                     alt="Plataforma Fellow Ticket - Gestão de Eventos"
                                 />
 
@@ -207,9 +214,12 @@ export default function ServicesSections() {
                             </h1>
 
                             <div className={`${styles.featureContentRow} ${styles.section2ContentRow}`}>
-                                <img
+                                <Image
                                     className={`${styles.featureImage} ${styles.section2Image}`}
                                     src="/assets/ai.jpg"
+                                    width={760}
+                                    height={520}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                     alt="Representação visual do serviço Fellow Agents"
                                 />
 

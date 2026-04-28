@@ -5,7 +5,12 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
-import { IconTarget } from '@tabler/icons-react';
+import {
+    IconGauge,
+    IconLicense,
+    IconServer2,
+    IconTarget,
+} from '@tabler/icons-react';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
 import styles from './AboutSection.module.css';
 
@@ -17,15 +22,15 @@ const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', 
 const stats = [
     {
         label: 'INFRAESTRUTURA',
-        value: 'Soluções digitais resilientes para operações de alta disponibilidade.',
+        icon: IconServer2,
     },
     {
         label: 'LICENCIAMENTO',
-        value: 'Softwares customizáveis projetados para escalar seu ecossistema.',
+        icon: IconLicense,
     },
     {
         label: 'PERFORMANCE',
-        value: 'Desenvolvimento focado em tolerância zero a falhas e estabilidade.',
+        icon: IconGauge,
     },
 ];
 
@@ -203,12 +208,18 @@ export default function AboutSection() {
                     </div>
 
                     <div className={styles.statsGrid}>
-                        {stats.map((item) => (
-                            <div key={item.label} className={styles.statItem}>
-                                <span className={`${styles.statLabel} ${bodyFont.className}`}>{item.label}</span>
-                                <p className={`${styles.statValue} ${bodyFont.className}`}>{item.value}</p>
-                            </div>
-                        ))}
+                        {stats.map((item) => {
+                            const Icon = item.icon;
+
+                            return (
+                                <div key={item.label} className={styles.statItem}>
+                                    <span className={styles.statIcon}>
+                                        <Icon size={30} stroke={1.7} />
+                                    </span>
+                                    <span className={`${styles.statLabel} ${bodyFont.className}`}>{item.label}</span>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -219,8 +230,8 @@ export default function AboutSection() {
                         <Image
                             src="/assets/felloww-logo.png"
                             alt="Logo Grupo Fellow"
-                            width={420}
-                            height={420}
+                            width={600}
+                            height={600}
                             className={styles.brandLogo}
                         />
                     </div>

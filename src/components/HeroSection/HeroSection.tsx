@@ -10,7 +10,6 @@ import AboutSection from '../AboutSection/AboutSection';
 import ServicesSections from '../ServicesSection/ServicesSection';
 import SquadSection from '../SquadSection/SquadSection';
 import ContactSection from '../ContactSection/ContactSection';
-import ProductsSection from '../ProductsSection/SubscriptionCTA';
 import SubscriptionCTA from '../ProductsSection/SubscriptionCTA';
 
 const FellowNavbar = dynamic(
@@ -239,7 +238,11 @@ export default function MinimalHero() {
           '-=0.5'
         )
         .to(
-          [`.${styles.loaderLogo}`, `.${styles.loaderName}`],
+          [
+            `.${styles.loaderLogo}`,
+            `.${styles.loaderName1}`,
+            `.${styles.loaderName}`,
+          ],
           {
             opacity: 0.18,
             filter: 'blur(18px)',
@@ -495,11 +498,19 @@ export default function MinimalHero() {
             className={styles.loaderLogo}
             src="/assets/felloww-logo.png"
             alt="Logo Fellow"
-            width={200}
-            height={200}
+            width={400}
+            height={400}
             priority
           />
-          <span className={`${styles.loaderName} ${headingFont.className}`}>FELLOW</span>
+          <div className={styles.loaderWrapper}>
+            <span className={`${styles.loaderName1} ${headingFont.className}`}>
+              GRUPO
+            </span>
+
+            <span className={`${styles.loaderName} ${headingFont.className}`}>
+              FELLOW
+            </span>
+          </div>
         </div>
       </div>
 
@@ -635,8 +646,8 @@ export default function MinimalHero() {
         <AboutSection />
         <ServicesSections />
         <SquadSection />
-        <ContactSection/>
-        <SubscriptionCTA/>
+        <ContactSection />
+        <SubscriptionCTA />
       </section>
     </div>
   );

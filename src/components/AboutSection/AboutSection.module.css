@@ -113,7 +113,7 @@
 .brandGlow {
   position: absolute;
   left: 0;
-  width: clamp(280px, 34vw, 460px);
+  width: clamp(280px, 54vw, 460px);
   aspect-ratio: 1;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.045) 0%, rgba(110, 110, 110, 0.05) 26%, transparent 76%);
   filter: blur(80px); 
@@ -136,10 +136,10 @@
 .brandLogo {
   position: relative;
   z-index: 1;
-  width: clamp(260px, 34vw, 460px);
+  width: clamp(860px, 34vw, 460px);
   height: auto;
   object-fit: contain;
-  /* Melhora na pulsação: Opacidade + Filtro de Brilho */
+  margin-left: 100px;
   animation: logoBreath 5s ease-in-out infinite;
   will-change: opacity, filter;
 }
@@ -202,7 +202,10 @@
 .statItem {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+  min-height: 150px;
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 1.5rem;
@@ -212,18 +215,30 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
+.statIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid rgba(159, 140, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(123, 97, 255, 0.14);
+  color: #c7bdff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 34px rgba(0, 0, 0, 0.38),
+    0 0 28px rgba(123, 97, 255, 0.16);
+}
+
 .statLabel {
   color: rgba(236, 236, 236, 0.72);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
+  text-align: center;
   opacity: 0.8;
-}
-
-.statValue {
-  color: rgba(221, 221, 221, 0.68);
-  font-size: 0.95rem;
 }
 
 /* ==========================================================================
@@ -322,17 +337,18 @@
   }
 
   .statItem {
+    min-height: 136px;
     padding: 1.2rem;
     border-radius: 1.2rem;
+  }
+
+  .statIcon {
+    width: 3.5rem;
+    height: 3.5rem;
   }
 
   .statLabel {
     font-size: 0.62rem;
     letter-spacing: 0.18em;
-  }
-
-  .statValue {
-    font-size: 0.9rem;
-    line-height: 1.6;
   }
 }

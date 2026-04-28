@@ -80,6 +80,7 @@
 .pc-details {
   padding-top: 2rem;
   text-align: center;
+  margin-top: -20px;
 }
 
 .pc-details h3 {
@@ -91,7 +92,7 @@
 }
 
 .pc-details p {
-  color: #a1a1a1;
+  color: #eeecec;
   font-size: 0.9rem;
   margin-top: 5px;
 }

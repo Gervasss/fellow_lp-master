@@ -100,7 +100,7 @@ useEffect(() => {
                     <div className={styles.pulseIcon}>
                         <IoRocketOutline size={16} />
                     </div>
-                    <span>Planos de Assinatura</span>
+                    <span>Vamos Escalar?</span>
                 </div>
             </div>
 

@@ -1,0 +1,360 @@
+/* ==========================================================================
+   CONTACT SECTION - FELLOW BLACKOUT (GREY-PURPLE EDITION)
+   ========================================================================== */
+
+.section {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    padding: clamp(80px, 12vw, 160px) 0;
+    background: #0a090d; 
+    color: #ffffff;
+    border-top: 1px solid rgba(123, 97, 255, 0.05);
+}
+
+/* Efeito de Glow Centralizado */
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 50% auto auto 50%;
+    z-index: 1;
+    width: min(90vw, 1100px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle, 
+        rgba(123, 97, 255, 0.07) 0%, 
+        rgba(30, 27, 38, 0.04) 35%, 
+        transparent 70%
+    );
+    transform: translate(-50%, -50%);
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+.container {
+    position: relative;
+    z-index: 4;
+    width: min(1180px, calc(100% - 3rem));
+    margin: 0 auto;
+}
+
+/* HEADER CENTRALIZADO */
+.header {
+    max-width: 800px;
+    margin: 0 auto 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.35rem;
+}
+
+/* BADGE ESTILO FELLOW */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.72rem 1.2rem;
+    border: 1px solid rgba(159, 140, 255, 0.34);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(123, 97, 255, 0.16) 0%, rgba(18, 18, 18, 0.92) 100%);
+    color: rgba(235, 235, 235, 0.86);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.badgeIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: rgba(123, 97, 255, 0.18);
+    color: #9F8CFF;
+    box-shadow: 0 0 18px rgba(123, 97, 255, 0.24);
+}
+
+.title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(2rem, 5vw, 4.3rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+
+.subtitle {
+    max-width: 760px;
+    margin: 0 auto;
+    color: rgba(214, 214, 214, 0.7);
+    font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+    line-height: 1.7;
+}
+
+/* GRID DE CONTATO */
+.grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 40px;
+}
+
+.form, .side {
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 2rem;
+    background: linear-gradient(
+        180deg, 
+        rgba(20, 18, 26, 0.6) 0%, 
+        rgba(10, 9, 13, 0.95) 100%
+    );
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+}
+
+/* FORMULÁRIO */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.8rem;
+}
+
+.label {
+    color: rgba(236, 236, 236, 0.72);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.input, .textarea {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(159, 140, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input:focus, .textarea:focus {
+    border-color: rgba(159, 140, 255, 0.4);
+    background: rgba(123, 97, 255, 0.05);
+    outline: none;
+    box-shadow: 0 0 25px rgba(123, 97, 255, 0.1);
+}
+
+.textarea {
+    min-height: 160px;
+}
+
+/* CTA BUTTON */
+.button {
+    width: 100%;
+    height: 64px;
+    border-radius: 1.2rem;
+    border: 1px solid rgba(159, 140, 255, 0.4);
+    background: rgba(123, 97, 255, 0.1);
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.button:hover:not(:disabled) {
+    background: #7B61FF;
+    color: #000000;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(123, 97, 255, 0.3);
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button.success {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: white;
+}
+
+/* SIDE INFO */
+.sideTitle {
+    color: #ffffff;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.02em;
+}
+
+.infoRow {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.iconBubble {
+    flex-shrink: 0;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.1rem;
+    background: rgba(123, 97, 255, 0.08);
+    border: 1px solid rgba(159, 140, 255, 0.15);
+    color: #9F8CFF;
+}
+
+.infoText p {
+    margin: 0;
+    color: rgba(214, 214, 214, 0.5);
+    font-size: 0.85rem;
+}
+
+.infoStrong {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    word-break: break-word;
+}
+
+.socialRow {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.social {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.social:hover {
+    background: rgba(123, 97, 255, 0.1);
+    border-color: #7B61FF;
+    color: #7B61FF;
+    transform: translateY(-5px);
+}
+
+.errorMessage {
+    color: #ff4d4d;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* ==========================================================================
+   BREAKPOINTS - RESPONSIVIDADE
+   ========================================================================== */
+
+/* Tablets e Desktops Pequenos */
+@media (max-width: 1024px) {
+    .grid {
+        gap: 30px;
+    }
+    
+    .form, .side {
+        padding: 2.5rem;
+    }
+}
+
+/* Tablets Verticais (Geralmente 1 Card por linha aqui) */
+@media (max-width: 968px) {
+    .header {
+        margin-bottom: 3.5rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr; /* Força 1 coluna */
+        gap: 24px;
+    }
+
+    .side {
+        order: 2; /* Move as informações para baixo do form */
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 640px) {
+    .section {
+        padding: 60px 0 80px;
+    }
+
+    .container {
+        width: calc(100% - 2rem);
+    }
+
+    .form, .side {
+        padding: 1.75rem 1.5rem;
+        border-radius: 1.5rem;
+    }
+
+    .title {
+        letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .infoRow {
+        gap: 1rem;
+    }
+
+    .iconBubble {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.85rem;
+    }
+
+    .infoStrong {
+        font-size: 1rem;
+    }
+
+    .socialRow {
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .social {
+        width: 3.2rem;
+        height: 3.2rem;
+    }
+}
+
+/* Ajustes para telas muito pequenas (iPhone SE etc) */
+@media (max-width: 380px) {
+    .badge {
+        letter-spacing: 0.1em;
+        padding: 0.5rem 1rem;
+    }
+    
+    .title {
+        font-size: 1.75rem;
+    }
+}

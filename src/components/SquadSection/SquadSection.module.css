@@ -1,0 +1,153 @@
+.founders-container {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  width: 100%;
+  padding: 150px 0 170px;
+  background: #000000; 
+  color: #ffffff;
+}
+
+
+.founders-container::before {
+  content: '';
+  position: absolute;
+  inset: 12% auto auto 50%;
+  z-index: 1;
+  width: min(78vw, 980px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle, 
+    rgba(123, 97, 255, 0.08) 0%, 
+    rgba(123, 97, 255, 0.03) 40%, 
+    transparent 70%
+  );
+  transform: translateX(-50%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.founders-header {
+  position: relative;
+  z-index: 4;
+  width: min(1180px, calc(100% - 4rem));
+  max-width: none;
+  margin: 0 auto 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.72rem 1rem;
+  border: 1px solid rgba(123, 97, 255, 0.3); 
+  border-radius: 999px;
+  /* Efeito Glassmorphism no Badge */
+  background: rgba(123, 97, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(235, 235, 235, 0.95);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.badgeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  background: rgba(123, 97, 255, 0.25);
+  color: #9F8CFF;
+  box-shadow: 0 0 15px rgba(123, 97, 255, 0.3);
+}
+
+.main-title {
+  max-width: 15ch;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2.3rem, 4.4vw, 4.3rem);
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.description {
+  max-width: 760px;
+  margin: 0;
+  color: rgba(160, 160, 160, 0.8); 
+  font-size: clamp(1rem, 1.35vw, 1.08rem);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+.cards-grid {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  width: min(1200px, calc(100% - 4rem));
+  margin: 0 auto 80px;
+  flex-wrap: wrap;
+}
+
+.profile-card-wrapper {
+  flex: 1;
+  max-width: 400px;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+/* --- RESPONSIVIDADE MOBILE --- */
+@media (max-width: 768px) {
+  .founders-container {
+    padding: 92px 0 110px;
+    background: #000; 
+  }
+
+  .founders-header,
+  .cards-grid {
+    width: calc(100% - 2.5rem);
+  }
+
+  .founders-header {
+    margin-bottom: 3.5rem;
+  }
+
+  /* Um card por linha */
+  .cards-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .profile-card-wrapper {
+    width: 100%;
+    max-width: 400px; 
+    min-width: 0;
+    margin: 0 auto;
+  }
+
+  .main-title {
+    max-width: 100%;
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
+  .description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6);
+  }
+}

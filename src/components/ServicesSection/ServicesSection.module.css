@@ -1,0 +1,436 @@
+.slidesWrapper {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  padding-top: calc(63px + 5.5rem);
+  background: transparent;
+}
+
+.slidesWrapper::before {
+  content: '';
+  position: absolute;
+  inset: 6% auto auto 50%;
+  z-index: 1;
+  width: min(78vw, 980px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, rgba(96, 96, 96, 0.06) 26%, rgba(0, 0, 0, 0) 68%);
+  transform: translateX(-50%);
+  filter: blur(56px);
+  pointer-events: none;
+}
+
+.introBlock {
+  position: relative;
+  z-index: 4;
+  width: min(1180px, calc(100% - 4rem));
+  margin: 0 auto 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.72rem 1rem;
+  border: 1px solid rgba(159, 140, 255, 0.34);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(123, 97, 255, 0.16) 0%, rgba(18, 18, 18, 0.92) 100%);
+  color: rgba(235, 235, 235, 0.86);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.badgeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  background: rgba(123, 97, 255, 0.18);
+  color: #9F8CFF;
+  box-shadow: 0 0 18px rgba(123, 97, 255, 0.24);
+}
+
+.badge i, .badge svg {
+  color: rgba(245, 245, 245, 0.82);
+  font-size: 0.9rem;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.18));
+}
+
+
+.introTitle {
+  max-width: 11ch;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2.3rem, 4.4vw, 4.3rem);
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.introSubtitle {
+  max-width: 740px;
+  margin: 0;
+  color: rgba(214, 214, 214, 0.7);
+  font-size: clamp(1rem, 1.35vw, 1.08rem);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+.section {
+  width: 100%;
+  height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 0 1rem 1rem;
+  margin-bottom: 0;
+}
+
+.sectionContent {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sectionInner {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+  border-radius: 28px;
+  background: #6D4CFF;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    0 24px 60px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  position: relative;
+  overflow: hidden;
+  border: none; 
+}
+
+/* A "Cobra" - O gradiente que gira */
+.sectionInner::before {
+  content: '';
+  position: absolute;
+  width: 150%; 
+  height: 150%;
+  background-image: conic-gradient(
+    transparent, 
+    transparent, 
+    transparent, 
+    #ffffff 
+  );
+  animation: rotateSnake 4s linear infinite;
+  top: -25%;
+  left: -25%;
+}
+
+/* O "Corpo" do card - Fica em cima do gradiente para criar o efeito de linha */
+.sectionInner::after {
+  content: '';
+  position: absolute;
+  inset: 5px; 
+  background: inherit; 
+  border-radius: 26px; 
+  z-index: 0;
+}
+
+/* Garante que o conteúdo real do card fique acima da animação */
+.sectionInner > * {
+  z-index: 1;
+}
+
+/* Animação de rotação */
+@keyframes rotateSnake {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.section h1 {
+  font-size: max(4rem, min(12vw + 1rem, 16rem));
+  font-weight: 600;
+  margin: 0 auto;
+}
+
+.image {
+  width: 50%;
+  max-width: 300px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  margin-top: 2.5rem;
+  border-radius: 12px;
+}
+
+.serviceFeature {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.8rem;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2.75rem;
+}
+
+.featureContentRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.92fr);
+  gap: 2.5rem;
+  align-items: center;
+  width: 100%;
+  min-height: 0;
+}
+
+.serviceFeatureLeft {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1.6rem;
+  text-align: left;
+}
+
+.featureTitle {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.45rem, 1.9vw, 2.1rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.featureImage {
+  width: min(100%, 520px);
+  height: clamp(320px, 38vw, 460px);
+  justify-self: start;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  object-fit: contain;
+  object-position: center;
+  background: #000000;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 24px 60px rgba(0, 0, 0, 0.3);
+}
+
+.serviceFeatureRight {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.6rem;
+  text-align: left;
+}
+
+.featureDescription {
+  margin: 0;
+  max-width: 40ch;
+  color: rgb(189, 185, 185);
+  font-size: clamp(1.08rem, 1.45vw, 1.18rem);
+  line-height: 1.95;
+  text-wrap: pretty;
+}
+
+.featureDescription strong {
+  color: #ffffff;
+}
+
+.featureButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 190px;
+  min-height: 3.3rem;
+  padding: 0.92rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  color: #fffdfd;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  text-transform: uppercase;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.25s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 18px 40px rgba(0, 0, 0, 0.3);
+}
+
+.featureButton:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 24px 46px rgba(0, 0, 0, 0.4);
+}
+
+
+
+
+.height {
+  padding: 1rem;
+  padding-bottom: 5rem;
+}
+
+.paragraph {
+  max-width: 45ch;
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+/* Cores das Seções em Tons de Preto/Noir */
+.section1 {
+  background: transparent;
+  color: #ffffff;
+}
+
+.section2 {
+  background: transparent;
+  color: #ffffff;
+}
+
+.section3 {
+  background: transparent;
+  color: #f8f7f5;
+}
+
+.section4 {
+  background: transparent;
+  color: #f8f7f5;
+}
+
+@media (max-width: 768px) {
+  .slidesWrapper {
+    padding-top: calc(63px + 4rem);
+  }
+
+  .introBlock {
+    width: min(100%, calc(100% - 1.5rem));
+    margin-bottom: 3rem;
+  }
+
+  .section h1 { font-size: 3rem; }
+  .image { width: 80%; }
+  .section {
+    padding: 0 0.75rem 0.75rem;
+    height: auto;
+    min-height: calc(100svh - 64px);
+    overflow: visible;
+  }
+
+  .sectionContent {
+    min-height: 0;
+  }
+
+  .sectionInner {
+    height: auto;
+    min-height: 100%;
+  }
+
+  .serviceFeature {
+    gap: 1.5rem;
+    min-height: auto;
+    padding: 1.3rem 1.15rem;
+  }
+
+  .featureContentRow {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .serviceFeatureLeft,
+  .serviceFeatureRight {
+    align-items: center;
+    text-align: center;
+  }
+
+  .serviceFeatureRight {
+    padding-top: 0;
+  }
+
+  .featureTitle {
+    white-space: normal;
+  }
+ 
+
+  
+
+  .featureImage {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1599px) {
+  .section2Title {
+    font-size: 160px !important; 
+   
+  }
+    .section1Title {
+    font-size: 200px !important; 
+   
+  }
+
+   .section3Title {
+    font-size: 160px !important; 
+   
+  }
+
+.section3{
+      height: 750px !important;
+    }
+
+   .section2{
+      height: 750px !important;
+    }
+
+    .section1{
+      height: 850px !important;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+ .section2Title {
+    font-size: 180px !important; 
+   
+  }
+ .section3Title {
+    font-size: 180px !important; 
+   
+  }
+}

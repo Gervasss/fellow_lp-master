@@ -5,6 +5,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import HeroSection from '../HeroSection/HeroSection';
+import AboutSection from '../AboutSection/AboutSection';
+import ServicesSections from '../ServicesSection/ServicesSection';
+import SquadSection from '../SquadSection/SquadSection';
+import ContactSection from '../ContactSection/ContactSection';
+import SubscriptionCTA from '../ProductsSection/SubscriptionCTA';
+import FooterSection from '../FooterSection/FooterSection';
+import styles from './AllSections.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,11 +41,17 @@ const AllSections = () => {
   }, []);
 
   return (
-    <main>
-      <HeroSection />
-  
-
-    </main>
+    <>
+      <div className={styles.sectionsShell}>
+        <HeroSection />
+        <AboutSection />
+        <ServicesSections />
+        <SquadSection />
+        <ContactSection />
+        <SubscriptionCTA />
+      </div>
+      <FooterSection />
+    </>
   );
 };
 

@@ -96,7 +96,7 @@ export default function ContactSection() {
     };
 
     return (
-        <section ref={sectionRef} className={styles.section} id="contact">
+        <section ref={sectionRef} className={styles.section} id="contato">
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div ref={badgeRef} className={`${styles.badge} ${bodyFont.className}`}>

@@ -114,7 +114,7 @@ export default function ServicesSections() {
     }, []);
 
     return (
-        <div ref={wrapperRef} className={styles.slidesWrapper}>
+        <div ref={wrapperRef} className={styles.slidesWrapper} id="servicos">
             <div className={styles.introBlock}>
                 <div className={`${styles.badge} ${bodyFont.className}`}>
                     <span className={styles.badgeIcon}>

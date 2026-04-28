@@ -11,7 +11,7 @@
 
   /* Fundo herdado do shell da hero para continuidade visual */
   background: transparent;
-  color: #ffffff;
+  color: #535353;
 }
 
 .aboutWrapper::before {

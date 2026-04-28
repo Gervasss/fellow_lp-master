@@ -7,8 +7,7 @@ import {
     IoFlashOutline, 
     IoShieldCheckmarkOutline, 
     IoTrendingUpOutline, 
-    IoRocketOutline,
-    IoCheckmarkCircle
+    IoRocketOutline
 } from 'react-icons/io5';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -109,7 +108,7 @@ useEffect(() => {
                     <div className={styles.content}>
                         <h2 className={`${styles.title} ${headingFont.className}`}>
                             Transforme sua operação com <br />
-                            <span>nossas soluções premium</span>
+                            <span>nossas soluções </span>
                         </h2>
 
                         <p className={`${styles.description} ${bodyFont.className}`}>
@@ -132,10 +131,7 @@ useEffect(() => {
                                     <h3 className={`${styles.prodName} ${headingFont.className}`}>
                                         {prod.name}
                                     </h3>
-                                    <ul className={styles.prodFeatures}>
-                                        <li><IoCheckmarkCircle size={14} /> Full Access</li>
-                                        <li><IoCheckmarkCircle size={14} /> Updates</li>
-                                    </ul>
+                                   
                                     <button className={`${styles.subscribeBtn} ${bodyFont.className}`}>
                                        Ir para o Produto
                                     </button>

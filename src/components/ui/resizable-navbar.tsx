@@ -61,6 +61,8 @@ const mobileNavItems = [
   { name: "Contato", link: "#contato", icon: IconMail },
 ];
 
+const WHATSAPP_URL = "https://wa.me/5571996418877";
+
 // --- COMPONENTE PAI (CONTROLLER) ---
 
 export const Navbar = ({ children, className }: NavbarProps) => {
@@ -372,7 +374,9 @@ export const FellowNavbar = () => {
   {/* Botão de Call-to-Action à Direita */}
   <div className="relative z-20 ml-auto">
     <NavbarButton
-      href="#contato"
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       className="border-[#9F8CFF]/35 bg-[#7B61FF]/15 text-[#E9E4FF] backdrop-blur-md hover:bg-[#6D4CFF]/30 hover:text-[#9F8CFF] hover:border-[#9F8CFF]/70 transition-all duration-300 shadow-[0_10px_30px_rgba(109,76,255,0.22)] hover:shadow-[0_14px_40px_rgba(109,76,255,0.34)]"
     >
       Fale com a equipe
@@ -430,7 +434,9 @@ export const FellowNavbar = () => {
 
           <div className="mt-3 flex w-full justify-center">
             <NavbarButton
-              href="#contato"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={closeMobileMenu}
              className="border-[#9F8CFF]/35 bg-[#7B61FF]/15 text-[#E9E4FF] backdrop-blur-md hover:bg-[#6D4CFF]/30 hover:text-[#9F8CFF] hover:border-[#9F8CFF]/70 transition-all duration-300 shadow-[0_10px_30px_rgba(109,76,255,0.22)] hover:shadow-[0_14px_40px_rgba(109,76,255,0.34)]"
             >

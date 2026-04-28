@@ -6,11 +6,6 @@ import Image from 'next/image';
 import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
 import gsap from 'gsap';
 import styles from './HeroSection.module.css';
-import AboutSection from '../AboutSection/AboutSection';
-import ServicesSections from '../ServicesSection/ServicesSection';
-import SquadSection from '../SquadSection/SquadSection';
-import ContactSection from '../ContactSection/ContactSection';
-import SubscriptionCTA from '../ProductsSection/SubscriptionCTA';
 
 const FellowNavbar = dynamic(
   () =>
@@ -643,11 +638,6 @@ export default function MinimalHero() {
             }}
           />
         </div>
-        <AboutSection />
-        <ServicesSections />
-        <SquadSection />
-        <ContactSection />
-        <SubscriptionCTA />
       </section>
     </div>
   );

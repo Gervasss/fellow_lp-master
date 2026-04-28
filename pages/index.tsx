@@ -3,7 +3,7 @@ import Head from "next/head";
 import Script from "next/script";
 
 function HomePage() {
-    const siteUrl = "https://fellow-lp.vercel.app/"; 
+    const siteUrl = "https://fellow-lp-master.vercel.app/"; 
     const ogImageUrl = `${siteUrl}/assets/fellow-banner.jpg`; 
 
     return (

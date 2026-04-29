@@ -92,7 +92,7 @@ function HomePage() {
                         "logo": OG_IMAGE_URL,
                         "address": {
                             "@type": "PostalAddress",
-                            "addressLocality": "Vitória da Conquista",
+                            "addressLocality": "Salvador",
                             "addressRegion": "BA",
                             "addressCountry": "BR"
                         },

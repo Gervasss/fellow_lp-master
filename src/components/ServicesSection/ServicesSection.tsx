@@ -28,9 +28,6 @@ export default function ServicesSections() {
             const splitBadge = new SplitText(badgeTextRef.current, { type: 'chars' });
             const splitTitle = new SplitText(introTitleRef.current, { type: 'words, chars' });
             const splitSubtitle = new SplitText(introSubtitleRef.current, { type: 'lines' });
-            const panels = gsap.utils.toArray<HTMLElement>(`.${styles.section}`);
-            const animatedPanels = panels.slice(0, -1);
-
             gsap.timeline({
                 scrollTrigger: {
                     trigger: wrapperRef.current,
@@ -69,44 +66,58 @@ export default function ServicesSections() {
                     '-=0.5'
                 );
 
-            animatedPanels.forEach((panel) => {
-                const innerpanel = panel.querySelector(`.${styles.sectionInner}`) as HTMLElement | null;
-                if (!innerpanel) return;
+            const media = gsap.matchMedia();
 
-                const panelHeight = innerpanel.offsetHeight;
-                const windowHeight = window.innerHeight - 64;
-                const difference = panelHeight - windowHeight;
-                const fakeScrollRatio = difference > 0 ? difference / (difference + windowHeight) : 0;
+            media.add('(min-width: 0px)', () => {
+                const panels = gsap.utils.toArray<HTMLElement>(`.${styles.section}`);
+                const animatedPanels = panels.slice(0, -1);
 
-                if (fakeScrollRatio > 0) {
-                    panel.style.marginBottom = `${difference}px`;
-                }
+                animatedPanels.forEach((panel) => {
+                    const innerpanel = panel.querySelector(`.${styles.sectionInner}`) as HTMLElement | null;
+                    if (!innerpanel) return;
 
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: panel,
-                        start: 'bottom bottom',
-                        end: () => (difference > 0 ? `+=${panelHeight}` : 'bottom top'),
-                        pinSpacing: false,
-                        pin: true,
-                        scrub: true,
-                        invalidateOnRefresh: true,
-                    },
+                    const panelHeight = innerpanel.offsetHeight;
+                    const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+                    const windowHeight = viewportHeight - 64;
+                    const difference = panelHeight - windowHeight;
+                    const fakeScrollRatio = difference > 0 ? difference / (difference + windowHeight) : 0;
+
+                    if (fakeScrollRatio > 0) {
+                        panel.style.marginBottom = `${difference}px`;
+                    }
+
+                    const tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: panel,
+                            start: 'bottom bottom',
+                            end: () => (difference > 0 ? `+=${panelHeight}` : 'bottom top'),
+                            pinSpacing: false,
+                            pin: true,
+                            scrub: true,
+                            invalidateOnRefresh: true,
+                        },
+                    });
+
+                    if (difference > 0) {
+                        tl.to(innerpanel, {
+                            y: -difference,
+                            duration: difference / windowHeight,
+                            ease: 'none',
+                        });
+                    }
+
+                    tl.fromTo(
+                        panel,
+                        { scale: 1, opacity: 1 },
+                        { scale: 0.7, opacity: 0.5, duration: 0.9, ease: 'none' }
+                    ).to(panel, { opacity: 0, duration: 0.1 });
                 });
 
-                if (difference > 0) {
-                    tl.to(innerpanel, {
-                        y: -difference,
-                        duration: difference / windowHeight,
-                        ease: 'none',
+                return () => {
+                    animatedPanels.forEach((panel) => {
+                        panel.style.marginBottom = '';
                     });
-                }
-
-                tl.fromTo(
-                    panel,
-                    { scale: 1, opacity: 1 },
-                    { scale: 0.7, opacity: 0.5, duration: 0.9, ease: 'none' }
-                ).to(panel, { opacity: 0, duration: 0.1 });
+                };
             });
         }, wrapperRef);
 

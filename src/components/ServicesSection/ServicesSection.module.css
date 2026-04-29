@@ -348,23 +348,27 @@ background: linear-gradient(135deg, #7B61FF, #9F8CFF);
   .section {
     padding: 0 0.75rem 0.75rem;
     height: auto;
+    min-height: calc(100vh - 64px);
     min-height: calc(100svh - 64px);
+    min-height: calc(100dvh - 64px);
     overflow: visible;
   }
 
   .sectionContent {
-    min-height: 0;
+    min-height: inherit;
+    align-items: stretch;
   }
 
   .sectionInner {
-    height: auto !important;
-    min-height: 100%;
+    height: auto;
+    min-height: inherit;
   }
 
   .serviceFeature {
     gap: 1.5rem;
-    min-height: auto;
+    min-height: inherit;
     padding: 1.3rem 1.15rem;
+    box-sizing: border-box;
   }
 
   .featureContentRow {
@@ -391,7 +395,8 @@ background: linear-gradient(135deg, #7B61FF, #9F8CFF);
 
   .featureImage {
     width: 100%;
-    height: auto;
+    height: clamp(180px, 44svh, 320px);
+    height: clamp(180px, 44dvh, 320px);
     max-height: 320px;
   }
 }

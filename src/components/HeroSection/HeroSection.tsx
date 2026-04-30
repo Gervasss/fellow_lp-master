@@ -32,28 +32,42 @@ const bodyFont = Plus_Jakarta_Sans({
 });
 
 const supportingWords = [
-  'Infraestrutura',
-  'digital',
-  'para',
-  'centralizar,',
-  'simplificar',
+  'Grupo',
+  'Fellow',
+  'é',
+  'a',
+  'empresa',
+  'mãe',
+  'por',
+  'trás',
+  'do',
+  'Fellow',
+  'Pay,',
+  'Fellow',
+  'Core,',
+  'Fellow',
+  'Tickets',
   'e',
-  'escalar',
-  'operações',
-  'com',
-  'alta',
-  'disponibilidade',
+  'Fellow',
+  'AI.',
+  'Cada',
+  'marca',
+  'tem',
+  'seu',
+  'próprio',
+  'produto,',
+  'seu',
+  'próprio',
+  'time',
   'e',
-  'segurança.',
+  'seu',
+  'próprio',
+  'mercado.',
 ];
 
-const titleWords = [
-  'Tecnologia',
-  'para',
-  'operações',
-  'que',
-  'exigem',
-  'escala.',
+const titleLines = [
+  'Onde o DNA da tecnologia se divide em quatro expertises únicas.',
+  'O melhor de cada mundo, sob o mesmo teto.',
 ];
 
 const bottomWords = [
@@ -577,13 +591,17 @@ export default function MinimalHero() {
                 data-delay="220"
                 style={{ color: colors.light }}
               >
-                {titleWords.map((word, index) => (
-                  <span
-                    key={word}
-                    className={styles.word}
-                    data-delay={520 + index * 120}
-                  >
-                    {word}{' '}
+                {titleLines.map((line, lineIndex) => (
+                  <span className={styles.titleLine} key={line}>
+                    {line.split(' ').map((word, wordIndex) => (
+                      <span
+                        key={`${word}-${wordIndex}`}
+                        className={styles.word}
+                        data-delay={520 + (lineIndex * 10 + wordIndex) * 120}
+                      >
+                        {word}{' '}
+                      </span>
+                    ))}
                   </span>
                 ))}
               </h1>

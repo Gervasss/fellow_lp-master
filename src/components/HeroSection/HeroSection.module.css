@@ -351,7 +351,7 @@
 
 .copy {
   display: flex;
-  max-width: 760px;
+  max-width: 1180px;
   flex-direction: column;
   align-items: center;
   gap: 1.35rem;
@@ -379,12 +379,16 @@
 
 .title {
   margin: 0;
-  max-width: 12ch;
-  font-size: clamp(2.4rem, 5vw, 4.7rem);
+  max-width: 34ch;
+  font-size: clamp(2rem, 3.2vw, 3.25rem);
   font-weight: 600;
   line-height: 1.12;
   letter-spacing: -0.055em;
   text-wrap: balance;
+}
+
+.titleLine {
+  display: block;
 }
 
 .title .word {

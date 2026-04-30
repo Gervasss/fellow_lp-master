@@ -131,15 +131,15 @@ export default function ServicesSections() {
                     <span className={styles.badgeIcon}>
                         <GrServices size={14} />
                     </span>
-                    <span ref={badgeTextRef}>Serviços</span>
+                    <span ref={badgeTextRef}>Produtos</span>
                 </div>
 
                 <h2 ref={introTitleRef} className={`${styles.introTitle} ${headingFont.className}`}>
-                    Nossos serviços
+                    Cada marca, seu próprio universo.
                 </h2>
 
                 <p ref={introSubtitleRef} className={`${styles.introSubtitle} ${bodyFont.className}`}>
-                    Conheça serviços que podem impulsionar sua operação e presença digital.
+                   Quatro produtos, quatro propostas. Você contrata a marca que precisa, sem pacote, sem dependência cruzada.
                 </p>
             </div>
 
@@ -147,27 +147,46 @@ export default function ServicesSections() {
                 <div className={styles.sectionContent}>
                     <div className={styles.sectionInner}>
                         <div className={styles.serviceFeature}>
-                            <h1 className={`${styles.featureTitle} ${headingFont.className} ${styles.section1Title}`}>Fellow Pay</h1>
+                            <div className={`${styles.cardMeta} ${bodyFont.className}`}>
+                                <span>Marca</span>
+                                <span>01 de 04</span>
+                            </div>
 
                             <div className={styles.featureContentRow}>
-                                <Image
-                                    className={styles.featureImage}
-                                    src="/assets/pay.jpg"
-                                    width={760}
-                                    height={520}
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                    alt="Representação visual do serviço Fellow Pay"
-                                />
-
-                                <div className={styles.serviceFeatureRight}>
+                                <div className={styles.serviceFeatureLeft}>
+                                    <Image
+                                        className={styles.productLogo}
+                                        src="/assets/payment.jpg"
+                                        width={96}
+                                        height={96}
+                                        alt="Logo Fellow Pay"
+                                    />
+                                    <h1 className={`${styles.featureTitle} ${headingFont.className} ${styles.section1Title}`}>Fellow Pay</h1>
+                                    <span className={`${styles.productEyebrow} ${bodyFont.className}`}>Gateway de pagamentos</span>
                                     <p className={`${styles.featureDescription} ${bodyFont.className}`}>
-                                        O <strong>Fellow Pay</strong> é a solução do Grupo Fellow para operações que precisam de
-                                        pagamentos mais fluidos, controle centralizado e uma experiência digital sólida para
-                                        vender, receber e acompanhar transações com mais clareza.
+                                        Plataforma de pagamentos para empresas que precisam acelerar Pix, cartão,
+                                        boleto e carteiras digitais com checkout próprio, conciliação e repasses
+                                        em um produto pensado para o mercado brasileiro.
                                     </p>
+                                    <ul className={`${styles.featureList} ${bodyFont.className}`}>
+                                        <li>Checkout link de pagamento e cobrança recorrente</li>
+                                        <li>Pix, cartão, boleto e carteiras digitais</li>
+                                        <li>Dashboard com relatórios e conciliação</li>
+                                    </ul>
                                     <a className={`${styles.featureButton} ${bodyFont.className}`} href="#contato">
                                         Em breve
                                     </a>
+                                </div>
+
+                                <div className={styles.productVisual}>
+                                    <Image
+                                        className={styles.featureImage}
+                                        src="/assets/fellow_example.png"
+                                        width={760}
+                                        height={760}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        alt="Interface do produto Fellow Pay"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -176,39 +195,107 @@ export default function ServicesSections() {
             </section>
 
 
+            <section className={`${styles.section} ${styles.section4}`}>
+                <div className={styles.sectionContent}>
+                    <div className={styles.sectionInner}>
+                        <div className={styles.serviceFeature}>
+                            <div className={`${styles.cardMeta} ${bodyFont.className}`}>
+                                <span>Marca</span>
+                                <span>02 de 04</span>
+                            </div>
+
+                            <div className={styles.featureContentRow}>
+                                <div className={styles.serviceFeatureLeft}>
+                                    <Image
+                                        className={styles.productLogo}
+                                        src="/assets/core.png"
+                                        width={96}
+                                        height={96}
+                                        alt="Logo Fellow Core"
+                                    />
+                                    <h1 className={`${styles.featureTitle} ${headingFont.className}`}>
+                                        Fellow Core
+                                    </h1>
+                                    <span className={`${styles.productEyebrow} ${bodyFont.className}`}>API de pagamentos</span>
+                                    <p className={`${styles.featureDescription} ${bodyFont.className}`}>
+                                        Fellow Core é a API de pagamentos que opera por trás do Fellow Pay.
+                                        Para empresas com produtos próprios, que precisam de uma camada técnica direta (webhooks, autorização, rotemento) sem dashboard ou interface do Pay.
+                                    </p>
+                                    <ul className={`${styles.featureList} ${bodyFont.className}`}>
+                                        <li>REST API, implementação completa</li>
+                                        <li>Webhooks, conciliação e eventos transacionais</li>
+                                        <li>Infraestrutura para integrações financeiras críticas</li>
+                                    </ul>
+                                    <a className={`${styles.featureButton} ${bodyFont.className}`} href="#contato">
+                                        Em breve
+                                    </a>
+                                </div>
+
+                                <div className={styles.productVisual}>
+                                    <Image
+                                        className={styles.featureImage}
+                                        src="/assets/core_ex.png"
+                                        width={760}
+                                        height={760}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        alt="Interface do produto Fellow Core"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
             <section className={`${styles.section} ${styles.section3}`}>
                 <div className={styles.sectionContent}>
                     <div className={`${styles.sectionInner} ${styles.section3Inner}`}>
                         <div className={`${styles.serviceFeature} ${styles.section3Feature}`}>
-                            {/* Título com a fonte de heading do projeto */}
-                            <h1 className={`${styles.featureTitle} ${styles.section3Title} ${headingFont.className}`}>
-                                Fellow Ticket
-                            </h1>
+                            <div className={`${styles.cardMeta} ${bodyFont.className}`}>
+                                <span>Marca</span>
+                                <span>03 de 04</span>
+                            </div>
 
                             <div className={`${styles.featureContentRow} ${styles.section3ContentRow}`}>
-                                <Image
-                                    className={`${styles.featureImage} ${styles.section3Image}`}
-                                    src="/assets/ticket.jpg"
-                                    width={760}
-                                    height={520}
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                    alt="Plataforma Fellow Ticket - Gestão de Eventos"
-                                />
-
-                                <div className={`${styles.serviceFeatureRight} ${styles.section3Right}`}>
+                                <div className={`${styles.serviceFeatureLeft} ${styles.section3Right}`}>
+                                    <Image
+                                        className={styles.productLogo}
+                                        src="/assets/tickets.png"
+                                        width={96}
+                                        height={96}
+                                        alt="Logo Fellow Ticket"
+                                    />
+                                    <h1 className={`${styles.featureTitle} ${styles.section3Title} ${headingFont.className}`}>
+                                        Fellow Ticket
+                                    </h1>
+                                    <span className={`${styles.productEyebrow} ${bodyFont.className}`}>Ingressos e eventos</span>
                                     <p className={`${styles.featureDescription} ${styles.section3Description} ${bodyFont.className}`}>
-                                        O <strong>Fellow Ticket</strong> é a nossa solução de alta performance para a
-                                        venda e gestão de ingressos. Projetada para suportar <strong>altos volumes de tráfego</strong>
-                                        e garantir transações seguras, a plataforma oferece controle total sobre o ecossistema
-                                        do evento, desde o checkout otimizado até a validação em tempo real.
+                                        Plataforma de venda e gestão de ingressos para eventos que precisam de
+                                        checkout rápido, controle de lotes e validação segura em tempo real.
                                     </p>
+                                    <ul className={`${styles.featureList} ${bodyFont.className}`}>
+                                        <li>Venda online com checkout otimizado</li>
+                                        <li>Gestão de lotes, cupons e acessos</li>
+                                        <li>Validação e operação no dia do evento</li>
+                                    </ul>
 
                                     <div className={styles.buttonGroup}>
                                         <a className={`${styles.featureButton} ${styles.section3Button} ${bodyFont.className}`} href="#contato">
                                             Em breve
                                         </a>
                                     </div>
+                                </div>
+
+                                <div className={styles.productVisual}>
+                                    <Image
+                                        className={`${styles.featureImage} ${styles.section3Image}`}
+                                        src="/assets/ticket_ex.png"
+                                        width={760}
+                                        height={520}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        alt="Interface do produto Fellow Ticket"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -220,29 +307,48 @@ export default function ServicesSections() {
                 <div className={styles.sectionContent}>
                     <div className={`${styles.sectionInner} ${styles.section2Inner}`}>
                         <div className={`${styles.serviceFeature} ${styles.section2Feature}`}>
-                            <h1 className={`${styles.featureTitle} ${styles.section2Title} ${headingFont.className}`}>
-                                Fellow AI
-                            </h1>
+                            <div className={`${styles.cardMeta} ${bodyFont.className}`}>
+                                <span>Marca</span>
+                                <span>04 de 04</span>
+                            </div>
 
                             <div className={`${styles.featureContentRow} ${styles.section2ContentRow}`}>
-                                <Image
-                                    className={`${styles.featureImage} ${styles.section2Image}`}
-                                    src="/assets/ai.jpg"
-                                    width={760}
-                                    height={520}
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                    alt="Representação visual do serviço Fellow Agents"
-                                />
-
-                                <div className={`${styles.serviceFeatureRight} ${styles.section2Right}`}>
+                                <div className={`${styles.serviceFeatureLeft} ${styles.section2Right}`}>
+                                    <Image
+                                        className={styles.productLogo}
+                                        src="/assets/agents.jpg"
+                                        width={96}
+                                        height={96}
+                                        alt="Logo Fellow AI"
+                                    />
+                                    <h1 className={`${styles.featureTitle} ${styles.section2Title} ${headingFont.className}`}>
+                                        Fellow AI
+                                    </h1>
+                                    <span className={`${styles.productEyebrow} ${bodyFont.className}`}>Automação com IA</span>
                                     <p className={`${styles.featureDescription} ${styles.section2Description} ${bodyFont.className}`}>
-                                        O <strong>Fellow AI</strong> é a frente do Grupo Fellow para agentes de IA
-                                        aplicados a atendimento, operação e produtividade, conectando contexto,
-                                        automações e execução real para responder, analisar e agir com mais eficiência.
+                                        Agentes de IA aplicados a atendimento, operação e produtividade,
+                                        conectando contexto, automações e execução real para responder,
+                                        analisar e agir com mais eficiência.
                                     </p>
+                                    <ul className={`${styles.featureList} ${bodyFont.className}`}>
+                                        <li>Agentes para atendimento e triagem operacional</li>
+                                        <li>Automações conectadas ao contexto do negócio</li>
+                                        <li>Fluxos para análise, resposta e execução</li>
+                                    </ul>
                                     <a className={`${styles.featureButton} ${styles.section2Button} ${bodyFont.className}`} href="#contato">
                                         Em breve
                                     </a>
+                                </div>
+
+                                <div className={styles.productVisual}>
+                                    <Image
+                                        className={`${styles.featureImage} ${styles.section2Image}`}
+                                        src="/assets/chat_ai.png"
+                                        width={760}
+                                        height={520}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        alt="Interface do produto Fellow AI"
+                                    />
                                 </div>
                             </div>
                         </div>

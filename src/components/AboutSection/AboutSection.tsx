@@ -41,6 +41,7 @@ export default function AboutSection() {
     const badgeTextRef = useRef<HTMLSpanElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const descriptionRef = useRef<HTMLDivElement>(null);
+    const visualRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -50,36 +51,17 @@ export default function AboutSection() {
             const splitTitle = new SplitText(titleRef.current, { type: 'words, chars' });
             const splitDescription = new SplitText(descriptionRef.current, { type: 'lines' });
 
-            gsap.set([...revealItems, ...statItems], {
+            gsap.set(revealItems, {
                 opacity: 0,
                 y: 42,
                 filter: 'blur(14px)',
             });
 
-            gsap.to(`.${styles.brandGlow}`, {
-                opacity: 0.42,
-                duration: 2.4,
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut',
-            });
-
-            gsap.to(`.${styles.brandLogo}`, {
-                opacity: 0.16,
-                filter: 'drop-shadow(0 0 12px rgba(200, 180, 160, 0.1))',
-                duration: 2.4,
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut',
-            });
-
-            gsap.to(`.${styles.logoOrb}`, {
-                y: -8,
-                x: 6,
-                duration: 3.6,
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut',
+            gsap.set(visualRef.current, {
+                opacity: 0,
+                y: 34,
+                scale: 0.98,
+                filter: 'blur(18px)',
             });
 
             const playAboutIntro = () => {
@@ -94,10 +76,6 @@ export default function AboutSection() {
                     y: 0,
                     filter: 'blur(0px)',
                 });
-
-                const secondaryRevealItems = revealItems.filter(
-                    item => item !== badgeRef.current && item !== titleRef.current && item !== descriptionRef.current
-                );
 
                 const tl = gsap.timeline();
 
@@ -120,18 +98,6 @@ export default function AboutSection() {
                         },
                         '-=0.4'
                     )
-                    .to(
-                        secondaryRevealItems,
-                        {
-                            opacity: 1,
-                            y: 0,
-                            filter: 'blur(0px)',
-                            duration: 0.9,
-                            stagger: 0.12,
-                            ease: 'power3.out',
-                        },
-                        '-=0.45'
-                    )
                     .from(
                         splitDescription.lines,
                         {
@@ -144,16 +110,28 @@ export default function AboutSection() {
                         '-=0.65'
                     )
                     .to(
+                        visualRef.current,
+                        {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            filter: 'blur(0px)',
+                            duration: 0.95,
+                            ease: 'power3.out',
+                        },
+                        '-=0.25'
+                    )
+                    .to(
                         statItems,
                         {
                             opacity: 1,
                             y: 0,
                             filter: 'blur(0px)',
-                            duration: 0.9,
-                            stagger: 0.12,
+                            duration: 0.8,
+                            stagger: 0.1,
                             ease: 'power3.out',
                         },
-                        '-=0.42'
+                        '-=0.45'
                     );
             };
 
@@ -185,25 +163,25 @@ export default function AboutSection() {
                     <span className={styles.badgeIcon}>
                         <IconTarget size={14} stroke={1.8} />
                     </span>
-                    <span ref={badgeTextRef}>Sobre nós</span>
+                    <span ref={badgeTextRef}>Quem somos</span>
                 </div>
 
                 <div className={styles.content}>
                     <h2 ref={titleRef} className={`${styles.mainTitle} ${headingFont.className} ${styles.revealItem}`}>
-                        Moldando o futuro através da tecnologia.
+                        <span className={styles.mainTitleLine}>Não somos um produto.</span>
+                        <span className={`${styles.mainTitleLine} ${styles.mainTitleAccent}`}>Somos quatro.</span>
                     </h2>
 
                     <div ref={descriptionRef} className={`${styles.description} ${styles.revealItem}`}>
                         <p className={bodyFont.className}>
-                            O <strong>Grupo Fellow</strong> atua no epicentro das operações financeiras
-                            e da gestão tecnológica de eventos. Somos uma provedora de infraestrutura digital
-                            dedicada a centralizar, simplificar e escalar negócios que exigem
-                            <strong> alta disponibilidade</strong> e tolerância zero a falhas.
+                            O <strong>Grupo Fellow</strong> é uma empresa brasileira que atua como
+                            holding de produtos digitais. Não vendemos um SaaS: operamos um portfólio
+                            de marcas, cada uma resolvendo um problema diferente,
+                            com seu próprio time de produto e sua própria base de clientes.
                         </p>
                         <p className={bodyFont.className}>
-                            Nossa expertise abrange o desenvolvimento e licenciamento de softwares
-                            customizáveis, garantindo que a tecnologia seja o motor estratégico, e não
-                            o gargalo, para empresas que buscam segurança e escalabilidade real.
+                            Quando uma marca precisa de outra, a sinergia acontece. Mas o cliente
+                            não precisa saber disso. Ele contrata a marca. A marca resolve.
                         </p>
                     </div>
 
@@ -212,9 +190,9 @@ export default function AboutSection() {
                             const Icon = item.icon;
 
                             return (
-                                <div key={item.label} className={styles.statItem}>
+                                <div key={item.label} className={`${styles.statItem} ${styles.revealItem}`}>
                                     <span className={styles.statIcon}>
-                                        <Icon size={30} stroke={1.7} />
+                                        <Icon size={28} stroke={1.7} />
                                     </span>
                                     <span className={`${styles.statLabel} ${bodyFont.className}`}>{item.label}</span>
                                 </div>
@@ -223,18 +201,14 @@ export default function AboutSection() {
                     </div>
                 </div>
 
-                <aside className={styles.sidebar}>
-                    <div className={`${styles.brandBlock} ${styles.revealItem}`}>
-                        <span className={styles.brandGlow} />
-                        <span className={styles.logoOrb} />
-                        <Image
-                            src="/assets/felloww-logo.png"
-                            alt="Logo Grupo Fellow"
-                            width={600}
-                            height={600}
-                            className={styles.brandLogo}
-                        />
-                    </div>
+                <aside ref={visualRef} className={styles.visual} aria-label="Grupo Fellow">
+                    <Image
+                        src="/assets/about.png"
+                        alt="Composição visual do Grupo Fellow"
+                        fill
+                        sizes="(max-width: 968px) 78vw, 440px"
+                        className={styles.aboutImage}
+                    />
                 </aside>
             </div>
         </section>

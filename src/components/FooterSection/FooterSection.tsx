@@ -24,6 +24,7 @@ const data = {
   linkedinLink: 'https://www.linkedin.com/company/grupo-fellow/posts/?feedView=all',
   services: [
     { text: 'Fellow Pay', href: '#servicos' },
+    { text: 'Fellow Core', href: '#servicos' },
     { text: 'Fellow Ticket', href: '#servicos' },
     { text: 'Fellow AI', href: '#servicos' },
   ],

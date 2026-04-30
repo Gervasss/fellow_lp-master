@@ -510,6 +510,10 @@ background: linear-gradient(135deg, #7B61FF, #9F8CFF);
     text-align: center;
   }
 
+  .serviceFeatureLeft {
+    display: contents;
+  }
+
   .cardMeta {
     justify-content: center;
   }
@@ -531,17 +535,28 @@ background: linear-gradient(135deg, #7B61FF, #9F8CFF);
 
   .productLogo {
     align-self: flex-start;
+    order: 1;
     width: 4rem;
     height: 4rem;
   }
 
+  .featureTitle {
+    order: 2;
+  }
+
+  .productEyebrow {
+    order: 3;
+  }
+
   .featureDescription {
     max-width: 100%;
+    order: 4;
     text-align: left;
   }
 
   .featureList {
     align-items: flex-start;
+    order: 5;
     text-align: left;
   }
 
@@ -551,7 +566,16 @@ background: linear-gradient(135deg, #7B61FF, #9F8CFF);
     max-width: 100%;
     min-height: clamp(240px, 48svh, 360px);
     min-height: clamp(240px, 48dvh, 360px);
-    order: 0;
+    order: 6;
+  }
+
+  .buttonGroup {
+    display: contents;
+  }
+
+  .featureButton {
+    justify-self: center;
+    order: 7;
   }
 
   .featureImage {

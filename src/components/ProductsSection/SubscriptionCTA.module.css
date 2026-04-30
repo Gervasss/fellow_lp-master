@@ -108,21 +108,24 @@
 /* PRODUCTS GRID */
 .productsGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
-    width: 100%;
-    max-width: 860px;
+    width: min(100%, 960px);
     margin-bottom: 3.5rem;
 }
 
 .productMiniCard {
     position: relative;
     min-height: 310px;
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.018) 100%),
-        rgba(12, 11, 16, 0.78);
-    border: 1px solid rgba(159, 140, 255, 0.14);
-    border-radius: 1.35rem;
+      background:
+        linear-gradient(180deg, rgba(123, 97, 255, 0.09) 0%, rgba(255, 255, 255, 0.025) 100%),
+        rgba(12, 11, 16, 0.86);
+    border-color: rgba(159, 140, 255, 0.34);
+    border-radius: 20px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 24px 54px rgba(0, 0, 0, 0.42),
+        0 0 34px rgba(123, 97, 255, 0.13);
     padding: 1.65rem 1.15rem;
     display: flex;
     flex-direction: column;
@@ -164,14 +167,14 @@
 .prodLogo {
     position: relative;
     z-index: 1;
-    width: 4.25rem;
-    height: 4.25rem;
+    width: 5rem;
+    height: 5rem;
     background: #141218;
     border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.15rem;
+    margin-bottom: 0.72rem;
     overflow: hidden;
     border: 1px solid rgba(159, 140, 255, 0.18);
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.34);
@@ -188,7 +191,7 @@
     z-index: 1;
     font-size: 1.08rem;
     color: #fff;
-    margin: 0 0 0.85rem;
+    margin: 0 0 0.7rem;
 }
 
 .prodFeatures {

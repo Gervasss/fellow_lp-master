@@ -235,10 +235,24 @@
 
   .badgeTop {
     margin-bottom: 0;
+    order: 1;
   }
 
   .content {
+    display: contents;
     gap: 1.3rem;
+  }
+
+  .mainTitle {
+    order: 2;
+  }
+
+  .description {
+    order: 3;
+  }
+
+  .statsGrid {
+    order: 5;
   }
 
   .visual {
@@ -250,6 +264,7 @@
     aspect-ratio: 1295 / 1214;
     min-height: 0;
     margin-top: 0.5rem;
+    order: 4;
   }
 }
 

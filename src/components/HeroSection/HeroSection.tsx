@@ -1,19 +1,10 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
 import gsap from 'gsap';
 import styles from './HeroSection.module.css';
-
-const FellowNavbar = dynamic(
-  () =>
-    import('@/src/components/ui/resizable-navbar').then(
-      (mod) => mod.FellowNavbar
-    ),
-  { ssr: false }
-);
 
 const colors = {
   light: '#f5f5f5',
@@ -101,7 +92,6 @@ export default function MinimalHero() {
   const gradientRef = useRef<HTMLDivElement>(null);
   const isTransitioningRef = useRef(false);
   const [isSectionTransitionActive, setIsSectionTransitionActive] = useState(false);
-  const [isPreloading, setIsPreloading] = useState(true);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -343,7 +333,7 @@ export default function MinimalHero() {
           '-=0.82'
         )
         .add(() => {
-          setIsPreloading(false);
+          window.dispatchEvent(new Event('hero:preloader-complete'));
         }, '-=0.55')
         .to(
           loaderRef.current,
@@ -526,7 +516,6 @@ export default function MinimalHero() {
       <section ref={heroRevealRef} className={styles.heroContainer} id="inicio">
         <div className={styles.heroViewport}>
           <div ref={heroGlowRef} className={styles.heroIntroGlow} />
-          {!isPreloading ? <FellowNavbar /> : null}
 
           <svg className={styles.gridLayer} xmlns="http://www.w3.org/2000/svg">
             <defs>

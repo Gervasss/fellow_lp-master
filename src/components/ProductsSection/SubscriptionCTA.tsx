@@ -30,6 +30,11 @@ const SUBSCRIPTION_PRODUCTS = [
         name: 'Fellow Pay', 
         logo: '/assets/payment.jpg' 
     }, 
+    {
+        id: 'core',
+        name: 'Fellow Core',
+        logo: '/assets/core.png'
+    },
     { 
         id: 'ai', 
         name: 'Fellow AI', 

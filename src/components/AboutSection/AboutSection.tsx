@@ -59,7 +59,7 @@ export default function AboutSection() {
 
             gsap.set(visualRef.current, {
                 opacity: 0,
-                y: 34,
+                x: 120,
                 scale: 0.98,
                 filter: 'blur(18px)',
             });
@@ -113,7 +113,7 @@ export default function AboutSection() {
                         visualRef.current,
                         {
                             opacity: 1,
-                            y: 0,
+                            x: 0,
                             scale: 1,
                             filter: 'blur(0px)',
                             duration: 0.95,

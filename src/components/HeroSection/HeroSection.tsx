@@ -67,6 +67,9 @@ const bottomWords = [
   { label: 'PRESENÇA DIGITAL', delay: 3350 },
 ];
 
+const subtitleStartDelay = 3600;
+const actionStartDelay = subtitleStartDelay + supportingWords.length * 90 + 450;
+
 const floatingElements = [
   { top: '24%', left: '14%', delay: '0.4s', duration: '7s' },
   { top: '62%', left: '86%', delay: '1.1s', duration: '8.5s' },
@@ -175,17 +178,6 @@ export default function MinimalHero() {
             ease: 'power4.out',
           },
           '-=0.48'
-        )
-        .to(
-          `.${styles.loaderOrbit}`,
-          {
-            opacity: 1,
-            scale: 1,
-            rotate: 0,
-            duration: 0.95,
-            ease: 'power2.out',
-          },
-          '-=0.55'
         )
         .to(
           `.${styles.loaderSmoke}`,
@@ -490,7 +482,6 @@ export default function MinimalHero() {
         <div className={styles.loaderBrand}>
           <span className={`${styles.loaderSmoke} ${styles.loaderSmokeBack}`} />
           <span className={styles.loaderPulse} />
-          <span className={styles.loaderOrbit} />
           <span className={styles.loaderSmoke} />
           <span className={`${styles.loaderSmoke} ${styles.loaderSmokeFront}`} />
           <Image
@@ -597,13 +588,13 @@ export default function MinimalHero() {
 
               <p
                 className={`${styles.supportingText} ${bodyFont.className} ${styles.revealBlock}`}
-                data-delay="360"
+                data-delay={subtitleStartDelay}
               >
                 {supportingWords.map((word, index) => (
                   <span
                     key={`${word}-${index}`}
                     className={styles.word}
-                    data-delay={1400 + index * 90}
+                    data-delay={subtitleStartDelay + index * 90}
                   >
                     {word}{' '}
                   </span>
@@ -612,7 +603,7 @@ export default function MinimalHero() {
 
               <div
                 className={`${styles.actions} ${bodyFont.className} ${styles.revealBlock}`}
-                data-delay="3900"
+                data-delay={actionStartDelay}
               >
                 <a className={styles.primaryButton} href="#sobre" onClick={handleKnowMoreClick}>
                   Conhecer

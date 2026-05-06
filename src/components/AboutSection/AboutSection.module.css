@@ -23,9 +23,23 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, rgba(96, 96, 96, 0.06) 26%, rgba(0, 0, 0, 0) 68%);
+    radial-gradient(circle, rgba(123, 97, 255, 0.08) 0%, rgba(123, 97, 255, 0.04) 32%, rgba(0, 0, 0, 0) 68%);
   transform: translate(-50%, -50%);
   filter: blur(56px);
+  pointer-events: none;
+}
+
+.aboutWrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0.38) 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0.38) 100%);
   pointer-events: none;
 }
 

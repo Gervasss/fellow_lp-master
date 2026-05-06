@@ -32,6 +32,20 @@
     pointer-events: none;
 }
 
+.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0.38) 100%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0.38) 100%);
+    pointer-events: none;
+}
+
 .container {
     position: relative;
     z-index: 4;

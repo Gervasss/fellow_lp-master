@@ -8,6 +8,39 @@
     overflow: hidden;
 }
 
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 10% auto auto 50%;
+    z-index: 1;
+    width: min(82vw, 980px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(123, 97, 255, 0.08) 0%,
+        rgba(123, 97, 255, 0.035) 36%,
+        transparent 70%
+    );
+    transform: translateX(-50%);
+    filter: blur(76px);
+    pointer-events: none;
+}
+
+.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0.38) 100%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0.38) 100%);
+    pointer-events: none;
+}
+
 .container {
     position: relative;
     z-index: 5;
@@ -17,6 +50,7 @@
 
 /* BADGE SETUP */
 .badgeWrapper {
+    position: relative;
     display: flex;
     justify-content: center;
     width: 100%;

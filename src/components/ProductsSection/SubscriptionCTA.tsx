@@ -17,6 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['700', '800'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
+const softEase = "power3.out";
 
 const BENEFITS = [
     { icon: <IoFlashOutline />, text: "Ativação Imediata" },
@@ -71,23 +72,26 @@ useEffect(() => {
 
         tl.from(badgeRef.current, { 
             opacity: 0, 
-            y: 30, 
-            duration: 0.6, 
-            ease: "power3.out" 
+            y: 16,
+            duration: 0.85,
+            ease: softEase
         })
         .from(cardRef.current, { 
             opacity: 0, 
-            y: 40, 
-            duration: 0.8, 
-            ease: "power3.out" 
+            y: 24,
+            filter: "blur(3px)",
+            duration: 1,
+            ease: softEase,
+            clearProps: "filter"
         }, "-=0.3")
         .from(miniCards, { 
             opacity: 0, 
-            scale: 0.9, 
-            y: 30, 
-            stagger: 0.1, 
-            duration: 0.6,
-            ease: "back.out(1.7)",
+            scale: 0.97,
+            y: 20,
+            filter: "blur(2px)",
+            stagger: 0.08,
+            duration: 0.95,
+            ease: softEase,
             clearProps: "all" 
         }, "-=0.4");
 

@@ -1,10 +1,181 @@
 .sectionsShell {
   position: relative;
+  --ambient-x: 0;
+  --ambient-y: 0;
   isolation: isolate;
   overflow: hidden;
   background:
-    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.025), transparent 20%),
-    radial-gradient(circle at 78% 74%, rgba(120, 120, 120, 0.07), transparent 24%),
-    radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.02), transparent 30%),
-    linear-gradient(180deg, #000 0%, #020202 52%, #050505 100%);
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.018), transparent 22%),
+    radial-gradient(circle at 78% 74%, rgba(120, 120, 120, 0.045), transparent 26%),
+    linear-gradient(180deg, #000 0%, #020205 46%, #050409 100%);
+}
+
+.sectionsContent {
+  position: relative;
+  z-index: 2;
+}
+
+.ambientBackground {
+  position: fixed;
+  inset: -18vh -12vw;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform:
+    translate3d(
+      calc(var(--ambient-x) * -8px),
+      calc(var(--ambient-y) * -8px),
+      0
+    );
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.meshBlob {
+  position: absolute;
+  display: block;
+  border-radius: 999px;
+  filter: blur(72px);
+  opacity: 0.52;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.meshBlobOne {
+  top: 4%;
+  left: 4%;
+  width: min(64vw, 860px);
+  aspect-ratio: 1.2;
+  background:
+    radial-gradient(circle at 36% 42%, rgba(123, 97, 255, 0.15), transparent 58%),
+    radial-gradient(circle at 70% 46%, rgba(72, 52, 180, 0.08), transparent 64%);
+  transform:
+    translate3d(
+      calc(var(--ambient-x) * 12px),
+      calc(var(--ambient-y) * 10px),
+      0
+    );
+  animation: ambientFloatOne 34s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+.meshBlobTwo {
+  top: 34%;
+  right: -10%;
+  width: min(58vw, 760px);
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle at 45% 45%, rgba(159, 140, 255, 0.11), transparent 58%),
+    radial-gradient(circle at 34% 62%, rgba(36, 24, 96, 0.16), transparent 68%);
+  transform:
+    translate3d(
+      calc(var(--ambient-x) * -10px),
+      calc(var(--ambient-y) * -7px),
+      0
+    );
+  animation: ambientFloatTwo 42s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+.meshBlobThree {
+  bottom: 2%;
+  left: 22%;
+  width: min(70vw, 920px);
+  aspect-ratio: 1.35;
+  background:
+    radial-gradient(circle at 42% 48%, rgba(86, 69, 190, 0.12), transparent 58%),
+    radial-gradient(circle at 62% 42%, rgba(255, 255, 255, 0.035), transparent 66%);
+  transform:
+    translate3d(
+      calc(var(--ambient-x) * 6px),
+      calc(var(--ambient-y) * -10px),
+      0
+    );
+  animation: ambientFloatThree 48s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+.ambientGrid {
+  position: absolute;
+  inset: 0;
+  display: block;
+  opacity: 0.22;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image:
+    radial-gradient(circle at 50% 38%, rgba(0, 0, 0, 0.64), transparent 68%),
+    linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+  -webkit-mask-image:
+    radial-gradient(circle at 50% 38%, rgba(0, 0, 0, 0.64), transparent 68%),
+    linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+  transform:
+    translate3d(
+      calc(var(--ambient-x) * -5px),
+      calc(var(--ambient-y) * -5px),
+      0
+    );
+}
+
+.noiseLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: soft-light;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.8) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.52) 0 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+}
+
+@keyframes ambientFloatOne {
+  from {
+    translate: -2% -1%;
+    scale: 1;
+  }
+
+  to {
+    translate: 3% 2%;
+    scale: 1.06;
+  }
+}
+
+@keyframes ambientFloatTwo {
+  from {
+    translate: 2% 1%;
+    scale: 1;
+  }
+
+  to {
+    translate: -3% -2%;
+    scale: 1.04;
+  }
+}
+
+@keyframes ambientFloatThree {
+  from {
+    translate: -1% 2%;
+    scale: 1.02;
+  }
+
+  to {
+    translate: 2% -2%;
+    scale: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .ambientBackground {
+    inset: -12vh -35vw;
+    transform: none;
+  }
+
+  .meshBlob {
+    filter: blur(58px);
+    opacity: 0.42;
+  }
+
+  .ambientGrid {
+    opacity: 0.14;
+    background-size: 56px 56px;
+  }
 }

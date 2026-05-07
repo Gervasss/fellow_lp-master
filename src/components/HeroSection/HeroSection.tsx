@@ -22,6 +22,8 @@ const bodyFont = Plus_Jakarta_Sans({
   weight: ['400', '500', '600', '700'],
 });
 
+const softEase = 'power3.out';
+
 const supportingWords = [
   'Grupo',
   'Fellow',
@@ -106,9 +108,9 @@ export default function MinimalHero() {
       );
 
       gsap.set(heroStageRef.current, {
-        scale: 0.9,
+        scale: 0.96,
         yPercent: 4,
-        filter: 'blur(16px)',
+        filter: 'blur(5px)',
         opacity: 0,
         transformOrigin: '50% 58%',
       });
@@ -155,16 +157,16 @@ export default function MinimalHero() {
         opacity: 1,
         scale: 1,
         rotate: 0,
-        duration: 0.9,
-        ease: 'power3.out',
+        duration: 1.05,
+        ease: softEase,
       })
         .to(
           `.${styles.loaderPulse}`,
           {
             opacity: 0.85,
             scale: 1.08,
-            duration: 0.9,
-            ease: 'power2.out',
+            duration: 1.05,
+            ease: softEase,
           },
           '<'
         )
@@ -174,8 +176,8 @@ export default function MinimalHero() {
             opacity: 1,
             y: 0,
             letterSpacing: '0.38em',
-            duration: 0.85,
-            ease: 'power4.out',
+            duration: 1,
+            ease: softEase,
           },
           '-=0.48'
         )
@@ -223,8 +225,8 @@ export default function MinimalHero() {
           {
             scale: 1.42,
             opacity: 0,
-            duration: 0.8,
-            ease: 'power2.out',
+            duration: 1,
+            ease: softEase,
           },
           '-=0.5'
         )
@@ -235,11 +237,11 @@ export default function MinimalHero() {
             `.${styles.loaderName}`,
           ],
           {
-            opacity: 0.18,
-            filter: 'blur(18px)',
+            opacity: 0.08,
+            filter: 'blur(8px)',
             scale: 1.03,
-            duration: 0.95,
-            ease: 'power2.inOut',
+            duration: 1.05,
+            ease: 'power3.inOut',
           },
           '+=0.12'
         )
@@ -248,8 +250,8 @@ export default function MinimalHero() {
           {
             clipPath: 'circle(150% at 50% 50%)',
             WebkitClipPath: 'circle(150% at 50% 50%)',
-            duration: 1.5,
-            ease: 'expo.out',
+            duration: 1.65,
+            ease: softEase,
           },
           '-=0.5'
         )
@@ -260,8 +262,8 @@ export default function MinimalHero() {
             scale: 1,
             yPercent: 0,
             filter: 'blur(0px)',
-            duration: 1.4,
-            ease: 'expo.out',
+            duration: 1.55,
+            ease: softEase,
           },
           '-=1.2'
         )
@@ -270,8 +272,8 @@ export default function MinimalHero() {
           {
             opacity: 1,
             scale: 1.8,
-            duration: 1.25,
-            ease: 'expo.out',
+            duration: 1.45,
+            ease: softEase,
           },
           '<'
         )
@@ -284,7 +286,7 @@ export default function MinimalHero() {
             yPercent: -10,
             rotate: 10,
             duration: 1.3,
-            ease: 'power2.out',
+            ease: softEase,
           },
           '-=1.15'
         )
@@ -297,7 +299,7 @@ export default function MinimalHero() {
             yPercent: -16,
             rotate: 8,
             duration: 1.45,
-            ease: 'power2.out',
+            ease: softEase,
           },
           '<'
         )
@@ -310,7 +312,7 @@ export default function MinimalHero() {
             yPercent: -18,
             rotate: -6,
             duration: 1.65,
-            ease: 'power2.out',
+            ease: softEase,
           },
           '<'
         )
@@ -319,8 +321,8 @@ export default function MinimalHero() {
           {
             opacity: 1,
             stagger: 0.04,
-            duration: 0.38,
-            ease: 'power1.out',
+            duration: 0.75,
+            ease: softEase,
           },
           '-=0.82'
         )
@@ -331,9 +333,9 @@ export default function MinimalHero() {
           loaderRef.current,
           {
             opacity: 0,
-            filter: 'blur(28px)',
-            duration: 1.2,
-            ease: 'power2.out',
+            filter: 'blur(10px)',
+            duration: 1.35,
+            ease: softEase,
           },
           '-=1.15'
         );
@@ -342,14 +344,14 @@ export default function MinimalHero() {
         revealBlocks.forEach((block) => {
           const delay = parseInt(block.getAttribute('data-delay') || '0', 10);
           setTimeout(() => {
-            block.style.animation = `${styles.blockAppear} 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards`;
+            block.style.animation = `${styles.blockAppear} 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
           }, delay);
         });
 
         words.forEach((word) => {
           const delay = parseInt(word.getAttribute('data-delay') || '0', 10);
           setTimeout(() => {
-            word.style.animation = `${styles.wordAppear} 0.8s ease-out forwards`;
+            word.style.animation = `${styles.wordAppear} 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
           }, delay);
         });
       }, '-=0.2');
@@ -387,7 +389,7 @@ export default function MinimalHero() {
     const aboutSection = document.querySelector<HTMLElement>('#sobre');
     const smokeLayers = sectionSmokeRef.current.querySelectorAll<HTMLElement>(`[data-smoke-layer="true"]`);
     const tl = gsap.timeline({
-      defaults: { ease: 'power2.out' },
+      defaults: { ease: softEase },
       onComplete: () => {
         isTransitioningRef.current = false;
         setIsSectionTransitionActive(false);
@@ -406,11 +408,11 @@ export default function MinimalHero() {
           yPercent: 18,
         },
         {
-          opacity: (index) => (index === 1 ? 0.95 : 0.72),
+          opacity: (index) => (index === 1 ? 0.72 : 0.5),
           scale: (index) => 1.18 + index * 0.08,
           xPercent: (index) => (index === 0 ? -14 : index === 1 ? 0 : 14),
           yPercent: (index) => (index === 2 ? -16 : -8),
-          duration: 0.75,
+          duration: 0.95,
           stagger: 0.04,
         }
       )
@@ -418,7 +420,7 @@ export default function MinimalHero() {
         sectionSmokeRef.current,
         {
           opacity: 1,
-          duration: 0.18,
+          duration: 0.35,
         },
         '<'
       )
@@ -435,9 +437,9 @@ export default function MinimalHero() {
           scale: 1.6,
           xPercent: (index) => (index === 0 ? -28 : index === 1 ? 10 : 30),
           yPercent: -34,
-          duration: 1.05,
+          duration: 1.2,
           stagger: 0.05,
-          ease: 'power2.inOut',
+          ease: 'power3.inOut',
         },
         '+=0.12'
       )
@@ -445,7 +447,7 @@ export default function MinimalHero() {
         sectionSmokeRef.current,
         {
           opacity: 0,
-          duration: 0.45,
+          duration: 0.65,
           pointerEvents: 'none',
         },
         '-=0.55'

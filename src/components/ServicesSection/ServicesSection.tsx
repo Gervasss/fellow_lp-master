@@ -16,6 +16,7 @@ if (typeof window !== 'undefined') {
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['500', '600'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
+const softEase = 'power3.out';
 
 export default function ServicesSections() {
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -37,33 +38,33 @@ export default function ServicesSections() {
             })
                 .from(splitBadge.chars, {
                     opacity: 0,
-                    y: 10,
+                    y: 8,
                     stagger: 0.03,
-                    duration: 0.6,
-                    ease: 'power2.out',
+                    duration: 0.85,
+                    ease: softEase,
                 })
                 .from(
                     splitTitle.chars,
                     {
                         opacity: 0,
-                        x: -15,
-                        filter: 'blur(5px)',
-                        stagger: 0.02,
-                        duration: 0.8,
-                        ease: 'back.out(1.7)',
+                        x: -8,
+                        filter: 'blur(2px)',
+                        stagger: 0.016,
+                        duration: 1,
+                        ease: softEase,
                     },
-                    '-=0.4'
+                    '-=0.55'
                 )
                 .from(
                     splitSubtitle.lines,
                     {
                         opacity: 0,
-                        y: 20,
-                        stagger: 0.1,
-                        duration: 0.8,
-                        ease: 'power3.out',
+                        y: 14,
+                        stagger: 0.08,
+                        duration: 0.95,
+                        ease: softEase,
                     },
-                    '-=0.5'
+                    '-=0.6'
                 );
 
             const media = gsap.matchMedia();
@@ -109,8 +110,8 @@ export default function ServicesSections() {
                     tl.fromTo(
                         panel,
                         { scale: 1, opacity: 1 },
-                        { scale: 0.7, opacity: 0.5, duration: 0.9, ease: 'none' }
-                    ).to(panel, { opacity: 0, duration: 0.1 });
+                        { scale: 0.86, opacity: 0.72, duration: 1, ease: 'none' }
+                    ).to(panel, { opacity: 0.28, duration: 0.45, ease: 'none' });
                 });
 
                 return () => {
@@ -219,7 +220,7 @@ export default function ServicesSections() {
                                     <span className={`${styles.productEyebrow} ${bodyFont.className}`}>API de pagamentos</span>
                                     <p className={`${styles.featureDescription} ${bodyFont.className}`}>
                                         Fellow Core é a API de pagamentos que opera por trás do Fellow Pay.
-                                        Para empresas com produtos próprios, que precisam de uma camada técnica direta (webhooks, autorização, rotemento) sem dashboard ou interface do Pay.
+                                        Para empresas com produtos próprios, que precisam de uma camada técnica direta (webhooks, autorização, roteamento) sem dashboard ou interface do Pay.
                                     </p>
                                     <ul className={`${styles.featureList} ${bodyFont.className}`}>
                                         <li>REST API, implementação completa</li>

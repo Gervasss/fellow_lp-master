@@ -13,6 +13,7 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['500', '600'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
+const softEase = 'power3.out';
 
 const founders = [
   {
@@ -91,44 +92,46 @@ const SquadSection = () => {
 
       tl.from(splitUpper.chars, {
         opacity: 0,
-        y: 10,
+        y: 8,
         stagger: 0.03,
-        duration: 0.6,
-        ease: 'power2.out',
+        duration: 0.85,
+        ease: softEase,
       })
         .from(
           splitMain.chars,
           {
             opacity: 0,
-            x: -15,
-            filter: 'blur(5px)',
-            stagger: 0.02,
-            duration: 0.8,
-            ease: 'back.out(1.7)',
+            x: -8,
+            filter: 'blur(2px)',
+            stagger: 0.016,
+            duration: 1,
+            ease: softEase,
           },
-          '-=0.4'
+          '-=0.55'
         )
         .from(
           splitDesc.lines,
           {
             opacity: 0,
-            y: 20,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: 'power3.out',
+            y: 14,
+            stagger: 0.08,
+            duration: 0.95,
+            ease: softEase,
           },
-          '-=0.5'
+          '-=0.6'
         )
         .from(
           validCards,
           {
-            y: 60,
+            y: 34,
             opacity: 0,
-            stagger: 0.2,
-            duration: 1.2,
-            ease: 'expo.out',
+            filter: 'blur(2px)',
+            stagger: 0.14,
+            duration: 1.15,
+            ease: softEase,
+            clearProps: 'filter',
           },
-          '-=0.4'
+          '-=0.5'
         );
     }, containerRef);
 
@@ -150,7 +153,7 @@ const SquadSection = () => {
         </h2>
 
         <p ref={descriptionRef} className={`${styles.description} ${bodyFont.className}`}>
-          Um squad multidisciplinar conectando produto, engenharia, operação e crescimento para sustentar solucoes de alta disponibilidade.
+          Um squad multidisciplinar conectando produto, engenharia, operação e crescimento para sustentar soluções de alta disponibilidade.
         </p>
       </div>
 

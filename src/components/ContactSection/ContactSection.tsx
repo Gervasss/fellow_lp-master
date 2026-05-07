@@ -19,6 +19,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['600', '800'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
+const softEase = "power3.out";
 
 type FormState = {
     name: string;
@@ -59,31 +60,31 @@ export default function ContactSection() {
             // Animação sequencial
             tl.from(badgeRef.current, { 
                 opacity: 0, 
-                y: 20, 
-                duration: 0.6,
-                ease: "power3.out" 
+                y: 12,
+                duration: 0.85,
+                ease: softEase
             })
             .from(splitBadge.chars, {
                 opacity: 0,
-                y: 10,
+                y: 8,
                 stagger: 0.03,
-                duration: 0.5,
-                ease: "power2.out"
+                duration: 0.75,
+                ease: softEase
             }, "-=0.3")
             .from(splitTitle.chars, { 
                 opacity: 0, 
-                x: -10, 
-                filter: "blur(5px)", 
-                stagger: 0.02, 
-                duration: 0.8, 
-                ease: "back.out(1.7)" 
-            }, "-=0.4")
+                x: -8,
+                filter: "blur(2px)",
+                stagger: 0.016,
+                duration: 1,
+                ease: softEase
+            }, "-=0.5")
             .from(splitSubtitle.lines, { 
                 opacity: 0, 
-                y: 15, 
-                stagger: 0.1, 
-                duration: 0.7, 
-                ease: "power3.out" 
+                y: 12,
+                stagger: 0.08,
+                duration: 0.95,
+                ease: softEase
             }, "-=0.6");
         }, sectionRef);
 
@@ -131,7 +132,7 @@ export default function ContactSection() {
                         </div>
 
                         <button className={`${styles.button} ${bodyFont.className}`} type="submit">
-                            <span>Enviar via WhatsApp</span>
+                            <span>Agendar conversa estratégica</span>
                             <IoPaperPlaneOutline size={18} />
                         </button>
                     </form>

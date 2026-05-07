@@ -18,6 +18,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['600'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600'] });
+const softEase = 'power3.out';
 
 const stats = [
     {
@@ -53,15 +54,15 @@ export default function AboutSection() {
 
             gsap.set(revealItems, {
                 opacity: 0,
-                y: 42,
-                filter: 'blur(14px)',
+                y: 24,
+                filter: 'blur(3px)',
             });
 
             gsap.set(visualRef.current, {
                 opacity: 0,
-                x: 120,
+                x: 48,
                 scale: 0.98,
-                filter: 'blur(18px)',
+                filter: 'blur(4px)',
             });
 
             const playAboutIntro = () => {
@@ -81,33 +82,33 @@ export default function AboutSection() {
 
                 tl.from(splitBadge.chars, {
                     opacity: 0,
-                    y: 10,
+                    y: 8,
                     stagger: 0.03,
-                    duration: 0.6,
-                    ease: 'power2.out',
+                    duration: 0.85,
+                    ease: softEase,
                 })
                     .from(
                         splitTitle.chars,
                         {
                             opacity: 0,
-                            x: -15,
-                            filter: 'blur(5px)',
-                            stagger: 0.02,
-                            duration: 0.8,
-                            ease: 'back.out(1.7)',
+                            x: -8,
+                            filter: 'blur(2px)',
+                            stagger: 0.016,
+                            duration: 1,
+                            ease: softEase,
                         },
-                        '-=0.4'
+                        '-=0.55'
                     )
                     .from(
                         splitDescription.lines,
                         {
                             opacity: 0,
-                            y: 20,
-                            stagger: 0.1,
-                            duration: 0.8,
-                            ease: 'power3.out',
+                            y: 14,
+                            stagger: 0.08,
+                            duration: 0.95,
+                            ease: softEase,
                         },
-                        '-=0.65'
+                        '-=0.6'
                     )
                     .to(
                         visualRef.current,
@@ -116,8 +117,8 @@ export default function AboutSection() {
                             x: 0,
                             scale: 1,
                             filter: 'blur(0px)',
-                            duration: 0.95,
-                            ease: 'power3.out',
+                            duration: 1.15,
+                            ease: softEase,
                         },
                         '-=0.25'
                     )
@@ -127,9 +128,9 @@ export default function AboutSection() {
                             opacity: 1,
                             y: 0,
                             filter: 'blur(0px)',
-                            duration: 0.8,
+                            duration: 0.95,
                             stagger: 0.1,
-                            ease: 'power3.out',
+                            ease: softEase,
                         },
                         '-=0.45'
                     );
@@ -168,8 +169,8 @@ export default function AboutSection() {
 
                 <div className={styles.content}>
                     <h2 ref={titleRef} className={`${styles.mainTitle} ${headingFont.className} ${styles.revealItem}`}>
-                        <span className={styles.mainTitleLine}>Não somos um produto.</span>
-                        <span className={`${styles.mainTitleLine} ${styles.mainTitleAccent}`}>Somos quatro.</span>
+                        <span className={styles.mainTitleLine}>Não somos um produto</span>
+                        <span className={`${styles.mainTitleLine} ${styles.mainTitleAccent}`}>Somos quatro</span>
                     </h2>
 
                     <div ref={descriptionRef} className={`${styles.description} ${styles.revealItem}`}>

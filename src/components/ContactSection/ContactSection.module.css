@@ -7,7 +7,7 @@
     z-index: 1;
     overflow: hidden;
     padding: clamp(80px, 12vw, 160px) 0;
-    background: #0a090d; 
+    background: transparent;
     color: #ffffff;
     border-top: 1px solid rgba(123, 97, 255, 0.05);
 }
@@ -28,21 +28,7 @@
         transparent 70%
     );
     transform: translate(-50%, -50%);
-    filter: blur(80px);
-    pointer-events: none;
-}
-
-.section::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background:
-        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0.38) 100%);
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0.38) 100%);
+    filter: blur(62px);
     pointer-events: none;
 }
 
@@ -128,8 +114,12 @@
         rgba(20, 18, 26, 0.6) 0%, 
         rgba(10, 9, 13, 0.95) 100%
     );
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(20px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 12px 30px rgba(0, 0, 0, 0.28),
+        0 34px 90px rgba(0, 0, 0, 0.4),
+        0 0 58px rgba(123, 97, 255, 0.08);
+    backdrop-filter: blur(14px);
 }
 
 /* FORMULÁRIO */
@@ -155,14 +145,19 @@
     padding: 1.2rem;
     color: #ffffff;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition:
+        border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .input:focus, .textarea:focus {
     border-color: rgba(159, 140, 255, 0.4);
     background: rgba(123, 97, 255, 0.05);
     outline: none;
-    box-shadow: 0 0 25px rgba(123, 97, 255, 0.1);
+    box-shadow:
+        0 0 0 4px rgba(123, 97, 255, 0.06),
+        0 18px 42px rgba(0, 0, 0, 0.18);
 }
 
 .textarea {
@@ -185,14 +180,20 @@
     justify-content: center;
     gap: 0.75rem;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition:
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .button:hover:not(:disabled) {
     background: #7B61FF;
     color: #000000;
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(123, 97, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 28px rgba(123, 97, 255, 0.18),
+        0 26px 64px rgba(0, 0, 0, 0.28);
 }
 
 .button:disabled {

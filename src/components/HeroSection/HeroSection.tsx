@@ -23,6 +23,8 @@ const bodyFont = Plus_Jakarta_Sans({
 });
 
 const softEase = 'power3.out';
+const HERO_BACKGROUND_VIDEO_URL =
+  'https://res.cloudinary.com/ddwu6s64v/video/upload/v1778268738/hero_1_nhg9yh.mp4';
 
 const supportingWords = [
   'Grupo',
@@ -508,32 +510,22 @@ export default function MinimalHero() {
 
       <section ref={heroRevealRef} className={styles.heroContainer} id="inicio">
         <div className={styles.heroViewport}>
-          <div ref={heroGlowRef} className={styles.heroIntroGlow} />
+          <div className={styles.videoBackground} aria-hidden="true">
+            <video
+              className={styles.heroVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              poster="/assets/fellow-banner.jpg"
+            >
+              <source src={HERO_BACKGROUND_VIDEO_URL} />
+            </video>
+            <div className={styles.videoScrim} />
+          </div>
 
-          <svg className={styles.gridLayer} xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path
-                  d="M 60 0 L 0 0 0 60"
-                  fill="none"
-                  stroke="rgba(255, 255, 255, 0.08)"
-                  strokeWidth="0.5"
-                />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-            {[18, 50, 82].map((pos, i) => (
-              <line
-                key={`h-${i}`}
-                x1="0"
-                y1={`${pos}%`}
-                x2="100%"
-                y2={`${pos}%`}
-                className={styles.gridLine}
-                style={{ animationDelay: `${i * 0.4}s` }}
-              />
-            ))}
-          </svg>
+          <div ref={heroGlowRef} className={styles.heroIntroGlow} />
 
           <div className={`${styles.cornerElement} ${styles.topLeft}`}>
             <div className={styles.cornerDot} style={{ background: colors.gold }} />

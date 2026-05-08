@@ -175,7 +175,7 @@ export default function ServicesSections() {
                                         <li>Dashboard com relatórios e conciliação</li>
                                     </ul>
                                     <a className={`${styles.featureButton} ${bodyFont.className}`} href="#contato">
-                                        Em breve
+                                       Em Desenvolvimento
                                     </a>
                                 </div>
 
@@ -228,7 +228,7 @@ export default function ServicesSections() {
                                         <li>Infraestrutura para integrações financeiras críticas</li>
                                     </ul>
                                     <a className={`${styles.featureButton} ${bodyFont.className}`} href="#contato">
-                                        Em breve
+                                        Em Desenvolvimento
                                     </a>
                                 </div>
 
@@ -283,7 +283,7 @@ export default function ServicesSections() {
 
                                     <div className={styles.buttonGroup}>
                                         <a className={`${styles.featureButton} ${styles.section3Button} ${bodyFont.className}`} href="#contato">
-                                            Em breve
+                                           Em Desenvolvimento
                                         </a>
                                     </div>
                                 </div>
@@ -337,7 +337,7 @@ export default function ServicesSections() {
                                         <li>Fluxos para análise, resposta e execução</li>
                                     </ul>
                                     <a className={`${styles.featureButton} ${styles.section2Button} ${bodyFont.className}`} href="#contato">
-                                        Em breve
+                                        Em Desenvolvimento
                                     </a>
                                 </div>
 

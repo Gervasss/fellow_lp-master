@@ -108,6 +108,29 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
+  const [interactionReady, setInteractionReady] = useState(
+    () => !enableTilt || typeof window === "undefined" || !("IntersectionObserver" in window)
+  );
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap || interactionReady) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setInteractionReady(true);
+        observer.disconnect();
+      },
+      { rootMargin: "420px 0px" }
+    );
+
+    observer.observe(wrap);
+
+    return () => observer.disconnect();
+  }, [interactionReady]);
 
   const animationHandlers = useMemo(() => {
     if (!enableTilt) return null;
@@ -207,7 +230,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
   // (opcional) Tilt por giroscópio — só funciona via HTTPS com permissão
   useEffect(() => {
-    if (!enableTilt || !enableMobileTilt || !animationHandlers) return;
+    if (!interactionReady || !enableTilt || !enableMobileTilt || !animationHandlers) return;
     const handler = (e: DeviceOrientationEvent) => {
       const card = cardRef.current;
       const wrap = wrapRef.current;
@@ -238,10 +261,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     void bind();
 
     return () => window.removeEventListener("deviceorientation", handler);
-  }, [enableTilt, enableMobileTilt, mobileTiltSensitivity, animationHandlers]);
+  }, [interactionReady, enableTilt, enableMobileTilt, mobileTiltSensitivity, animationHandlers]);
 
   useEffect(() => {
-    if (!enableTilt || !animationHandlers) return;
+    if (!interactionReady || !enableTilt || !animationHandlers) return;
     const card = cardRef.current;
     const wrap = wrapRef.current;
     if (!card || !wrap) return;
@@ -266,7 +289,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
       card.removeEventListener("pointerleave", pl);
       animationHandlers.cancelAnimation();
     };
-  }, [enableTilt, animationHandlers, handlePointerMove, handlePointerEnter, handlePointerLeave]);
+  }, [interactionReady, enableTilt, animationHandlers, handlePointerMove, handlePointerEnter, handlePointerLeave]);
 
   const cardStyle = useMemo<CSSVars>(
     () => ({
@@ -328,6 +351,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               width={420}
               height={540}
               sizes="(max-width: 768px) 86vw, 320px"
+              quality={68}
               onError={(e) => {
                 e.currentTarget.style.display = "none";
               }}
@@ -343,6 +367,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                       width={80}
                       height={80}
                       sizes="40px"
+                      quality={55}
                       onError={(e) => {
                         const t = e.currentTarget;
                         t.style.opacity = "0.5";

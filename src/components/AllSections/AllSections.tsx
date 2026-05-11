@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import HeroSection from '../HeroSection/HeroSection';
 import styles from './AllSections.module.css';
@@ -17,11 +17,20 @@ const FooterSection = dynamic(() => import('../FooterSection/FooterSection'), { 
 
 const AllSections = () => {
   
-  // O Lenis e GSAP agora rodam assim que o componente monta
-  useLayoutEffect(() => {
+  // Inicializa o scroll suave fora do caminho crítico.
+  useEffect(() => {
     let cleanupLenis: (() => void) | undefined;
+    let cancelled = false;
 
     const setupLenis = async () => {
+      if (
+        cancelled ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        window.matchMedia('(pointer: coarse)').matches
+      ) {
+        return;
+      }
+
       const [{ default: gsap }, { ScrollTrigger }, { default: Lenis }] = await Promise.all([
         import('gsap'),
         import('gsap/ScrollTrigger'),
@@ -50,9 +59,22 @@ const AllSections = () => {
       };
     };
 
-    setupLenis();
+    const startLenis = () => {
+      window.removeEventListener('wheel', startLenis);
+      window.removeEventListener('keydown', startLenis);
+      window.removeEventListener('touchstart', startLenis);
+      setupLenis();
+    };
+
+    window.addEventListener('wheel', startLenis, { passive: true, once: true });
+    window.addEventListener('keydown', startLenis, { once: true });
+    window.addEventListener('touchstart', startLenis, { passive: true, once: true });
 
     return () => {
+      cancelled = true;
+      window.removeEventListener('wheel', startLenis);
+      window.removeEventListener('keydown', startLenis);
+      window.removeEventListener('touchstart', startLenis);
       cleanupLenis?.();
     };
   }, []);

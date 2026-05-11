@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { IconUsersGroup } from '@tabler/icons-react';
 import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
 import ProfileCard from '@/src/components/ui/ProfileCard';
@@ -69,8 +69,9 @@ const SquadSection = () => {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let cleanup = () => {};
+    let observer: IntersectionObserver | undefined;
     let cancelled = false;
 
     async function initAnimations() {
@@ -147,10 +148,25 @@ const SquadSection = () => {
       cleanup = () => ctx.revert();
     }
 
-    initAnimations();
+    const section = containerRef.current;
+
+    if (!section || !('IntersectionObserver' in window)) {
+      initAnimations();
+    } else {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry?.isIntersecting) return;
+          observer?.disconnect();
+          initAnimations();
+        },
+        { rootMargin: '650px 0px' }
+      );
+      observer.observe(section);
+    }
 
     return () => {
       cancelled = true;
+      observer?.disconnect();
       cleanup();
     };
   }, []);

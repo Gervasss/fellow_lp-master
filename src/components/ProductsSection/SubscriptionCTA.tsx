@@ -55,6 +55,7 @@ export default function SubscriptionCTA() {
 
 useEffect(() => {
     let cleanup = () => {};
+    let observer: IntersectionObserver | undefined;
     let cancelled = false;
 
     async function initAnimations() {
@@ -140,10 +141,25 @@ useEffect(() => {
         cleanup = () => ctx.revert();
     }
 
-    initAnimations();
+    const section = sectionRef.current;
+
+    if (!section || !('IntersectionObserver' in window)) {
+        initAnimations();
+    } else {
+        observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry?.isIntersecting) return;
+                observer?.disconnect();
+                initAnimations();
+            },
+            { rootMargin: '650px 0px' }
+        );
+        observer.observe(section);
+    }
 
     return () => {
         cancelled = true;
+        observer?.disconnect();
         cleanup();
     };
 }, []);
@@ -181,6 +197,8 @@ useEffect(() => {
                                             alt={prod.name} 
                                             width={80} 
                                             height={80}
+                                            sizes="80px"
+                                            quality={70}
                                             className={styles.logoImage}
                                         />
                                     </div>

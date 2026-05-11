@@ -41,6 +41,7 @@ export default function AboutSection() {
 
     useEffect(() => {
         let cleanup = () => {};
+        let observer: IntersectionObserver | undefined;
         let cancelled = false;
 
         async function initAnimations() {
@@ -166,10 +167,25 @@ export default function AboutSection() {
             cleanup = () => ctx.revert();
         }
 
-        initAnimations();
+        const section = sectionRef.current;
+
+        if (!section || !('IntersectionObserver' in window)) {
+            initAnimations();
+        } else {
+            observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (!entry?.isIntersecting) return;
+                    observer?.disconnect();
+                    initAnimations();
+                },
+                { rootMargin: '650px 0px' }
+            );
+            observer.observe(section);
+        }
 
         return () => {
             cancelled = true;
+            observer?.disconnect();
             cleanup();
         };
     }, []);
@@ -225,6 +241,7 @@ export default function AboutSection() {
                         alt="Composição visual do Grupo Fellow"
                         fill
                         sizes="(max-width: 968px) 78vw, 440px"
+                        quality={72}
                         className={styles.aboutImage}
                     />
                 </aside>

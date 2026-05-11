@@ -174,6 +174,7 @@ export default function ServicesSections() {
                                         src="/assets/payment.jpg"
                                         width={96}
                                         height={96}
+                                        sizes="(max-width: 768px) 58px, 80px"
                                         alt="Logo Fellow Pay"
                                     />
                                     <h1 className={`${styles.featureTitle} ${headingFont.className} ${styles.section1Title}`}>Fellow Pay</h1>
@@ -199,7 +200,8 @@ export default function ServicesSections() {
                                         src="/assets/fellow_example.png"
                                         width={760}
                                         height={760}
-                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        sizes="(max-width: 420px) 340px, (max-width: 768px) 540px, 520px"
+                                        quality={70}
                                         alt="Interface do produto Fellow Pay"
                                     />
                                 </div>
@@ -226,6 +228,7 @@ export default function ServicesSections() {
                                         src="/assets/core.png"
                                         width={96}
                                         height={96}
+                                        sizes="(max-width: 768px) 58px, 80px"
                                         alt="Logo Fellow Core"
                                     />
                                     <h1 className={`${styles.featureTitle} ${headingFont.className}`}>
@@ -252,7 +255,8 @@ export default function ServicesSections() {
                                         src="/assets/core_ex.png"
                                         width={760}
                                         height={760}
-                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        sizes="(max-width: 420px) 340px, (max-width: 768px) 540px, 520px"
+                                        quality={70}
                                         alt="Interface do produto Fellow Core"
                                     />
                                 </div>
@@ -279,6 +283,7 @@ export default function ServicesSections() {
                                         src="/assets/tickets.png"
                                         width={96}
                                         height={96}
+                                        sizes="(max-width: 768px) 58px, 80px"
                                         alt="Logo Fellow Ticket"
                                     />
                                     <h1 className={`${styles.featureTitle} ${styles.section3Title} ${headingFont.className}`}>
@@ -308,7 +313,8 @@ export default function ServicesSections() {
                                         src="/assets/ticket_ex.png"
                                         width={760}
                                         height={520}
-                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        sizes="(max-width: 420px) 340px, (max-width: 768px) 540px, 520px"
+                                        quality={70}
                                         alt="Interface do produto Fellow Ticket"
                                     />
                                 </div>
@@ -334,6 +340,7 @@ export default function ServicesSections() {
                                         src="/assets/agents.jpg"
                                         width={96}
                                         height={96}
+                                        sizes="(max-width: 768px) 58px, 80px"
                                         alt="Logo Fellow AI"
                                     />
                                     <h1 className={`${styles.featureTitle} ${styles.section2Title} ${headingFont.className}`}>
@@ -361,7 +368,8 @@ export default function ServicesSections() {
                                         src="/assets/chat_ai.png"
                                         width={760}
                                         height={520}
-                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        sizes="(max-width: 420px) 340px, (max-width: 768px) 540px, 520px"
+                                        quality={70}
                                         alt="Interface do produto Fellow AI"
                                     />
                                 </div>

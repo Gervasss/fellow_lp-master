@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { Sora } from "next/font/google";
 import styles from "./navbar.module.css";
 
@@ -54,13 +55,14 @@ const Navbar: React.FC = () => {
                 </button>
 
                 <a href="#inicio" className={styles.brand} onClick={closeMenu}>
-                    <img
+                    <Image
                         src="/assets/fellow-logo.jpg"
                         alt="Logotipo Grupo Fellow"
                         width={42}
                         height={42}
+                        sizes="42px"
                         className={styles.logo}
-                        loading="lazy"
+                        loading="eager"
                         decoding="async"
                     />
                     <span>Grupo Fellow</span>

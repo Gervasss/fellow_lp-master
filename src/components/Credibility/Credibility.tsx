@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import {
   IconApi,
@@ -88,8 +88,9 @@ export default function Credibility() {
   const cardsRef = useRef<(HTMLElement | null)[]>([]);
   const stackPanelRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let cleanup = () => {};
+    let observer: IntersectionObserver | undefined;
     let cancelled = false;
 
     async function initAnimations() {
@@ -177,10 +178,25 @@ export default function Credibility() {
       cleanup = () => ctx.revert();
     }
 
-    initAnimations();
+    const section = sectionRef.current;
+
+    if (!section || !("IntersectionObserver" in window)) {
+      initAnimations();
+    } else {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry?.isIntersecting) return;
+          observer?.disconnect();
+          initAnimations();
+        },
+        { rootMargin: "650px 0px" }
+      );
+      observer.observe(section);
+    }
 
     return () => {
       cancelled = true;
+      observer?.disconnect();
       cleanup();
     };
   }, []);

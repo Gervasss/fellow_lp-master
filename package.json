@@ -8,6 +8,14 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "browserslist": [
+    "Chrome >= 111",
+    "Edge >= 111",
+    "Firefox >= 111",
+    "Safari >= 16.4",
+    "iOS >= 16.4",
+    "Android >= 111"
+  ],
   "dependencies": {
     "@mantine/core": "^9.1.0",
     "@tabler/icons-react": "^3.41.1",

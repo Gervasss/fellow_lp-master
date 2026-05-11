@@ -2,17 +2,9 @@
 
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
 import styles from './ServicesSection.module.css';
 import { GrServices } from 'react-icons/gr';
-
-if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.registerPlugin(SplitText);
-}
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['500', '600'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
@@ -25,7 +17,21 @@ export default function ServicesSections() {
     const introSubtitleRef = useRef<HTMLParagraphElement>(null);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
+        let cleanup = () => {};
+        let cancelled = false;
+
+        async function initAnimations() {
+            const [{ default: gsap }, { ScrollTrigger }, { SplitText }] = await Promise.all([
+                import('gsap'),
+                import('gsap/ScrollTrigger'),
+                import('gsap/SplitText'),
+            ]);
+
+            if (cancelled) return;
+
+            gsap.registerPlugin(ScrollTrigger, SplitText);
+
+            const ctx = gsap.context(() => {
             const splitBadge = new SplitText(badgeTextRef.current, { type: 'chars' });
             const splitTitle = new SplitText(introTitleRef.current, { type: 'words, chars' });
             const splitSubtitle = new SplitText(introSubtitleRef.current, { type: 'lines' });
@@ -120,9 +126,17 @@ export default function ServicesSections() {
                     });
                 };
             });
-        }, wrapperRef);
+            }, wrapperRef);
 
-        return () => ctx.revert();
+            cleanup = () => ctx.revert();
+        }
+
+        initAnimations();
+
+        return () => {
+            cancelled = true;
+            cleanup();
+        };
     }, []);
 
     return (

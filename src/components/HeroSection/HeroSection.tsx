@@ -1,9 +1,7 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import React, { useEffect, useRef } from 'react';
 import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
-import gsap from 'gsap';
 import styles from './HeroSection.module.css';
 
 const colors = {
@@ -22,57 +20,18 @@ const bodyFont = Plus_Jakarta_Sans({
   weight: ['400', '500', '600', '700'],
 });
 
-const softEase = 'power3.out';
 const HERO_BACKGROUND_VIDEO_URL =
   'https://res.cloudinary.com/ddwu6s64v/video/upload/v1778268738/hero_1_nhg9yh.mp4';
 
-const supportingWords = [
-  'Grupo',
-  'Fellow',
-  'é',
-  'a',
-  'empresa',
-  'mãe',
-  'por',
-  'trás',
-  'do',
-  'Fellow',
-  'Pay,',
-  'Fellow',
-  'Core,',
-  'Fellow',
-  'Tickets',
-  'e',
-  'Fellow',
-  'AI.',
-  'Cada',
-  'marca',
-  'tem',
-  'seu',
-  'próprio',
-  'produto,',
-  'seu',
-  'próprio',
-  'time',
-  'e',
-  'seu',
-  'próprio',
-  'mercado.',
-];
+const supportingText =
+  'Grupo Fellow é a empresa mãe por trás do Fellow Pay, Fellow Core, Fellow Tickets e Fellow AI. Cada marca tem seu próprio produto, seu próprio time e seu próprio mercado.';
 
 const titleLines = [
   'Onde o DNA da tecnologia se divide em quatro expertises únicas.',
   'O melhor de cada mundo, sob o mesmo teto.',
 ];
 
-const bottomWords = [
-  { label: 'PERFORMANCE', delay: 3050 },
-  { label: 'ESTRATÉGIA', delay: 3200 },
-  { label: 'PRESENÇA DIGITAL', delay: 3350 },
-];
-
-const subtitleStartDelay = 3600;
-const actionStartDelay = subtitleStartDelay + supportingWords.length * 90 + 450;
+const bottomWords = ['PERFORMANCE', 'ESTRATÉGIA', 'PRESENÇA DIGITAL'];
 
 const floatingElements = [
   { top: '24%', left: '14%', delay: '0.4s', duration: '7s' },
@@ -90,281 +49,28 @@ const floatingElements = [
 ];
 
 export default function MinimalHero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const loaderRef = useRef<HTMLDivElement>(null);
-  const heroStageRef = useRef<HTMLDivElement>(null);
-  const heroGlowRef = useRef<HTMLDivElement>(null);
-  const heroRevealRef = useRef<HTMLDivElement>(null);
-  const sectionSmokeRef = useRef<HTMLDivElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
-  const isTransitioningRef = useRef(false);
-  const [isSectionTransitionActive, setIsSectionTransitionActive] = useState(false);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-      const revealBlocks = gsap.utils.toArray<HTMLElement>(`.${styles.revealBlock}`);
-      const words = gsap.utils.toArray<HTMLElement>(`.${styles.word}`);
-      const heroChildren = gsap.utils.toArray<HTMLElement>(
-        `.${styles.heroViewport} > *:not(.${styles.heroIntroGlow})`
-      );
+    if (!window.matchMedia('(pointer: fine)').matches) {
+      return;
+    }
 
-      gsap.set(heroStageRef.current, {
-        scale: 0.96,
-        yPercent: 4,
-        filter: 'blur(5px)',
-        opacity: 0,
-        transformOrigin: '50% 58%',
-      });
-
-      gsap.set(heroGlowRef.current, {
-        scale: 0.65,
-        opacity: 0,
-        transformOrigin: '50% 50%',
-      });
-
-      gsap.set(`.${styles.loaderSmoke}`, {
-        xPercent: -8,
-        yPercent: 3,
-        rotate: -6,
-      });
-
-      gsap.set(`.${styles.loaderSmokeFront}`, {
-        xPercent: -16,
-        yPercent: 10,
-        rotate: -8,
-        scale: 0.78,
-      });
-
-      gsap.set(`.${styles.loaderSmokeBack}`, {
-        xPercent: 12,
-        yPercent: -6,
-        rotate: 6,
-        scale: 0.9,
-      });
-
-      gsap.set(heroRevealRef.current, {
-        clipPath: 'circle(8% at 50% 50%)',
-        WebkitClipPath: 'circle(8% at 50% 50%)',
-      });
-
-      gsap.set(sectionSmokeRef.current, {
-        opacity: 0,
-        scale: 0.8,
-      });
-
-      gsap.set(heroChildren, { opacity: 0 });
-
-      tl.to(`.${styles.loaderLogo}`, {
-        opacity: 1,
-        scale: 1,
-        rotate: 0,
-        duration: 1.05,
-        ease: softEase,
-      })
-        .to(
-          `.${styles.loaderPulse}`,
-          {
-            opacity: 0.85,
-            scale: 1.08,
-            duration: 1.05,
-            ease: softEase,
-          },
-          '<'
-        )
-        .to(
-          `.${styles.loaderName}`,
-          {
-            opacity: 1,
-            y: 0,
-            letterSpacing: '0.38em',
-            duration: 1,
-            ease: softEase,
-          },
-          '-=0.48'
-        )
-        .to(
-          `.${styles.loaderSmoke}`,
-          {
-            opacity: 1,
-            scale: 1.08,
-            xPercent: 8,
-            yPercent: -4,
-            rotate: 5,
-            duration: 1.1,
-            ease: 'sine.inOut',
-          },
-          '-=0.45'
-        )
-        .to(
-          `.${styles.loaderSmokeFront}`,
-          {
-            opacity: 0.72,
-            xPercent: 10,
-            yPercent: -2,
-            rotate: 4,
-            scale: 1.08,
-            duration: 1.35,
-            ease: 'sine.inOut',
-          },
-          '-=0.95'
-        )
-        .to(
-          `.${styles.loaderSmokeBack}`,
-          {
-            opacity: 0.5,
-            xPercent: -4,
-            yPercent: -10,
-            rotate: -2,
-            scale: 1.18,
-            duration: 1.55,
-            ease: 'sine.inOut',
-          },
-          '<'
-        )
-        .to(
-          `.${styles.loaderPulse}`,
-          {
-            scale: 1.42,
-            opacity: 0,
-            duration: 1,
-            ease: softEase,
-          },
-          '-=0.5'
-        )
-        .to(
-          [
-            `.${styles.loaderLogo}`,
-            `.${styles.loaderName1}`,
-            `.${styles.loaderName}`,
-          ],
-          {
-            opacity: 0.08,
-            filter: 'blur(8px)',
-            scale: 1.03,
-            duration: 1.05,
-            ease: 'power3.inOut',
-          },
-          '+=0.12'
-        )
-        .to(
-          heroRevealRef.current,
-          {
-            clipPath: 'circle(150% at 50% 50%)',
-            WebkitClipPath: 'circle(150% at 50% 50%)',
-            duration: 1.65,
-            ease: softEase,
-          },
-          '-=0.5'
-        )
-        .to(
-          heroStageRef.current,
-          {
-            opacity: 1,
-            scale: 1,
-            yPercent: 0,
-            filter: 'blur(0px)',
-            duration: 1.55,
-            ease: softEase,
-          },
-          '-=1.2'
-        )
-        .to(
-          heroGlowRef.current,
-          {
-            opacity: 1,
-            scale: 1.8,
-            duration: 1.45,
-            ease: softEase,
-          },
-          '<'
-        )
-        .to(
-          `.${styles.loaderSmoke}`,
-          {
-            opacity: 0,
-            scale: 1.45,
-            xPercent: 18,
-            yPercent: -10,
-            rotate: 10,
-            duration: 1.3,
-            ease: softEase,
-          },
-          '-=1.15'
-        )
-        .to(
-          `.${styles.loaderSmokeFront}`,
-          {
-            opacity: 0,
-            scale: 1.55,
-            xPercent: 22,
-            yPercent: -16,
-            rotate: 8,
-            duration: 1.45,
-            ease: softEase,
-          },
-          '<'
-        )
-        .to(
-          `.${styles.loaderSmokeBack}`,
-          {
-            opacity: 0,
-            scale: 1.7,
-            xPercent: -14,
-            yPercent: -18,
-            rotate: -6,
-            duration: 1.65,
-            ease: softEase,
-          },
-          '<'
-        )
-        .to(
-          heroChildren,
-          {
-            opacity: 1,
-            stagger: 0.04,
-            duration: 0.75,
-            ease: softEase,
-          },
-          '-=0.82'
-        )
-        .add(() => {
-          window.dispatchEvent(new Event('hero:preloader-complete'));
-        }, '-=0.55')
-        .to(
-          loaderRef.current,
-          {
-            opacity: 0,
-            filter: 'blur(10px)',
-            duration: 1.35,
-            ease: softEase,
-          },
-          '-=1.15'
-        );
-
-      tl.add(() => {
-        revealBlocks.forEach((block) => {
-          const delay = parseInt(block.getAttribute('data-delay') || '0', 10);
-          setTimeout(() => {
-            block.style.animation = `${styles.blockAppear} 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
-          }, delay);
-        });
-
-        words.forEach((word) => {
-          const delay = parseInt(word.getAttribute('data-delay') || '0', 10);
-          setTimeout(() => {
-            word.style.animation = `${styles.wordAppear} 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
-          }, delay);
-        });
-      }, '-=0.2');
-    }, containerRef);
+    let frame = 0;
 
     function onMouseMove(e: MouseEvent) {
-      if (gradientRef.current) {
-        gradientRef.current.style.left = `${e.clientX - 192}px`;
-        gradientRef.current.style.top = `${e.clientY - 192}px`;
-        gradientRef.current.style.opacity = '1';
+      if (frame || !gradientRef.current) {
+        return;
       }
+
+      frame = window.requestAnimationFrame(() => {
+        if (gradientRef.current) {
+          gradientRef.current.style.left = `${e.clientX - 192}px`;
+          gradientRef.current.style.top = `${e.clientY - 192}px`;
+          gradientRef.current.style.opacity = '1';
+        }
+        frame = 0;
+      });
     }
 
     function onMouseLeave() {
@@ -373,142 +79,19 @@ export default function MinimalHero() {
       }
     }
 
-    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
 
     return () => {
-      ctx.revert();
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
+      if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
 
-  useEffect(() => {
-    if (!isSectionTransitionActive || !sectionSmokeRef.current) {
-      return;
-    }
-
-    const aboutSection = document.querySelector<HTMLElement>('#sobre');
-    const smokeLayers = sectionSmokeRef.current.querySelectorAll<HTMLElement>(`[data-smoke-layer="true"]`);
-    const tl = gsap.timeline({
-      defaults: { ease: softEase },
-      onComplete: () => {
-        isTransitioningRef.current = false;
-        setIsSectionTransitionActive(false);
-      },
-    });
-
-    tl.set(sectionSmokeRef.current, {
-      display: 'block',
-      pointerEvents: 'auto',
-    })
-      .fromTo(
-        smokeLayers,
-        {
-          opacity: 0,
-          scale: 0.72,
-          yPercent: 18,
-        },
-        {
-          opacity: (index) => (index === 1 ? 0.72 : 0.5),
-          scale: (index) => 1.18 + index * 0.08,
-          xPercent: (index) => (index === 0 ? -14 : index === 1 ? 0 : 14),
-          yPercent: (index) => (index === 2 ? -16 : -8),
-          duration: 0.95,
-          stagger: 0.04,
-        }
-      )
-      .to(
-        sectionSmokeRef.current,
-        {
-          opacity: 1,
-          duration: 0.35,
-        },
-        '<'
-      )
-      .add(() => {
-        if (aboutSection) {
-          aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        window.dispatchEvent(new CustomEvent('about:focus'));
-      }, '-=0.12')
-      .to(
-        smokeLayers,
-        {
-          opacity: 0,
-          scale: 1.6,
-          xPercent: (index) => (index === 0 ? -28 : index === 1 ? 10 : 30),
-          yPercent: -34,
-          duration: 1.2,
-          stagger: 0.05,
-          ease: 'power3.inOut',
-        },
-        '+=0.12'
-      )
-      .to(
-        sectionSmokeRef.current,
-        {
-          opacity: 0,
-          duration: 0.65,
-          pointerEvents: 'none',
-        },
-        '-=0.55'
-      )
-      .set(sectionSmokeRef.current, {
-        display: 'none',
-      });
-
-    return () => {
-      tl.kill();
-    };
-  }, [isSectionTransitionActive]);
-
-  function handleKnowMoreClick(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.preventDefault();
-
-    if (isTransitioningRef.current) {
-      return;
-    }
-
-    isTransitioningRef.current = true;
-    setIsSectionTransitionActive(true);
-  }
-
   return (
-    <div ref={containerRef} className={styles.mainWrapper}>
-      <div ref={sectionSmokeRef} className={styles.sectionSmokeTransition}>
-        <span className={`${styles.sectionSmokeLayer} ${styles.sectionSmokeLayerLeft}`} data-smoke-layer="true" />
-        <span className={`${styles.sectionSmokeLayer} ${styles.sectionSmokeLayerCenter}`} data-smoke-layer="true" />
-        <span className={`${styles.sectionSmokeLayer} ${styles.sectionSmokeLayerRight}`} data-smoke-layer="true" />
-      </div>
-
-      <div ref={loaderRef} className={styles.preloader}>
-        <div className={styles.loaderBrand}>
-          <span className={`${styles.loaderSmoke} ${styles.loaderSmokeBack}`} />
-          <span className={styles.loaderPulse} />
-          <span className={styles.loaderSmoke} />
-          <span className={`${styles.loaderSmoke} ${styles.loaderSmokeFront}`} />
-          <Image
-            className={styles.loaderLogo}
-            src="/assets/felloww-logo.png"
-            alt="Logo Fellow"
-            width={400}
-            height={400}
-            priority
-          />
-          <div className={styles.loaderWrapper}>
-            <span className={`${styles.loaderName1} ${headingFont.className}`}>
-              GRUPO
-            </span>
-
-            <span className={`${styles.loaderName} ${headingFont.className}`}>
-              FELLOW
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <section ref={heroRevealRef} className={styles.heroContainer} id="inicio">
+    <div className={styles.mainWrapper}>
+      <section className={styles.heroContainer} id="inicio">
         <div className={styles.heroViewport}>
           <div className={styles.videoBackground} aria-hidden="true">
             <video
@@ -517,15 +100,14 @@ export default function MinimalHero() {
               loop
               muted
               playsInline
-              preload="metadata"
-              poster="/assets/fellow-banner.jpg"
+              preload="none"
             >
-              <source src={HERO_BACKGROUND_VIDEO_URL} />
+              <source src={HERO_BACKGROUND_VIDEO_URL} type="video/mp4" />
             </video>
             <div className={styles.videoScrim} />
           </div>
 
-          <div ref={heroGlowRef} className={styles.heroIntroGlow} />
+          <div className={styles.heroIntroGlow} />
 
           <div className={`${styles.cornerElement} ${styles.topLeft}`}>
             <div className={styles.cornerDot} style={{ background: colors.gold }} />
@@ -546,77 +128,34 @@ export default function MinimalHero() {
             />
           ))}
 
-          <div ref={heroStageRef} className={styles.content}>
-            <div className={`${styles.copy} ${styles.revealBlock}`} data-delay="40">
-              <p
-                className={`${styles.kicker} ${bodyFont.className} ${styles.revealBlock}`}
-                data-delay="120"
-              >
-                <span className={styles.word} data-delay="0">
-                  Grupo{' '}
-                </span>
-                <span className={styles.word} data-delay="140">
-                  Fellow
-                </span>
+          <div className={styles.content}>
+            <div className={`${styles.copy} ${styles.revealBlock}`}>
+              <p className={`${styles.kicker} ${bodyFont.className}`}>
+                <span>Grupo Fellow</span>
               </p>
 
-              <h1
-                className={`${styles.title} ${headingFont.className} ${styles.revealBlock}`}
-                data-delay="220"
-                style={{ color: colors.light }}
-              >
-                {titleLines.map((line, lineIndex) => (
+              <h1 className={`${styles.title} ${headingFont.className}`} style={{ color: colors.light }}>
+                {titleLines.map((line) => (
                   <span className={styles.titleLine} key={line}>
-                    {line.split(' ').map((word, wordIndex) => (
-                      <span
-                        key={`${word}-${wordIndex}`}
-                        className={styles.word}
-                        data-delay={520 + (lineIndex * 10 + wordIndex) * 120}
-                      >
-                        {word}{' '}
-                      </span>
-                    ))}
+                    {line}
                   </span>
                 ))}
               </h1>
 
-              <p
-                className={`${styles.supportingText} ${bodyFont.className} ${styles.revealBlock}`}
-                data-delay={subtitleStartDelay}
-              >
-                {supportingWords.map((word, index) => (
-                  <span
-                    key={`${word}-${index}`}
-                    className={styles.word}
-                    data-delay={subtitleStartDelay + index * 90}
-                  >
-                    {word}{' '}
-                  </span>
-                ))}
-              </p>
+              <p className={`${styles.supportingText} ${bodyFont.className}`}>{supportingText}</p>
 
-              <div
-                className={`${styles.actions} ${bodyFont.className} ${styles.revealBlock}`}
-                data-delay={actionStartDelay}
-              >
-                <a className={styles.primaryButton} href="#sobre" onClick={handleKnowMoreClick}>
+              <div className={`${styles.actions} ${bodyFont.className}`}>
+                <a className={styles.primaryButton} href="#sobre">
                   Conhecer
                 </a>
               </div>
             </div>
 
-            <div
-              className={`${styles.bottomLabel} ${bodyFont.className} ${styles.revealBlock}`}
-              data-delay="460"
-            >
+            <div className={`${styles.bottomLabel} ${bodyFont.className}`}>
               {bottomWords.map((item, index) => (
-                <React.Fragment key={item.label}>
-                  <span className={styles.word} data-delay={item.delay}>
-                    {item.label}
-                  </span>
-                  {index < bottomWords.length - 1 ? (
-                    <span className={styles.separator}>•</span>
-                  ) : null}
+                <React.Fragment key={item}>
+                  <span>{item}</span>
+                  {index < bottomWords.length - 1 ? <span className={styles.separator}>•</span> : null}
                 </React.Fragment>
               ))}
             </div>

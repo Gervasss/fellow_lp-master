@@ -2,9 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import {
     IconGauge,
     IconLicense,
@@ -13,8 +10,6 @@ import {
 } from '@tabler/icons-react';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
 import styles from './AboutSection.module.css';
-
-gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['600'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600'] });
@@ -45,7 +40,21 @@ export default function AboutSection() {
     const visualRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
+        let cleanup = () => {};
+        let cancelled = false;
+
+        async function initAnimations() {
+            const [{ default: gsap }, { ScrollTrigger }, { SplitText }] = await Promise.all([
+                import('gsap'),
+                import('gsap/ScrollTrigger'),
+                import('gsap/SplitText'),
+            ]);
+
+            if (cancelled) return;
+
+            gsap.registerPlugin(ScrollTrigger, SplitText);
+
+            const ctx = gsap.context(() => {
             const revealItems = gsap.utils.toArray<HTMLElement>(`.${styles.revealItem}`);
             const statItems = gsap.utils.toArray<HTMLElement>(`.${styles.statItem}`);
             const splitBadge = new SplitText(badgeTextRef.current, { type: 'chars' });
@@ -152,9 +161,17 @@ export default function AboutSection() {
             return () => {
                 window.removeEventListener('about:focus', onAboutFocus);
             };
-        }, sectionRef);
+            }, sectionRef);
 
-        return () => ctx.revert();
+            cleanup = () => ctx.revert();
+        }
+
+        initAnimations();
+
+        return () => {
+            cancelled = true;
+            cleanup();
+        };
     }, []);
 
     return (

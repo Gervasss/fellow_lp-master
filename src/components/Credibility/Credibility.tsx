@@ -2,9 +2,6 @@
 
 import React, { useLayoutEffect, useRef } from "react";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
 import {
   IconApi,
   IconBolt,
@@ -27,8 +24,6 @@ import {
 } from "react-icons/si";
 import LogoLoop, { LogoItem } from "../ui/LogoLoop";
 import styles from "./Credibility.module.css";
-
-gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const headingFont = Sora({ subsets: ["latin"], weight: ["500", "600"] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
@@ -94,7 +89,21 @@ export default function Credibility() {
   const stackPanelRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+    let cleanup = () => {};
+    let cancelled = false;
+
+    async function initAnimations() {
+      const [{ default: gsap }, { ScrollTrigger }, { SplitText }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+        import("gsap/SplitText"),
+      ]);
+
+      if (cancelled) return;
+
+      gsap.registerPlugin(ScrollTrigger, SplitText);
+
+      const ctx = gsap.context(() => {
       const splitBadge = new SplitText(badgeTextRef.current, { type: "chars" });
       const splitTitle = new SplitText(titleRef.current, { type: "words, chars" });
       const splitSubtitle = new SplitText(subtitleRef.current, { type: "lines" });
@@ -163,9 +172,17 @@ export default function Credibility() {
           },
           "-=0.55"
         );
-    }, sectionRef);
+      }, sectionRef);
 
-    return () => ctx.revert();
+      cleanup = () => ctx.revert();
+    }
+
+    initAnimations();
+
+    return () => {
+      cancelled = true;
+      cleanup();
+    };
   }, []);
 
   return (

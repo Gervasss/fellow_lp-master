@@ -2,14 +2,9 @@
 
 import React, { useLayoutEffect, useRef } from 'react';
 import { IconUsersGroup } from '@tabler/icons-react';
-import { gsap } from 'gsap';
-import { SplitText } from 'gsap/SplitText';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
 import ProfileCard from '@/src/components/ui/ProfileCard';
 import styles from './SquadSection.module.css';
-
-gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['500', '600'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
@@ -75,9 +70,23 @@ const SquadSection = () => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useLayoutEffect(() => {
-    const validCards = cardsRef.current.filter(el => el !== null);
+    let cleanup = () => {};
+    let cancelled = false;
 
-    const ctx = gsap.context(() => {
+    async function initAnimations() {
+      const [{ gsap }, { ScrollTrigger }, { SplitText }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+        import('gsap/SplitText'),
+      ]);
+
+      if (cancelled) return;
+
+      gsap.registerPlugin(SplitText, ScrollTrigger);
+
+      const validCards = cardsRef.current.filter(el => el !== null);
+
+      const ctx = gsap.context(() => {
       const splitUpper = new SplitText(upperTitleRef.current, { type: 'chars' });
       const splitMain = new SplitText(mainTitleRef.current, { type: 'words, chars' });
       const splitDesc = new SplitText(descriptionRef.current, { type: 'lines' });
@@ -133,9 +142,17 @@ const SquadSection = () => {
           },
           '-=0.5'
         );
-    }, containerRef);
+      }, containerRef);
 
-    return () => ctx.revert();
+      cleanup = () => ctx.revert();
+    }
+
+    initAnimations();
+
+    return () => {
+      cancelled = true;
+      cleanup();
+    };
   }, []);
 
   return (

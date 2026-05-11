@@ -9,11 +9,7 @@ import {
     IoTrendingUpOutline, 
     IoRocketOutline
 } from 'react-icons/io5';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['700', '800'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
@@ -55,7 +51,20 @@ export default function SubscriptionCTA() {
     const cardRef = useRef<HTMLDivElement>(null);
 
 useEffect(() => {
-    const ctx = gsap.context(() => {
+    let cleanup = () => {};
+    let cancelled = false;
+
+    async function initAnimations() {
+        const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+            import('gsap'),
+            import('gsap/ScrollTrigger'),
+        ]);
+
+        if (cancelled) return;
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const ctx = gsap.context(() => {
         // Selecionamos os mini cards
         const miniCards = gsap.utils.toArray(`.${styles.productMiniCard}`);
 
@@ -95,9 +104,17 @@ useEffect(() => {
             clearProps: "all" 
         }, "-=0.4");
 
-    }, sectionRef);
+        }, sectionRef);
 
-    return () => ctx.revert();
+        cleanup = () => ctx.revert();
+    }
+
+    initAnimations();
+
+    return () => {
+        cancelled = true;
+        cleanup();
+    };
 }, []);
 
     return (
@@ -134,7 +151,6 @@ useEffect(() => {
                                             width={80} 
                                             height={80}
                                             className={styles.logoImage}
-                                            priority
                                         />
                                     </div>
                                     <h3 className={`${styles.prodName} ${headingFont.className}`}>

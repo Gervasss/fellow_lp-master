@@ -27,12 +27,6 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
-.preloading {
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -0.85rem);
-}
-
 .scrolled {
   width: min(980px, calc(100% - 2rem));
   border-color: rgba(159, 140, 255, 0.34);
@@ -218,11 +212,6 @@
   font-size: 0.94rem;
   font-weight: 750;
   text-decoration: none;
-}
-
-.mobileMenu a svg {
-  flex: 0 0 auto;
-  color: #9f8cff;
 }
 
 .mobileMenu a:hover {

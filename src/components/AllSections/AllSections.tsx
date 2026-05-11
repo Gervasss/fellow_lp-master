@@ -1,49 +1,56 @@
 "use client"
 
-import React, { useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
+import React, { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 import HeroSection from '../HeroSection/HeroSection';
-import AboutSection from '../AboutSection/AboutSection';
-import Credibility from '../Credibility/Credibility';
-import ServicesSections from '../ServicesSection/ServicesSection';
-import SquadSection from '../SquadSection/SquadSection';
-import ContactSection from '../ContactSection/ContactSection';
-import SubscriptionCTA from '../ProductsSection/SubscriptionCTA';
-import FooterSection from '../FooterSection/FooterSection';
 import styles from './AllSections.module.css';
 
-gsap.registerPlugin(ScrollTrigger);
+const AboutSection = dynamic(() => import('../AboutSection/AboutSection'), { ssr: false });
+const Credibility = dynamic(() => import('../Credibility/Credibility'), { ssr: false });
+const ServicesSections = dynamic(() => import('../ServicesSection/ServicesSection'), { ssr: false });
+const SquadSection = dynamic(() => import('../SquadSection/SquadSection'), { ssr: false });
+const ContactSection = dynamic(() => import('../ContactSection/ContactSection'), { ssr: false });
+const SubscriptionCTA = dynamic(() => import('../ProductsSection/SubscriptionCTA'), { ssr: false });
+const FooterSection = dynamic(() => import('../FooterSection/FooterSection'), { ssr: false });
 
 const AllSections = () => {
   const shellRef = useRef<HTMLDivElement>(null);
+  const [showDeferredSections, setShowDeferredSections] = useState(false);
 
-  useLayoutEffect(() => {
-    const lenis = new Lenis({
-      duration: 3.0,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
+  useEffect(() => {
+    if (showDeferredSections) return;
 
-    lenis.on('scroll', ScrollTrigger.update);
+    const revealSections = () => setShowDeferredSections(true);
+    const revealFromAnchor = (event: MouseEvent) => {
+      const link = (event.target as Element | null)?.closest?.('a[href^="#"]') as HTMLAnchorElement | null;
+      const hash = link?.hash;
 
-    const onTick = (time: number) => {
-      lenis.raf(time * 1000);
+      if (!hash || hash === '#inicio') {
+        return;
+      }
+
+      event.preventDefault();
+      revealSections();
+
+      window.setTimeout(() => {
+        document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
     };
 
-    gsap.ticker.add(onTick);
-    gsap.ticker.lagSmoothing(0);
+    window.addEventListener('wheel', revealSections, { passive: true, once: true });
+    window.addEventListener('touchstart', revealSections, { passive: true, once: true });
+    window.addEventListener('keydown', revealSections, { once: true });
+    document.addEventListener('click', revealFromAnchor, { capture: true });
 
     return () => {
-      lenis.destroy();
-      gsap.ticker.remove(onTick);
+      window.removeEventListener('wheel', revealSections);
+      window.removeEventListener('touchstart', revealSections);
+      window.removeEventListener('keydown', revealSections);
+      document.removeEventListener('click', revealFromAnchor, { capture: true });
     };
-  }, []);
+  }, [showDeferredSections]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const shell = shellRef.current;
     if (!shell) return;
 
@@ -83,15 +90,19 @@ const AllSections = () => {
 
         <div className={styles.sectionsContent}>
           <HeroSection />
-          <AboutSection />
-          <Credibility />
-          <ServicesSections />
-          <SquadSection />
-          <ContactSection />
-          <SubscriptionCTA />
+          {showDeferredSections ? (
+            <>
+              <AboutSection />
+              <Credibility />
+              <ServicesSections />
+              <SquadSection />
+              <ContactSection />
+              <SubscriptionCTA />
+            </>
+          ) : null}
         </div>
       </div>
-      <FooterSection />
+      {showDeferredSections ? <FooterSection /> : null}
     </>
   );
 };

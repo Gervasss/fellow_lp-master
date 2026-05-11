@@ -10,12 +10,7 @@ import {
   IoPaperPlaneOutline,
   IoChatbubblesOutline 
 } from 'react-icons/io5';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
-
-gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['600', '800'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
@@ -43,7 +38,21 @@ export default function ContactSection() {
     });
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
+        let cleanup = () => {};
+        let cancelled = false;
+
+        async function initAnimations() {
+            const [{ default: gsap }, { ScrollTrigger }, { SplitText }] = await Promise.all([
+                import('gsap'),
+                import('gsap/ScrollTrigger'),
+                import('gsap/SplitText'),
+            ]);
+
+            if (cancelled) return;
+
+            gsap.registerPlugin(ScrollTrigger, SplitText);
+
+            const ctx = gsap.context(() => {
             // Configuração do SplitText para cada elemento
             const splitBadge = new SplitText(badgeTextRef.current, { type: "chars" });
             const splitTitle = new SplitText(titleRef.current, { type: "chars, words" });
@@ -86,9 +95,17 @@ export default function ContactSection() {
                 duration: 0.95,
                 ease: softEase
             }, "-=0.6");
-        }, sectionRef);
+            }, sectionRef);
 
-        return () => ctx.revert();
+            cleanup = () => ctx.revert();
+        }
+
+        initAnimations();
+
+        return () => {
+            cancelled = true;
+            cleanup();
+        };
     }, []);
 
     const handleChange = (key: keyof Pick<FormState, 'name' | 'email' | 'message'>) => 

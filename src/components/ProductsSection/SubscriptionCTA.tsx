@@ -48,6 +48,9 @@ export default function SubscriptionCTA() {
     const sectionRef = useRef<HTMLElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const badgeRef = useRef<HTMLDivElement>(null);
+    const badgeTextRef = useRef<HTMLSpanElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const descriptionRef = useRef<HTMLParagraphElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
 
 useEffect(() => {
@@ -55,18 +58,22 @@ useEffect(() => {
     let cancelled = false;
 
     async function initAnimations() {
-        const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        const [{ default: gsap }, { ScrollTrigger }, { SplitText }] = await Promise.all([
             import('gsap'),
             import('gsap/ScrollTrigger'),
+            import('gsap/SplitText'),
         ]);
 
         if (cancelled) return;
 
-        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(ScrollTrigger, SplitText);
 
         const ctx = gsap.context(() => {
         // Selecionamos os mini cards
         const miniCards = gsap.utils.toArray(`.${styles.productMiniCard}`);
+        const splitBadge = new SplitText(badgeTextRef.current, { type: 'chars' });
+        const splitTitle = new SplitText(titleRef.current, { type: 'words, chars' });
+        const splitDescription = new SplitText(descriptionRef.current, { type: 'lines' });
 
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -79,29 +86,53 @@ useEffect(() => {
             }
         });
 
-        tl.from(badgeRef.current, { 
-            opacity: 0, 
-            y: 16,
+        tl.from(splitBadge.chars, {
+            opacity: 0,
+            y: 8,
+            stagger: 0.03,
             duration: 0.85,
-            ease: softEase
+            ease: softEase,
         })
-        .from(cardRef.current, { 
-            opacity: 0, 
+        .from(
+            splitTitle.chars,
+            {
+                opacity: 0,
+                x: -8,
+                filter: 'blur(2px)',
+                stagger: 0.016,
+                duration: 1,
+                ease: softEase,
+            },
+            '-=0.55'
+        )
+        .from(
+            splitDescription.lines,
+            {
+                opacity: 0,
+                y: 14,
+                stagger: 0.08,
+                duration: 0.95,
+                ease: softEase,
+            },
+            '-=0.6'
+        )
+        .from(cardRef.current, {
+            opacity: 0,
             y: 24,
             filter: "blur(3px)",
             duration: 1,
             ease: softEase,
             clearProps: "filter"
-        }, "-=0.3")
-        .from(miniCards, { 
-            opacity: 0, 
+        }, "-=0.4")
+        .from(miniCards, {
+            opacity: 0,
             scale: 0.97,
             y: 20,
             filter: "blur(2px)",
             stagger: 0.08,
             duration: 0.95,
             ease: softEase,
-            clearProps: "all" 
+            clearProps: "all"
         }, "-=0.4");
 
         }, sectionRef);
@@ -125,19 +156,19 @@ useEffect(() => {
                     <div className={styles.pulseIcon}>
                         <IoRocketOutline size={16} />
                     </div>
-                    <span>Vamos Escalar?</span>
+                    <span ref={badgeTextRef}>Vamos Escalar?</span>
                 </div>
             </div>
 
             <div className={styles.container} ref={containerRef}>
                 <div className={styles.glassCard} ref={cardRef}>
                     <div className={styles.content}>
-                        <h2 className={`${styles.title} ${headingFont.className}`}>
+                        <h2 ref={titleRef} className={`${styles.title} ${headingFont.className}`}>
                             Transforme sua operação com <br />
                             <span>nossas soluções </span>
                         </h2>
 
-                        <p className={`${styles.description} ${bodyFont.className}`}>
+                        <p ref={descriptionRef} className={`${styles.description} ${bodyFont.className}`}>
                             Selecione o ecossistema ideal para o seu negócio e tenha acesso imediato a ferramentas de alta performance.
                         </p>
 

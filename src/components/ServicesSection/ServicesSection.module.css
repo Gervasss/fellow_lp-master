@@ -1,6 +1,5 @@
 .slidesWrapper {
   position: relative;
-  z-index: 1;
   margin-top: 0;
   padding-top: calc(63px + 5.5rem);
   background: transparent;
@@ -10,7 +9,6 @@
   content: '';
   position: absolute;
   inset: 6% auto auto 50%;
-  z-index: 1;
   width: min(78vw, 980px);
   aspect-ratio: 1;
   border-radius: 50%;
@@ -135,52 +133,8 @@ background: linear-gradient(135deg, #7B61FF, #9F8CFF);
   border: none; 
 }
 
-/* A "Cobra" - O gradiente que gira */
-.sectionInner::before {
-  content: '';
-  position: absolute;
-  width: 150%; 
-  height: 150%;
-  background-image: conic-gradient(
-    transparent, 
-    transparent, 
-    transparent, 
-    #ffffff 
-  );
-  animation: rotateSnake 4s linear infinite;
-  top: -25%;
-  left: -25%;
-}
 
-/* O "Corpo" do card - Fica em cima do gradiente para criar o efeito de linha */
-.sectionInner::after {
-  content: '';
-  position: absolute;
-  inset: 5px; 
-  background: inherit; 
-  border-radius: 26px; 
-  z-index: 0;
-}
 
-/* Garante que o conteúdo real do card fique acima da animação */
-.sectionInner > * {
-  z-index: 1;
-}
-
-/* Animação de rotação */
-@keyframes rotateSnake {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.section h1 {
-  font-size: clamp(2.25rem, 4vw, 4.3rem);
-  font-weight: 600;
-  margin: 0;
-}
 
 .image {
   width: 50%;
@@ -345,7 +299,6 @@ background: linear-gradient(135deg, #7B61FF, #9F8CFF);
 /* IMAGEM */
 .featureImage {
   position: relative;
-  z-index: 1;
 
   width: 100%;
   max-width: 580px;
@@ -484,40 +437,42 @@ background: linear-gradient(135deg, #7B61FF, #9F8CFF);
   .section h1 { font-size: 3rem; }
   .image { width: 80%; }
   .section {
-    padding: 0 0.75rem 0.75rem;
+    padding: 0 0.75rem 1rem;
     height: auto;
-    min-height: calc(100vh - 64px);
-    min-height: calc(100svh - 64px);
-    min-height: calc(100dvh - 64px);
+    min-height: auto;
     overflow: visible;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
   }
 
   .sectionContent {
-    min-height: inherit;
+    min-height: auto;
     align-items: stretch;
   }
 
   .sectionInner {
     height: auto;
-    min-height: inherit;
+    min-height: auto;
+    overflow: visible;
   }
 
   .serviceFeature {
-    gap: 1.5rem;
-    min-height: inherit;
-    padding: 1.3rem 1.15rem;
+    gap: 1.75rem;
+    min-height: 120vh;
+    padding: 1.4rem 1.25rem;
     box-sizing: border-box;
   }
 
   .featureContentRow {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    align-items: stretch;
   }
 
   .serviceFeatureLeft,
   .serviceFeatureRight {
-    align-items: center;
-    text-align: center;
+    align-items: stretch;
+    text-align: left;
   }
 
   .serviceFeatureLeft {
@@ -535,7 +490,7 @@ background: linear-gradient(135deg, #7B61FF, #9F8CFF);
   .featureTitle {
     align-self: stretch;
     text-align: left;
-    font-size: clamp(2.2rem, 12vw, 3.4rem);
+    font-size: clamp(2.2rem, 9vw, 3.4rem);
   }
 
   .productEyebrow {

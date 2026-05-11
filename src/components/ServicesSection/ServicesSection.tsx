@@ -75,7 +75,7 @@ export default function ServicesSections() {
 
             const media = gsap.matchMedia();
 
-            media.add('(min-width: 0px)', () => {
+            media.add('(min-width: 769px)', () => {
                 const panels = gsap.utils.toArray<HTMLElement>(`.${styles.section}`);
                 const animatedPanels = panels.slice(0, -1);
 

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from 'react';
+import React, { ComponentType, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import HeroSection from '../HeroSection/HeroSection';
 import styles from './AllSections.module.css';
@@ -14,6 +14,60 @@ const SquadSection = dynamic(() => import('../SquadSection/SquadSection'), { ssr
 const ContactSection = dynamic(() => import('../ContactSection/ContactSection'), { ssr: false });
 const SubscriptionCTA = dynamic(() => import('../ProductsSection/SubscriptionCTA'), { ssr: false });
 const FooterSection = dynamic(() => import('../FooterSection/FooterSection'), { ssr: false });
+
+type LazySectionProps = {
+  anchorId?: string;
+  minHeight: string;
+  component: ComponentType;
+};
+
+function LazySection({ anchorId, minHeight, component: Component }: LazySectionProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [shouldRender, setShouldRender] = useState(
+    () => typeof window !== 'undefined' && !!anchorId && window.location.hash === `#${anchorId}`
+  );
+
+  useEffect(() => {
+    if (shouldRender) return;
+
+    const hashMatches = () => anchorId && window.location.hash === `#${anchorId}`;
+
+    if (hashMatches() || !('IntersectionObserver' in window)) {
+      queueMicrotask(() => setShouldRender(true));
+      return;
+    }
+
+    const preloadMargin = window.matchMedia('(max-width: 768px)').matches ? '900px 0px' : '0px 0px -12% 0px';
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setShouldRender(true);
+        observer.disconnect();
+      },
+      { rootMargin: preloadMargin }
+    );
+
+    const handleHashChange = () => {
+      if (!hashMatches()) return;
+      setShouldRender(true);
+      observer.disconnect();
+    };
+
+    if (wrapperRef.current) observer.observe(wrapperRef.current);
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [anchorId, shouldRender]);
+
+  return (
+    <div ref={wrapperRef} id={shouldRender ? undefined : anchorId} style={{ minHeight }}>
+      {shouldRender ? <Component /> : null}
+    </div>
+  );
+}
 
 const AllSections = () => {
   
@@ -92,15 +146,15 @@ const AllSections = () => {
 
       <div className={styles.sectionsContent}>
         <HeroSection />
-        <AboutSection />
-        <Credibility />
-        <ServicesSections />
-        <SquadSection />
-        <ContactSection />
-        <SubscriptionCTA />
+        <LazySection anchorId="sobre" minHeight="820px" component={AboutSection} />
+        <LazySection anchorId="credibilidade" minHeight="760px" component={Credibility} />
+        <LazySection anchorId="servicos" minHeight="1200px" component={ServicesSections} />
+        <LazySection anchorId="time" minHeight="980px" component={SquadSection} />
+        <LazySection anchorId="contato" minHeight="900px" component={ContactSection} />
+        <LazySection minHeight="720px" component={SubscriptionCTA} />
       </div>
       
-      <FooterSection />
+      <LazySection minHeight="220px" component={FooterSection} />
     </div>
   );
 };

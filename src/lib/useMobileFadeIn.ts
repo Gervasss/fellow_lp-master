@@ -31,11 +31,11 @@ export function useMobileFadeIn(rootRef: RefObject<HTMLElement | null>) {
           observer.unobserve(entry.target);
         });
       },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.16 }
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
     );
 
     items.forEach((item, index) => {
-      item.style.transitionDelay = `${Math.min(index * 55, 260)}ms`;
+      item.style.transitionDelay = `${Math.min(index * 80, 240)}ms`;
       observer.observe(item);
     });
 

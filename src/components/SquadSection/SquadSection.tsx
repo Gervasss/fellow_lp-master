@@ -197,13 +197,12 @@ const SquadSection = () => {
         </p>
       </div>
 
-      <div className={styles['cards-grid']}>
+      <div className={styles['cards-grid']} data-mobile-fade>
         {founders.map((socia, index) => (
           <div
             key={socia.handle}
             ref={el => { cardsRef.current[index] = el; }}
             className={styles['profile-card-wrapper']}
-            data-mobile-fade
           >
             <ProfileCard
               {...socia}

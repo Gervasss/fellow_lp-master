@@ -226,12 +226,12 @@ export default function AboutSection() {
                         </p>
                     </div>
 
-                    <div className={styles.statsGrid}>
+                    <div className={styles.statsGrid} data-mobile-fade>
                         {stats.map((item) => {
                             const Icon = item.icon;
 
                             return (
-                                <div key={item.label} className={`${styles.statItem} ${styles.revealItem}`} data-mobile-fade>
+                                <div key={item.label} className={`${styles.statItem} ${styles.revealItem}`}>
                                     <span className={styles.statIcon}>
                                         <Icon size={28} stroke={1.7} />
                                     </span>

@@ -228,7 +228,7 @@ export default function Credibility() {
           </p>
         </div>
 
-        <div className={styles.pillarsGrid}>
+        <div className={styles.pillarsGrid} data-mobile-fade>
           {pillars.map((pillar, index) => {
             const Icon = pillar.icon;
 
@@ -239,7 +239,6 @@ export default function Credibility() {
                 }}
                 className={styles.pillarCard}
                 key={pillar.title}
-                data-mobile-fade
               >
                 <div className={styles.pillarTop}>
                   <span className={styles.pillarIcon}>

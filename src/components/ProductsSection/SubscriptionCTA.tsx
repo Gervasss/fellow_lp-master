@@ -195,9 +195,9 @@ useEffect(() => {
                             Selecione o ecossistema ideal para o seu negócio e tenha acesso imediato a ferramentas de alta performance.
                         </p>
 
-                        <div className={styles.productsGrid}>
+                        <div className={styles.productsGrid} data-mobile-fade>
                             {SUBSCRIPTION_PRODUCTS.map((prod) => (
-                                <div key={prod.id} className={styles.productMiniCard} data-mobile-fade>
+                                <div key={prod.id} className={styles.productMiniCard}>
                                     <div className={styles.prodLogo}>
                                         <Image 
                                             src={prod.logo} 
@@ -220,9 +220,9 @@ useEffect(() => {
                             ))}
                         </div>
 
-                        <div className={styles.benefitsRow}>
+                        <div className={styles.benefitsRow} data-mobile-fade>
                             {BENEFITS.map((item, index) => (
-                                <div key={index} className={`${styles.benefitItem} ${bodyFont.className}`} data-mobile-fade>
+                                <div key={index} className={`${styles.benefitItem} ${bodyFont.className}`}>
                                     <span className={styles.icon}>{item.icon}</span>
                                     {item.text}
                                 </div>

@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { IconUsersGroup } from '@tabler/icons-react';
 import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
 import ProfileCard from '@/src/components/ui/ProfileCard';
+import { useMobileFadeIn } from '@/src/lib/useMobileFadeIn';
 import styles from './SquadSection.module.css';
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['500', '600'] });
@@ -69,7 +70,13 @@ const SquadSection = () => {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
+  useMobileFadeIn(containerRef);
+
   useEffect(() => {
+    if (window.matchMedia('(max-width: 768px), (prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     let cleanup = () => {};
     let observer: IntersectionObserver | undefined;
     let cancelled = false;
@@ -174,18 +181,18 @@ const SquadSection = () => {
   return (
     <section ref={containerRef} className={styles['founders-container']} id="time">
       <div className={styles['founders-header']}>
-        <div className={`${styles.badge} ${bodyFont.className}`}>
+        <div className={`${styles.badge} ${bodyFont.className}`} data-mobile-fade>
           <span className={styles.badgeIcon}>
             <IconUsersGroup size={14} stroke={1.8} />
           </span>
           <span ref={upperTitleRef}>Time Fellow</span>
         </div>
 
-        <h2 ref={mainTitleRef} className={`${styles['main-title']} ${headingFont.className}`}>
+        <h2 ref={mainTitleRef} className={`${styles['main-title']} ${headingFont.className}`} data-mobile-fade>
           Pessoas que constroem a operação.
         </h2>
 
-        <p ref={descriptionRef} className={`${styles.description} ${bodyFont.className}`}>
+        <p ref={descriptionRef} className={`${styles.description} ${bodyFont.className}`} data-mobile-fade>
           Um squad multidisciplinar conectando produto, engenharia, operação e crescimento para sustentar soluções de alta disponibilidade.
         </p>
       </div>
@@ -196,11 +203,12 @@ const SquadSection = () => {
             key={socia.handle}
             ref={el => { cardsRef.current[index] = el; }}
             className={styles['profile-card-wrapper']}
+            data-mobile-fade
           >
             <ProfileCard
               {...socia}
               enableTilt
-              enableMobileTilt
+              enableMobileTilt={false}
               showBehindGradient={false}
             />
           </div>

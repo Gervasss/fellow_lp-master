@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
 import styles from './ServicesSection.module.css';
 import { GrServices } from 'react-icons/gr';
+import { useMobileFadeIn } from '@/src/lib/useMobileFadeIn';
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['500', '600'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
@@ -16,7 +17,13 @@ export default function ServicesSections() {
     const introTitleRef = useRef<HTMLHeadingElement>(null);
     const introSubtitleRef = useRef<HTMLParagraphElement>(null);
 
+    useMobileFadeIn(wrapperRef);
+
     useEffect(() => {
+        if (window.matchMedia('(max-width: 768px), (prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
         let cleanup = () => {};
         let cancelled = false;
 
@@ -142,18 +149,18 @@ export default function ServicesSections() {
     return (
         <div ref={wrapperRef} className={styles.slidesWrapper} id="servicos">
             <div className={styles.introBlock}>
-                <div className={`${styles.badge} ${bodyFont.className}`}>
+                <div className={`${styles.badge} ${bodyFont.className}`} data-mobile-fade>
                     <span className={styles.badgeIcon}>
                         <GrServices size={14} />
                     </span>
                     <span ref={badgeTextRef}>Produtos</span>
                 </div>
 
-                <h2 ref={introTitleRef} className={`${styles.introTitle} ${headingFont.className}`}>
+                <h2 ref={introTitleRef} className={`${styles.introTitle} ${headingFont.className}`} data-mobile-fade>
                     Cada marca, seu próprio universo.
                 </h2>
 
-                <p ref={introSubtitleRef} className={`${styles.introSubtitle} ${bodyFont.className}`}>
+                <p ref={introSubtitleRef} className={`${styles.introSubtitle} ${bodyFont.className}`} data-mobile-fade>
                    Quatro produtos, quatro propostas. Você contrata a marca que precisa, sem pacote, sem dependência cruzada.
                 </p>
             </div>
@@ -161,7 +168,7 @@ export default function ServicesSections() {
             <section className={`${styles.section} ${styles.section1}`}>
                 <div className={styles.sectionContent}>
                     <div className={styles.sectionInner}>
-                        <div className={styles.serviceFeature}>
+                        <div className={styles.serviceFeature} data-mobile-fade>
                             <div className={`${styles.cardMeta} ${bodyFont.className}`}>
                                 <span>Marca</span>
                                 <span>01 de 04</span>
@@ -215,7 +222,7 @@ export default function ServicesSections() {
             <section className={`${styles.section} ${styles.section4}`}>
                 <div className={styles.sectionContent}>
                     <div className={styles.sectionInner}>
-                        <div className={styles.serviceFeature}>
+                        <div className={styles.serviceFeature} data-mobile-fade>
                             <div className={`${styles.cardMeta} ${bodyFont.className}`}>
                                 <span>Marca</span>
                                 <span>02 de 04</span>
@@ -270,7 +277,7 @@ export default function ServicesSections() {
             <section className={`${styles.section} ${styles.section3}`}>
                 <div className={styles.sectionContent}>
                     <div className={`${styles.sectionInner} ${styles.section3Inner}`}>
-                        <div className={`${styles.serviceFeature} ${styles.section3Feature}`}>
+                        <div className={`${styles.serviceFeature} ${styles.section3Feature}`} data-mobile-fade>
                             <div className={`${styles.cardMeta} ${bodyFont.className}`}>
                                 <span>Marca</span>
                                 <span>03 de 04</span>
@@ -327,7 +334,7 @@ export default function ServicesSections() {
             <section className={`${styles.section} ${styles.section2}`}>
                 <div className={styles.sectionContent}>
                     <div className={`${styles.sectionInner} ${styles.section2Inner}`}>
-                        <div className={`${styles.serviceFeature} ${styles.section2Feature}`}>
+                        <div className={`${styles.serviceFeature} ${styles.section2Feature}`} data-mobile-fade>
                             <div className={`${styles.cardMeta} ${bodyFont.className}`}>
                                 <span>Marca</span>
                                 <span>04 de 04</span>

@@ -11,6 +11,7 @@ import {
   IoChatbubblesOutline 
 } from 'react-icons/io5';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
+import { useMobileFadeIn } from '@/src/lib/useMobileFadeIn';
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['600', '800'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
@@ -32,12 +33,18 @@ export default function ContactSection() {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
 
+    useMobileFadeIn(sectionRef);
+
     const [state, setState] = useState<FormState>({
         name: '', email: '', message: '',
         errors: {}, submitting: false, submitted: false,
     });
 
     useEffect(() => {
+        if (window.matchMedia('(max-width: 768px), (prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
         let cleanup = () => {};
         let observer: IntersectionObserver | undefined;
         let cancelled = false;
@@ -133,24 +140,24 @@ export default function ContactSection() {
         <section ref={sectionRef} className={styles.section} id="contato">
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <div ref={badgeRef} className={`${styles.badge} ${bodyFont.className}`}>
+                    <div ref={badgeRef} className={`${styles.badge} ${bodyFont.className}`} data-mobile-fade>
                         <span className={styles.badgeIcon}>
                             <IoChatbubblesOutline size={16} />
                         </span>
                         <span ref={badgeTextRef}>Contato</span>
                     </div>
                     
-                    <h2 ref={titleRef} className={`${styles.title} ${headingFont.className}`}>
+                    <h2 ref={titleRef} className={`${styles.title} ${headingFont.className}`} data-mobile-fade>
                         Entre em Contato Conosco
                     </h2>
                     
-                    <p ref={subtitleRef} className={`${styles.subtitle} ${bodyFont.className}`}>
+                    <p ref={subtitleRef} className={`${styles.subtitle} ${bodyFont.className}`} data-mobile-fade>
                         Entre em Contato e nos conte como podemos ajudar a impulsionar seu negócio com nossas soluções de infraestrutura digital e software estratégico. Estamos prontos para transformar suas necessidades em resultados concretos!
                     </p>
                 </div>
 
                 <div className={styles.grid}>
-                    <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+                    <form className={styles.form} onSubmit={(e) => e.preventDefault()} data-mobile-fade>
                         <div className={styles.field}>
                             <label className={`${styles.label} ${bodyFont.className}`}>Nome Completo</label>
                             <input className={`${styles.input} ${bodyFont.className}`} placeholder="Como podemos te chamar?" value={state.name} onChange={handleChange('name')} />
@@ -170,7 +177,7 @@ export default function ContactSection() {
                         </button>
                     </form>
 
-                    <div className={styles.side}>
+                    <div className={styles.side} data-mobile-fade>
                         <h3 className={`${styles.sideTitle} ${headingFont.className}`}>Informações</h3>
                         
                         <div className={styles.infoRow}>

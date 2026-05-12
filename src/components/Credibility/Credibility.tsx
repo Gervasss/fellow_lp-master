@@ -23,6 +23,7 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import LogoLoop, { LogoItem } from "../ui/LogoLoop";
+import { useMobileFadeIn } from "@/src/lib/useMobileFadeIn";
 import styles from "./Credibility.module.css";
 
 const headingFont = Sora({ subsets: ["latin"], weight: ["500", "600"] });
@@ -88,7 +89,13 @@ export default function Credibility() {
   const cardsRef = useRef<(HTMLElement | null)[]>([]);
   const stackPanelRef = useRef<HTMLDivElement>(null);
 
+  useMobileFadeIn(sectionRef);
+
   useEffect(() => {
+    if (window.matchMedia("(max-width: 768px), (prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
     let cleanup = () => {};
     let observer: IntersectionObserver | undefined;
     let cancelled = false;
@@ -205,18 +212,18 @@ export default function Credibility() {
     <section ref={sectionRef} className={styles.section} id="credibilidade">
       <div className={styles.container}>
         <div className={styles.header}>
-          <div className={`${styles.badge} ${bodyFont.className}`}>
+          <div className={`${styles.badge} ${bodyFont.className}`} data-mobile-fade>
             <span className={styles.badgeIcon}>
               <IconCloudLock size={14} stroke={1.8} />
             </span>
             <span ref={badgeTextRef}>Prova técnica</span>
           </div>
 
-          <h2 ref={titleRef} className={`${styles.title} ${headingFont.className}`}>
+          <h2 ref={titleRef} className={`${styles.title} ${headingFont.className}`} data-mobile-fade>
             Infraestrutura moderna para produtos modernos.
           </h2>
 
-          <p ref={subtitleRef} className={`${styles.subtitle} ${bodyFont.className}`}>
+          <p ref={subtitleRef} className={`${styles.subtitle} ${bodyFont.className}`} data-mobile-fade>
             Construímos soluções digitais com foco em escalabilidade, automação e experiência. A credibilidade da Fellow começa na arquitetura.
           </p>
         </div>
@@ -232,6 +239,7 @@ export default function Credibility() {
                 }}
                 className={styles.pillarCard}
                 key={pillar.title}
+                data-mobile-fade
               >
                 <div className={styles.pillarTop}>
                   <span className={styles.pillarIcon}>
@@ -247,7 +255,7 @@ export default function Credibility() {
           })}
         </div>
 
-        <div ref={stackPanelRef} className={styles.stackPanel}>
+        <div ref={stackPanelRef} className={styles.stackPanel} data-mobile-fade>
           <div className={styles.stackHeader}>
             <span className={`${styles.stackEyebrow} ${bodyFont.className}`}>Tecnologias que sustentam nossos produtos</span>
             <p className={`${styles.stackText} ${bodyFont.className}`}>

@@ -9,6 +9,7 @@ import {
     IconTarget,
 } from '@tabler/icons-react';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
+import { useMobileFadeIn } from '@/src/lib/useMobileFadeIn';
 import styles from './AboutSection.module.css';
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['600'] });
@@ -39,7 +40,13 @@ export default function AboutSection() {
     const descriptionRef = useRef<HTMLDivElement>(null);
     const visualRef = useRef<HTMLElement>(null);
 
+    useMobileFadeIn(sectionRef);
+
     useEffect(() => {
+        if (window.matchMedia('(max-width: 768px), (prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
         let cleanup = () => {};
         let observer: IntersectionObserver | undefined;
         let cancelled = false;
@@ -193,7 +200,7 @@ export default function AboutSection() {
     return (
         <section ref={sectionRef} className={styles.aboutWrapper} id="sobre">
             <div className={styles.container}>
-                <div ref={badgeRef} className={`${styles.badge} ${bodyFont.className} ${styles.revealItem} ${styles.badgeTop}`}>
+                <div ref={badgeRef} className={`${styles.badge} ${bodyFont.className} ${styles.revealItem} ${styles.badgeTop}`} data-mobile-fade>
                     <span className={styles.badgeIcon}>
                         <IconTarget size={14} stroke={1.8} />
                     </span>
@@ -201,12 +208,12 @@ export default function AboutSection() {
                 </div>
 
                 <div className={styles.content}>
-                    <h2 ref={titleRef} className={`${styles.mainTitle} ${headingFont.className} ${styles.revealItem}`}>
+                    <h2 ref={titleRef} className={`${styles.mainTitle} ${headingFont.className} ${styles.revealItem}`} data-mobile-fade>
                         <span className={styles.mainTitleLine}>Não somos um produto</span>
                         <span className={`${styles.mainTitleLine} ${styles.mainTitleAccent}`}>Somos quatro</span>
                     </h2>
 
-                    <div ref={descriptionRef} className={`${styles.description} ${styles.revealItem}`}>
+                    <div ref={descriptionRef} className={`${styles.description} ${styles.revealItem}`} data-mobile-fade>
                         <p className={bodyFont.className}>
                             O <strong>Grupo Fellow</strong> é uma empresa brasileira que atua como
                             holding de produtos digitais. Não vendemos um SaaS: operamos um portfólio
@@ -224,7 +231,7 @@ export default function AboutSection() {
                             const Icon = item.icon;
 
                             return (
-                                <div key={item.label} className={`${styles.statItem} ${styles.revealItem}`}>
+                                <div key={item.label} className={`${styles.statItem} ${styles.revealItem}`} data-mobile-fade>
                                     <span className={styles.statIcon}>
                                         <Icon size={28} stroke={1.7} />
                                     </span>
@@ -235,7 +242,7 @@ export default function AboutSection() {
                     </div>
                 </div>
 
-                <aside ref={visualRef} className={styles.visual} aria-label="Grupo Fellow">
+                <aside ref={visualRef} className={styles.visual} aria-label="Grupo Fellow" data-mobile-fade>
                     <Image
                         src="/assets/about.png"
                         alt="Composição visual do Grupo Fellow"

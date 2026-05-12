@@ -10,6 +10,7 @@ import {
     IoRocketOutline
 } from 'react-icons/io5';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
+import { useMobileFadeIn } from '@/src/lib/useMobileFadeIn';
 
 const headingFont = Sora({ subsets: ['latin'], weight: ['700', '800'] });
 const bodyFont = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
@@ -53,7 +54,13 @@ export default function SubscriptionCTA() {
     const descriptionRef = useRef<HTMLParagraphElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
 
+useMobileFadeIn(sectionRef);
+
 useEffect(() => {
+    if (window.matchMedia('(max-width: 768px), (prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
     let cleanup = () => {};
     let observer: IntersectionObserver | undefined;
     let cancelled = false;
@@ -167,7 +174,7 @@ useEffect(() => {
     return (
         <section ref={sectionRef} className={styles.section}>
             {/* Badge flutuando acima da seção */}
-            <div ref={badgeRef} className={styles.badgeWrapper}>
+            <div ref={badgeRef} className={styles.badgeWrapper} data-mobile-fade>
                 <div className={`${styles.badge} ${bodyFont.className}`}>
                     <div className={styles.pulseIcon}>
                         <IoRocketOutline size={16} />
@@ -177,7 +184,7 @@ useEffect(() => {
             </div>
 
             <div className={styles.container} ref={containerRef}>
-                <div className={styles.glassCard} ref={cardRef}>
+                <div className={styles.glassCard} ref={cardRef} data-mobile-fade>
                     <div className={styles.content}>
                         <h2 ref={titleRef} className={`${styles.title} ${headingFont.className}`}>
                             Transforme sua operação com <br />
@@ -190,7 +197,7 @@ useEffect(() => {
 
                         <div className={styles.productsGrid}>
                             {SUBSCRIPTION_PRODUCTS.map((prod) => (
-                                <div key={prod.id} className={styles.productMiniCard}>
+                                <div key={prod.id} className={styles.productMiniCard} data-mobile-fade>
                                     <div className={styles.prodLogo}>
                                         <Image 
                                             src={prod.logo} 
@@ -215,7 +222,7 @@ useEffect(() => {
 
                         <div className={styles.benefitsRow}>
                             {BENEFITS.map((item, index) => (
-                                <div key={index} className={`${styles.benefitItem} ${bodyFont.className}`}>
+                                <div key={index} className={`${styles.benefitItem} ${bodyFont.className}`} data-mobile-fade>
                                     <span className={styles.icon}>{item.icon}</span>
                                     {item.text}
                                 </div>

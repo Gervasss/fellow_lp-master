@@ -83,42 +83,55 @@ export default function ServicesSections() {
             const media = gsap.matchMedia();
 
             media.add('(min-width: 769px)', () => {
-                const panels = gsap.utils.toArray<HTMLElement>(`.${styles.section}`);
+                const root = wrapperRef.current;
+                if (!root) return;
+
+                const panels = gsap.utils.toArray<HTMLElement>(root.querySelectorAll(`.${styles.section}`));
                 const animatedPanels = panels.slice(0, -1);
+                const triggers: ScrollTrigger[] = [];
 
                 animatedPanels.forEach((panel) => {
                     const innerpanel = panel.querySelector(`.${styles.sectionInner}`) as HTMLElement | null;
                     if (!innerpanel) return;
 
-                    const panelHeight = innerpanel.offsetHeight;
-                    const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-                    const windowHeight = viewportHeight - 64;
-                    const difference = panelHeight - windowHeight;
-                    const fakeScrollRatio = difference > 0 ? difference / (difference + windowHeight) : 0;
+                    const getMeasurements = () => {
+                        const panelHeight = innerpanel.offsetHeight;
+                        const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+                        const windowHeight = viewportHeight - 64;
+                        const difference = Math.max(panelHeight - windowHeight, 0);
 
-                    if (fakeScrollRatio > 0) {
-                        panel.style.marginBottom = `${difference}px`;
-                    }
+                        return { panelHeight, windowHeight, difference };
+                    };
 
                     const tl = gsap.timeline({
                         scrollTrigger: {
                             trigger: panel,
                             start: 'bottom bottom',
-                            end: () => (difference > 0 ? `+=${panelHeight}` : 'bottom top'),
+                            end: () => {
+                                const { panelHeight, difference } = getMeasurements();
+                                return difference > 0 ? `+=${panelHeight}` : 'bottom top';
+                            },
                             pinSpacing: false,
                             pin: true,
                             scrub: true,
                             invalidateOnRefresh: true,
+                            onRefresh: () => {
+                                const { difference } = getMeasurements();
+                                panel.style.marginBottom = difference > 0 ? `${difference}px` : '';
+                            },
                         },
                     });
 
-                    if (difference > 0) {
-                        tl.to(innerpanel, {
-                            y: -difference,
-                            duration: difference / windowHeight,
-                            ease: 'none',
-                        });
-                    }
+                    triggers.push(tl.scrollTrigger!);
+
+                    tl.to(innerpanel, {
+                        y: () => -getMeasurements().difference,
+                        duration: () => {
+                            const { difference, windowHeight } = getMeasurements();
+                            return difference > 0 ? difference / windowHeight : 0.001;
+                        },
+                        ease: 'none',
+                    });
 
                     tl.fromTo(
                         panel,
@@ -127,7 +140,24 @@ export default function ServicesSections() {
                     ).to(panel, { opacity: 0.28, duration: 0.45, ease: 'none' });
                 });
 
+                const refresh = () => ScrollTrigger.refresh();
+                const images = Array.from(root.querySelectorAll('img'));
+                const pendingImages = images.filter((image) => !image.complete);
+
+                pendingImages.forEach((image) => {
+                    image.addEventListener('load', refresh, { once: true });
+                    image.addEventListener('error', refresh, { once: true });
+                });
+
+                requestAnimationFrame(() => ScrollTrigger.refresh());
+
                 return () => {
+                    pendingImages.forEach((image) => {
+                        image.removeEventListener('load', refresh);
+                        image.removeEventListener('error', refresh);
+                    });
+
+                    triggers.forEach((trigger) => trigger.kill());
                     animatedPanels.forEach((panel) => {
                         panel.style.marginBottom = '';
                     });

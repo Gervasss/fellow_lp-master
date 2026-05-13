@@ -52,10 +52,40 @@ const floatingElements = [
 
 export default function MinimalHero() {
   const gradientRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    let loadTimer: ReturnType<typeof setTimeout> | undefined;
+    let idleId = 0;
+
+    const loadHeroVideo = () => {
+      const video = videoRef.current;
+
+      if (!video || !window.matchMedia('(min-width: 769px)').matches || video.dataset.loaded === 'true') {
+        return;
+      }
+
+      const source = document.createElement('source');
+      source.src = HERO_BACKGROUND_VIDEO_URL;
+      source.type = 'video/mp4';
+      source.media = '(min-width: 769px)';
+      video.appendChild(source);
+      video.dataset.loaded = 'true';
+      video.load();
+      void video.play().catch(() => {});
+    };
+
+    if ('requestIdleCallback' in window) {
+      idleId = window.requestIdleCallback(loadHeroVideo, { timeout: 1800 });
+    } else {
+      loadTimer = setTimeout(loadHeroVideo, 900);
+    }
+
     if (!window.matchMedia('(pointer: fine)').matches) {
-      return;
+      return () => {
+        if (idleId) window.cancelIdleCallback(idleId);
+        if (loadTimer) clearTimeout(loadTimer);
+      };
     }
 
     let frame = 0;
@@ -88,6 +118,8 @@ export default function MinimalHero() {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
       if (frame) window.cancelAnimationFrame(frame);
+      if (idleId) window.cancelIdleCallback(idleId);
+      if (loadTimer) clearTimeout(loadTimer);
     };
   }, []);
 
@@ -101,15 +133,15 @@ export default function MinimalHero() {
             style={{ '--hero-mobile-poster': `url(${HERO_BACKGROUND_POSTER_URL})` } as React.CSSProperties}
           >
             <video
+              ref={videoRef}
               className={styles.heroVideo}
               autoPlay
               loop
               muted
               playsInline
               preload="none"
-            >
-              <source src={HERO_BACKGROUND_VIDEO_URL} type="video/mp4" media="(min-width: 769px)" />
-            </video>
+              poster={HERO_BACKGROUND_POSTER_URL}
+            />
             <div className={styles.videoScrim} />
           </div>
 

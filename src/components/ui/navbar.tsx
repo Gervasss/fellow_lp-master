@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Sora } from "next/font/google";
 import styles from "./navbar.module.css";
@@ -20,25 +20,36 @@ const navItems = [
 const WHATSAPP_URL = "https://wa.me/5571996418877";
 
 const Navbar: React.FC = () => {
-    const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const navRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
+        let frame = 0;
+
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            if (frame) return;
+
+            frame = window.requestAnimationFrame(() => {
+                navRef.current?.classList.toggle(styles.scrolled, window.scrollY > 50);
+                frame = 0;
+            });
         };
 
         handleScroll();
         window.addEventListener("scroll", handleScroll, { passive: true });
 
-        return () => window.removeEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            if (frame) window.cancelAnimationFrame(frame);
+        };
     }, []);
 
     const closeMenu = () => setMenuOpen(false);
 
     return (
         <nav
-            className={`${styles.navbar} ${navFont.className} ${scrolled ? styles.scrolled : ""}`}
+            ref={navRef}
+            className={`${styles.navbar} ${navFont.className}`}
             aria-label="Navegação principal"
         >
             <div className={styles.navbarStart}>
@@ -56,7 +67,7 @@ const Navbar: React.FC = () => {
 
                 <a href="#inicio" className={styles.brand} onClick={closeMenu}>
                     <Image
-                        src="/assets/fellow-logo.jpg"
+                        src="/assets/felloww-logo.png"
                         alt="Logotipo Grupo Fellow"
                         width={42}
                         height={42}

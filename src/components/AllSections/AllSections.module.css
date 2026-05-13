@@ -20,6 +20,11 @@
   contain-intrinsic-size: auto 900px;
 }
 
+.preserveScrollEffects {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
+}
+
 .ambientBackground {
   position: fixed;
   inset: -18vh -12vw;

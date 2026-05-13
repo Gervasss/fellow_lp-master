@@ -19,9 +19,17 @@ type LazySectionProps = {
   anchorId?: string;
   minHeight: string;
   component: ComponentType;
+  desktopPreloadMargin?: string;
+  preserveScrollEffects?: boolean;
 };
 
-function LazySection({ anchorId, minHeight, component: Component }: LazySectionProps) {
+function LazySection({
+  anchorId,
+  minHeight,
+  component: Component,
+  desktopPreloadMargin = '0px 0px -12% 0px',
+  preserveScrollEffects = false,
+}: LazySectionProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [shouldRender, setShouldRender] = useState(
     () => typeof window !== 'undefined' && !!anchorId && window.location.hash === `#${anchorId}`
@@ -37,7 +45,7 @@ function LazySection({ anchorId, minHeight, component: Component }: LazySectionP
       return;
     }
 
-    const preloadMargin = window.matchMedia('(max-width: 768px)').matches ? '320px 0px' : '0px 0px -12% 0px';
+    const preloadMargin = window.matchMedia('(max-width: 768px)').matches ? '320px 0px' : desktopPreloadMargin;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting) return;
@@ -60,13 +68,13 @@ function LazySection({ anchorId, minHeight, component: Component }: LazySectionP
       observer.disconnect();
       window.removeEventListener('hashchange', handleHashChange);
     };
-  }, [anchorId, shouldRender]);
+  }, [anchorId, desktopPreloadMargin, shouldRender]);
 
   return (
     <div
       ref={wrapperRef}
       id={shouldRender ? undefined : anchorId}
-      className={styles.lazySection}
+      className={`${styles.lazySection} ${preserveScrollEffects ? styles.preserveScrollEffects : ''}`}
       style={{ minHeight, containIntrinsicSize: minHeight }}
     >
       {shouldRender ? <Component /> : null}
@@ -153,7 +161,13 @@ const AllSections = () => {
         <HeroSection />
         <LazySection anchorId="sobre" minHeight="820px" component={AboutSection} />
         <LazySection anchorId="credibilidade" minHeight="760px" component={Credibility} />
-        <LazySection anchorId="servicos" minHeight="1200px" component={ServicesSections} />
+        <LazySection
+          anchorId="servicos"
+          minHeight="1200px"
+          component={ServicesSections}
+          desktopPreloadMargin="1200px 0px"
+          preserveScrollEffects
+        />
         <LazySection anchorId="time" minHeight="980px" component={SquadSection} />
         <LazySection anchorId="contato" minHeight="900px" component={ContactSection} />
         <LazySection minHeight="720px" component={SubscriptionCTA} />

@@ -244,7 +244,7 @@ export default function AboutSection() {
 
                 <aside ref={visualRef} className={styles.visual} aria-label="Grupo Fellow" data-mobile-fade>
                     <Image
-                        src="/assets/about.png"
+                        src="https://i.postimg.cc/GpB8FHCm/about.png"
                         alt="Composição visual do Grupo Fellow"
                         fill
                         sizes="(max-width: 968px) 78vw, 440px"

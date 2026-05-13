@@ -178,7 +178,7 @@ export default function ServicesSections() {
                                 <div className={styles.serviceFeatureLeft}>
                                     <Image
                                         className={styles.productLogo}
-                                        src="/assets/payment.jpg"
+                                        src="https://i.postimg.cc/RVBvGqc0/payment.jpg"
                                         width={96}
                                         height={96}
                                         sizes="(max-width: 768px) 58px, 80px"
@@ -204,7 +204,7 @@ export default function ServicesSections() {
                                 <div className={styles.productVisual}>
                                     <Image
                                         className={styles.featureImage}
-                                        src="/assets/fellow_example.png"
+                                        src="https://i.postimg.cc/dtYJnD8h/fellow-example.png"
                                         width={760}
                                         height={760}
                                         sizes="(max-width: 420px) 340px, (max-width: 768px) 540px, 520px"
@@ -232,7 +232,7 @@ export default function ServicesSections() {
                                 <div className={styles.serviceFeatureLeft}>
                                     <Image
                                         className={styles.productLogo}
-                                        src="/assets/core.png"
+                                        src="https://i.postimg.cc/xT29gqKz/core.png"
                                         width={96}
                                         height={96}
                                         sizes="(max-width: 768px) 58px, 80px"
@@ -259,7 +259,7 @@ export default function ServicesSections() {
                                 <div className={styles.productVisual}>
                                     <Image
                                         className={styles.featureImage}
-                                        src="/assets/core_ex.png"
+                                        src="https://i.postimg.cc/sDr3K1pQ/core-ex.png"
                                         width={760}
                                         height={760}
                                         sizes="(max-width: 420px) 340px, (max-width: 768px) 540px, 520px"
@@ -287,7 +287,7 @@ export default function ServicesSections() {
                                 <div className={`${styles.serviceFeatureLeft} ${styles.section3Right}`}>
                                     <Image
                                         className={styles.productLogo}
-                                        src="/assets/tickets.png"
+                                        src="https://i.postimg.cc/Kv2mQ4n4/tickets.png"
                                         width={96}
                                         height={96}
                                         sizes="(max-width: 768px) 58px, 80px"
@@ -317,7 +317,7 @@ export default function ServicesSections() {
                                 <div className={styles.productVisual}>
                                     <Image
                                         className={`${styles.featureImage} ${styles.section3Image}`}
-                                        src="/assets/ticket_ex.png"
+                                        src="https://i.postimg.cc/tCj9D7hY/ticket-ex.png"
                                         width={760}
                                         height={520}
                                         sizes="(max-width: 420px) 340px, (max-width: 768px) 540px, 520px"
@@ -344,7 +344,7 @@ export default function ServicesSections() {
                                 <div className={`${styles.serviceFeatureLeft} ${styles.section2Right}`}>
                                     <Image
                                         className={styles.productLogo}
-                                        src="/assets/agents.jpg"
+                                        src="https://i.postimg.cc/GhCbz9ks/agents.jpg"
                                         width={96}
                                         height={96}
                                         sizes="(max-width: 768px) 58px, 80px"
@@ -372,7 +372,7 @@ export default function ServicesSections() {
                                 <div className={styles.productVisual}>
                                     <Image
                                         className={`${styles.featureImage} ${styles.section2Image}`}
-                                        src="/assets/chat_ai.png"
+                                        src="https://i.postimg.cc/bNhqLdQq/chat-ai.png"
                                         width={760}
                                         height={520}
                                         sizes="(max-width: 420px) 340px, (max-width: 768px) 540px, 520px"

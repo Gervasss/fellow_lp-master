@@ -456,7 +456,7 @@
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  animation: heroFadeIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+  animation: heroFadeIn 1.05s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
 }
 
 .title {
@@ -467,7 +467,7 @@
   line-height: 1.12;
   letter-spacing: -0.055em;
   text-wrap: balance;
-  animation: heroFadeIn 0.82s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+  animation: heroFadeIn 1.22s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
 }
 
 .titleLine {
@@ -489,14 +489,14 @@
   font-size: 0.88rem;
   line-height: 1.85;
   text-wrap: pretty;
-  animation: heroFadeIn 0.78s cubic-bezier(0.16, 1, 0.3, 1) 0.54s both;
+  animation: heroFadeIn 1.12s cubic-bezier(0.22, 1, 0.36, 1) 0.68s both;
 }
 
 .actions {
   display: flex;
   justify-content: center;
   margin-top: 0.7rem;
-  animation: heroFadeIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
+  animation: heroFadeIn 1.02s cubic-bezier(0.22, 1, 0.36, 1) 1.02s both;
 }
 
 .primaryButton {
@@ -550,7 +550,7 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  animation: heroFadeIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 1.06s both;
+  animation: heroFadeIn 1s cubic-bezier(0.22, 1, 0.36, 1) 1.18s both;
 }
 
 .separator {
@@ -598,14 +598,12 @@
 @keyframes heroFadeIn {
   from {
     opacity: 0;
-    transform: translateY(18px);
-    filter: blur(5px);
+    transform: translateY(24px) scale(0.992);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 
@@ -674,6 +672,38 @@
 
 
 @media (max-width: 768px) {
+  .heroVideo,
+  .floatingElement,
+  .mouseGradient {
+    display: none;
+  }
+
+  .heroIntroGlow {
+    width: min(86vw, 520px);
+    filter: none;
+    opacity: 0.34;
+  }
+
+  .videoBackground {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.48)),
+      radial-gradient(circle at 50% 34%, rgba(123, 97, 255, 0.13), transparent 42%),
+      radial-gradient(circle at 22% 24%, rgba(255, 255, 255, 0.035), transparent 24%),
+      var(--hero-mobile-poster),
+      linear-gradient(180deg, #000 0%, #020204 58%, #050508 100%);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .kicker,
+  .title,
+  .supportingText,
+  .actions,
+  .bottomLabel {
+    animation-duration: 0.95s;
+    filter: none;
+  }
+
   .sectionSmokeLayerLeft,
   .sectionSmokeLayerCenter,
   .sectionSmokeLayerRight {

@@ -37,7 +37,7 @@ function LazySection({ anchorId, minHeight, component: Component }: LazySectionP
       return;
     }
 
-    const preloadMargin = window.matchMedia('(max-width: 768px)').matches ? '900px 0px' : '0px 0px -12% 0px';
+    const preloadMargin = window.matchMedia('(max-width: 768px)').matches ? '320px 0px' : '0px 0px -12% 0px';
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting) return;
@@ -63,7 +63,12 @@ function LazySection({ anchorId, minHeight, component: Component }: LazySectionP
   }, [anchorId, shouldRender]);
 
   return (
-    <div ref={wrapperRef} id={shouldRender ? undefined : anchorId} style={{ minHeight }}>
+    <div
+      ref={wrapperRef}
+      id={shouldRender ? undefined : anchorId}
+      className={styles.lazySection}
+      style={{ minHeight, containIntrinsicSize: minHeight }}
+    >
       {shouldRender ? <Component /> : null}
     </div>
   );

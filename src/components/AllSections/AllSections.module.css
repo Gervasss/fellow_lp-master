@@ -15,6 +15,11 @@
   z-index: 2;
 }
 
+.lazySection {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 .ambientBackground {
   position: fixed;
   inset: -18vh -12vw;
@@ -164,18 +169,18 @@
 }
 
 @media (max-width: 768px) {
+  .lazySection {
+    contain-intrinsic-size: auto 760px;
+  }
+
   .ambientBackground {
     inset: -12vh -35vw;
+    display: none;
     transform: none;
   }
 
-  .meshBlob {
-    filter: blur(58px);
-    opacity: 0.42;
-  }
-
-  .ambientGrid {
-    opacity: 0.14;
-    background-size: 56px 56px;
+  .noiseLayer {
+    opacity: 0.018;
+    mix-blend-mode: normal;
   }
 }

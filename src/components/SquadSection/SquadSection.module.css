@@ -145,6 +145,8 @@
     min-width: 0;
     margin: 0 auto;
     transform: scale(0.94);
+    --mobile-fade-start-scale: 0.91;
+    --mobile-fade-visible-scale: 0.94;
   }
 
   .main-title {

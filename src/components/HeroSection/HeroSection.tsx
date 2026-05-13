@@ -22,6 +22,8 @@ const bodyFont = Plus_Jakarta_Sans({
 
 const HERO_BACKGROUND_VIDEO_URL =
   'https://res.cloudinary.com/ddwu6s64v/video/upload/v1778268738/hero_1_nhg9yh.mp4';
+const HERO_BACKGROUND_POSTER_URL =
+  'https://res.cloudinary.com/ddwu6s64v/video/upload/f_jpg,q_auto:eco,w_900,so_1/v1778268738/hero_1_nhg9yh.jpg';
 
 const supportingText =
   'Grupo Fellow é a empresa mãe por trás do Fellow Pay, Fellow Core, Fellow Tickets e Fellow AI. Cada marca tem seu próprio produto, seu próprio time e seu próprio mercado.';
@@ -93,7 +95,11 @@ export default function MinimalHero() {
     <div className={styles.mainWrapper}>
       <section className={styles.heroContainer} id="inicio">
         <div className={styles.heroViewport}>
-          <div className={styles.videoBackground} aria-hidden="true">
+          <div
+            className={styles.videoBackground}
+            aria-hidden="true"
+            style={{ '--hero-mobile-poster': `url(${HERO_BACKGROUND_POSTER_URL})` } as React.CSSProperties}
+          >
             <video
               className={styles.heroVideo}
               autoPlay
@@ -102,7 +108,7 @@ export default function MinimalHero() {
               playsInline
               preload="none"
             >
-              <source src={HERO_BACKGROUND_VIDEO_URL} type="video/mp4" />
+              <source src={HERO_BACKGROUND_VIDEO_URL} type="video/mp4" media="(min-width: 769px)" />
             </video>
             <div className={styles.videoScrim} />
           </div>

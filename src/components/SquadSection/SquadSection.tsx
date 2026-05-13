@@ -17,49 +17,49 @@ const founders = [
     handle: 'thiago.reis@grupofellow.com.br',
     title: ' Founder, CEO & CTO',
     status: 'Grupo Fellow',
-    avatarUrl: '/assets/thiago.png',
+    avatarUrl: 'https://i.postimg.cc/WbC6QL1Z/thiago.png',
   },
   {
     name: 'Jonathan Reis',
     handle: 'jonathan.reis@grupofellow.com.br',
     title: ' Co-Founder & Head of AI ',
     status: 'Grupo Fellow',
-    avatarUrl: '/assets/jon.png',
+    avatarUrl: 'https://i.postimg.cc/zGhSNtyh/jon.png',
   },
   {
     name: 'Gervásio Cardoso',
     handle: 'gervasio.cardoso@grupofellow.com.br',
     title: 'Partner & Head of Front-end',
     status: 'Grupo Fellow',
-    avatarUrl: '/assets/ge.png',
+    avatarUrl: 'https://i.postimg.cc/8P9BqQzr/ge.png',
   },
   {
     name: 'Guilherme Veiga',
     handle: 'guilherme.veiga@grupofellow.com.br',
     title: 'Co-Founder & AI Automation Engineer',
     status: 'Grupo Fellow',
-    avatarUrl: '/assets/gui.png',
+    avatarUrl: 'https://i.postimg.cc/GmDJR74s/gui.png',
   },
     {
     name: 'Gabriel Botelho',
     handle: 'gabriel.botelho@grupofellow.com.br',
     title: 'Business Development',
     status: 'Grupo Fellow',
-    avatarUrl: '/assets/gb.png',
+    avatarUrl: 'https://i.postimg.cc/KvwrdS8L/gb.png',
   },
    {
     name: 'Samuel Medeiros',
     handle: 'samuel.medeiros@grupofellow.com.br',
     title: 'Business Development',
     status: 'Grupo Fellow',
-    avatarUrl: '/assets/medeiros.png',
+    avatarUrl: 'https://i.postimg.cc/yYtXw48s/medeiros.png',
   },
     {
     name: 'Matheus Martins',
     handle: 'matheus.martins@grupofellow.com.br',
     title: ' Partner & Board Member',
     status: 'Grupo Fellow',
-    avatarUrl: '/assets/mt.png',
+    avatarUrl: 'https://i.postimg.cc/GhVJZwmT/mt.png',
   },
 ];
 
@@ -197,12 +197,15 @@ const SquadSection = () => {
         </p>
       </div>
 
-      <div className={styles['cards-grid']} data-mobile-fade>
+      <div className={styles['cards-grid']}>
         {founders.map((socia, index) => (
           <div
             key={socia.handle}
             ref={el => { cardsRef.current[index] = el; }}
             className={styles['profile-card-wrapper']}
+            data-mobile-fade
+            data-mobile-batch="squad-cards"
+            data-mobile-batch-size="3"
           >
             <ProfileCard
               {...socia}

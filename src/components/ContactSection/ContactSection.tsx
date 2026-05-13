@@ -173,7 +173,7 @@ export default function ContactSection() {
 
                         <button className={`${styles.button} ${bodyFont.className}`} type="submit">
                             <span>Agendar conversa estratégica</span>
-                            <IoPaperPlaneOutline size={18} />
+                            <IoPaperPlaneOutline size={18} className={styles.buttonIcon}/>
                         </button>
                     </form>
 

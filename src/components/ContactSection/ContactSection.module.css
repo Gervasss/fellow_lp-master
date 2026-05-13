@@ -379,6 +379,10 @@
     .buttonIcon{
         display: none;
     }
+
+    .button span{
+        font-size: 0.90rem;
+    }
 }
 
 /* Ajustes para telas muito pequenas (iPhone SE etc) */

@@ -72,7 +72,7 @@ export default function MinimalHero() {
       video.appendChild(source);
       video.dataset.loaded = 'true';
       video.load();
-      void video.play().catch(() => {});
+      void video.play().catch(() => { });
     };
 
     if ('requestIdleCallback' in window) {
@@ -181,12 +181,12 @@ export default function MinimalHero() {
               </h1>
 
               <p className={`${styles.supportingText} ${bodyFont.className}`}>{supportingText}</p>
-
-              <div className={`${styles.actions} ${bodyFont.className}`}>
+              {/* <div className={`${styles.actions} ${bodyFont.className}`}>
                 <a className={styles.primaryButton} href="#sobre">
                   Conhecer
                 </a>
-              </div>
+              </div> */}
+
             </div>
 
             <div className={`${styles.bottomLabel} ${bodyFont.className}`}>
